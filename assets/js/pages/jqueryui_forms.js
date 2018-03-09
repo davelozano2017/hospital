@@ -32,12 +32,7 @@ $(function() {
     });
 
 
-    // Month and year menu
-    $(".datepicker-menus").datepicker({
-        changeMonth: true,
-        changeYear: true
-    });
-
+ 
 
     // Multiple months
     $(".datepicker-multiple").datepicker({

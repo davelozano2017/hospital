@@ -30,7 +30,7 @@
         <div class="category-content no-padding">
             <ul class="navigation navigation-main navigation-accordion">
                 <!-- Main -->
-                <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+                <li class="navigation-header"><span>MAIN NAVIGATION</span> <i class="icon-menu" title="MAIN NAVIGATION"></i></li>
                 <?php if($data['user']->role == 0) { ?> 
                     <li class="<?= $data['title'] == 'Dashboard' ? 'active':'';?>"><a href="<?=URL?>admin/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                 <li>
@@ -40,11 +40,20 @@
                         <li class="<?= $data['title'] == 'Staff' ? 'active':'';?>"><a href="<?=URL?>admin/staff">Staff</a></li>
                     </ul>
                 </li>
-                <li class="navigation-header"><span>miscellaneous</span> <i class="icon-menu" title="Miscellaneous"></i></li>
+                <li class="navigation-header"><span>PATIENT ADMISSION MODULE</span> <i class="icon-menu" title="PATIENT ADMISSION MODULE"></i></li>
+                <li>
+                    <a href="#"><i class="icon-users"></i> <span>Admissions & Discharge</span></a>
+                    <ul>
+                        <li class="<?= $data['title'] == 'In Patients' ? 'active':'';?>"><a href="<?=URL?>admin/admissions_in_patients">In Patients</a></li>
+                        <li class="<?= $data['title'] == 'Out Patients' ? 'active':'';?>"><a href="<?=URL?>admin/admissions_out_patients">Out Patients</a></li>
+                    </ul>
+                </li>
+                <li class="navigation-header"><span>miscellaneous</span> <i class="icon-menu" title="MISCELLANEOUS"></i></li>
                 <li>
                     <a href="#"><i class="icon-cog3"></i> <span>Control Panel</span></a>
                     <ul>
                         <li class="<?= $data['title'] == 'Logs' ? 'active':'';?>"><a href="<?=URL?>admin/logs">Logs</a></li>
+                        <li class="<?= $data['title'] == 'Room' ? 'active':'';?>"><a href="<?=URL?>admin/rooms">Rooms</a></li>
                     </ul>
                 </li>
                 <?php } elseif($data['user']->role == 1) { ?>

@@ -16,7 +16,6 @@
 
 <script type="text/javascript" src="<?=ASSETS?>js/core/app.js"></script>
 <script type="text/javascript" src="<?=ASSETS?>js/pages/datatables_responsive.js"></script>
-<script type="text/javascript" src="<?=ASSETS?>js/pages/form_selectbox.js"></script>
 <!-- /theme JS files -->
 <!-- /theme JS files -->
 <script type="text/javascript">
@@ -33,6 +32,8 @@ $('.picture').change( function(event) {
     $("#preview").attr('src',URL.createObjectURL(event.target.files[0]));
 });
 toastr_option();
+// $('select').select2();
+
 </script>
 </body>
 </html>
