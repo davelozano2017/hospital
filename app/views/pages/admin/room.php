@@ -68,32 +68,26 @@
                 <form name="formRooms" id="formRooms" method="POST" novalidate>
                 <input type="hidden" id="token" name="token" value="<?=$data['token']?>'">
                 <input type="hidden" id="rooms_id" name="rooms_id">
-                <div class="input-group form-group ">
-                    <select name="room_type" id="room_type" class="select2 form-control" required>
+                <div class="form-group ">
+                    <label for="">Room Type</label>
+                    <select name="room_type" id="room_type" class="form-control" required>
                         <option value="Ward">Ward</option>
                         <option value="Semi Private">Semi Private</option>
                         <option value="Private">Private</option>
                     </select>
-                    <div class="input-group-addon ">
-                        <i class="icon-make-group text-muted"></i>
-                    </div>
                 </div>
 
-                <div class="form-group has-feedback has-feedback-left">
-                    <input type="text" name="floor" id="floor" ng-model="floor" class="form-control" placeholder="Floor" required>
-                    <div class="form-control-feedback">
-                        <i class="icon-pencil text-muted"></i>
-                    </div>
+                <div class="form-group">
+                    <label for="">Floor</label>
+                    <input type="text" name="floor" id="floor" ng-model="floor" class="form-control" required>
                     <span ng-messages="formRooms.floor.$error" ng-if="formRooms.floor.$dirty">
                         <strong ng-message="required" class="text-danger">This field is required.</strong>
                     </span>
                 </div>
 
-                <div class="form-group has-feedback has-feedback-left">
-                    <input type="text" name="room_number" id="room_number" ng-model="room_number" class="form-control" placeholder="Room Number" required>
-                    <div class="form-control-feedback">
-                        <i class="icon-pencil text-muted"></i>
-                    </div>
+                <div class="form-group">
+                    <label for="">Room Number</label>
+                    <input type="text" name="room_number" id="room_number" ng-model="room_number" class="form-control" required>
                     <span ng-messages="formRooms.room_number.$error" ng-if="formRooms.room_number.$dirty">
                         <strong ng-message="required" class="text-danger">This field is required.</strong>
                     </span>

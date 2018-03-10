@@ -5,20 +5,15 @@
 <div class="page-header page-header-default">
 <div class="page-header-content">
     <div class="page-title">
-        <h4><span class="text-semibold">Admissions & Discharge Record</span></h4>
+        <h4><span class="text-semibold">Admissions</span></h4>
     </div>
-    <div class="heading-elements">
-        <div class="heading-btn-group">
-            <button class="btn btn-primary" onclick="admission_modal()"><i class="icon-user-plus"></i> </button>
-        </div>
-    </div>
+    
 </div>
 
 <div class="breadcrumb-line">
     <ul class="breadcrumb">
         <li>Dashboard</li>
-        <li>Patients</li>
-        <li>Admissions & Discharge Record</li>
+        <li>Admissions</li>
         <li class="active">In Patients</li>
     </ul>
 </div>
@@ -30,29 +25,45 @@
 
 <!-- Basic responsive configuration -->
 <div class="panel panel-flat">
-    <table id="doctor" class="table datatable-responsive">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Hospital Code</th>
-                <th>Physicians</th>
-                <th>Room</th>
-                <td colspan=3></td>
-                </tr>
-        </thead>
-        <tbody>
-            <?php foreach($data['admissions'] as $row) { ?> 
-                <tr>
-                    <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
-                    <td><?=$row['hospital_code']?></td>
-                    <td>Dr. <?=$row['name']?></td>
-                    <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
-                    <td ></td>
-                    <td class="text-center"><a onclick="view_admissions('<?=$row['admissions_id']?>')"><i class="icon-eye"></i></a></td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+
+<div class="tabbable">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#Admission" data-toggle="tab">Admission</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="Admission">
+            <table id="doctor" class="table datatable-responsive">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Hospital Code</th>
+                        <th>Physicians</th>
+                        <th>Room</th>
+                        <td style="width:1px"></td>
+                        <td style="width:1px" class="text-center">Action</td>
+                        </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($data['admissions'] as $row) { ?> 
+                        <tr>
+                            <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
+                            <td><?=$row['hospital_code']?></td>
+                            <td>Dr. <?=$row['name']?></td>
+                            <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
+                            <td></td>
+                            <td class="text-center"><a onclick="view_admissions('<?=$row['admissions_id']?>')"><i class="icon-eye"></i></a></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+        
+    
 </div>
 <!-- /basic responsive configuration -->
 

@@ -40,63 +40,52 @@
     <div class="col-sm-8">
         <div class="panel panel-flat">
             <div class="panel-body">
-                <form name="formUpdateProfile" id="formUpdateProfile" method="POST" novalidate>
+                <form ng-app="app" ng-controller="mainController" name="formUpdateProfile" id="formUpdateProfile" method="POST" novalidate>
                     <input type="hidden" id="token" name="token" value="<?=$data['token']?>'">
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="text" name="name" id="name" ng-model="name" class="form-control" placeholder="Name" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-user text-muted"></i>
-                        </div>
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" name="name" id="name" ng-model="name" class="form-control" required>
                         <span ng-messages="formUpdateProfile.name.$error" ng-if="formUpdateProfile.name.$dirty">
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="text" name="contact" id="contact" ng-model="contact" class="form-control" placeholder="Contact #" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-phone2 text-muted"></i>
-                        </div>
+                    <div class="form-group">
+                        <label for="">Contact</label>
+                        <input type="text" name="contact" id="contact" ng-model="contact" class="form-control" >
                         <span ng-messages="formUpdateProfile.contact.$error" ng-if="formUpdateProfile.contact.$dirty">
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="email" name="email" id="email" ng-model="email" class="form-control" placeholder="Email Address" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-envelope text-muted"></i>
-                        </div>
+                    <div class="form-group">
+                        <label for="">Email Address</label>
+                        <input type="email" name="email" id="email" ng-model="email" class="form-control" required>
                         <span ng-messages="formUpdateProfile.email.$error" ng-if="formUpdateProfile.email.$dirty">
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
-                    <div class="input-group form-group ">
-                        
-                        <select name="gender" id="gender" ng-model="gender" class="selectbox" required>
+                    <div class="form-group">
+                        <label for="">Gender</label>
+                        <select name="gender" id="gender" ng-model="gender" class="form-control" required>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
-                        <div class="input-group-addon ">
-                            <i class="icon-people text-muted"></i>
-                        </div>
                     </div>
 
                     <div class="form-group">
-                        <textarea class="form-control" name="address" id="address" name="address" placeholder="Address" ng-model="address" style="resize:none;height:70px" required></textarea>
-                        <span ng-messages="formUpdateProfile.address.$error" ng-if="formUpdateProfile.address.$dirty">
+                        <label for="">Username</label>
+                        <input type="text" name="username" id="username" ng-model="username" class="form-control" required>
+                        <span ng-messages="formUpdateProfile.username.$error" ng-if="formUpdateProfile.username.$dirty">
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
-                    
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="text" name="username" id="username" ng-model="username" class="form-control" placeholder="Username" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-user text-muted"></i>
-                        </div>
-                        <span ng-messages="formUpdateProfile.username.$error" ng-if="formUpdateProfile.username.$dirty">
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <textarea class="form-control" name="address" id="address" name="address" ng-model="address" style="resize:none;height:70px" required></textarea>
+                        <span ng-messages="formUpdateProfile.address.$error" ng-if="formUpdateProfile.address.$dirty">
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>

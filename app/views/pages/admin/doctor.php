@@ -69,61 +69,52 @@
                 <form name="formDoctor" id="formDoctor" method="POST" novalidate>
                     <input type="hidden" id="token" name="token" value="<?=$data['token']?>'">
                     <input type="hidden" id="doctor_accounts_id" name="doctor_accounts_id">
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="text" ng-pattern ="/^[a-zA-Z\s]*$/"  name="doctor_name" id="doctor_name" ng-model="doctor_name" class="form-control" placeholder="Name" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-user text-muted"></i>
-                        </div>
+                    <div class="form-group ">
+                        <label for="">Name</label>
+                        <input type="text" ng-pattern ="/^[a-zA-Z\s]*$/"  name="doctor_name" id="doctor_name" ng-model="doctor_name" class="form-control" required>
                         <span ng-messages="formDoctor.doctor_name.$error" ng-if="formDoctor.doctor_name.$dirty">
                             <strong ng-message="pattern" class="text-danger">Please type alphabet only.</strong>
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="doctor_contact" id="doctor_contact" ng-model="doctor_contact" class="form-control" placeholder="Contact #" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-phone2 text-muted"></i>
-                        </div>
+                    <div class="form-group ">
+                        <label for="">Contact</label>
+                        <input type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="doctor_contact" id="doctor_contact" ng-model="doctor_contact" class="form-control" required>
                         <span ng-messages="formDoctor.doctor_contact.$error" ng-if="formDoctor.doctor_contact.$dirty">
                             <strong ng-message="pattern" class="text-danger">Please type 10 digits number..</strong>
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="email" name="doctor_email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" id="doctor_email" ng-model="doctor_email" class="form-control" placeholder="Email Address" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-envelope text-muted"></i>
-                        </div>
+                    <div class="form-group ">
+                        <label for="">Email Address</label>
+                        <input type="email" name="doctor_email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" id="doctor_email" ng-model="doctor_email" class="form-control" required>
                         <span ng-messages="formDoctor.doctor_email.$error" ng-if="formDoctor.doctor_email.$dirty">
                             <strong ng-message="pattern" class="text-danger">Please enter a valid email address.</strong>
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
-                    <div class="input-group form-group ">
-                        <select name="doctor_gender" id="doctor_gender"  class="selectbox" required>
+                    <div class="form-group ">
+                        <label for="">Gender</label>
+                        <select name="doctor_gender" id="doctor_gender"  class="form-control" required>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
-                        <div class="input-group-addon ">
-                            <i class="icon-people text-muted"></i>
-                        </div>
                     </div>
 
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="text" name="doctor_username" id="doctor_username" ng-model="doctor_username" class="form-control" placeholder="Username" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-user text-muted"></i>
-                        </div>
+                    <div class="form-group ">
+                        <label for="">Username</label>
+                        <input type="text" name="doctor_username" id="doctor_username" ng-model="doctor_username" class="form-control" required>
                         <span ng-messages="formDoctor.doctor_username.$error" ng-if="formDoctor.doctor_username.$dirty">
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
                     <div class="form-group">
-                        <textarea class="form-control" name="doctor_address" id="doctor_address" placeholder="Address" ng-model="doctor_address" style="resize:none;height:70px" required></textarea>
+                        <label for="">Address</label>
+                        <textarea class="form-control" name="doctor_address" id="doctor_address" ng-model="doctor_address" style="resize:none;height:70px" required></textarea>
                         <span ng-messages="formDoctor.doctor_address.$error" ng-if="formDoctor.doctor_address.$dirty">
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>

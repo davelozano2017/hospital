@@ -80,10 +80,16 @@ class account extends Model {
         }
     }
 
-    public function get_all_admissions() {
-        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.status = 0");
+    public function get_all_admissions($status) {
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.status = $status");
         return $query;
     }
+
+    public function get_all_admissions_by_doctor($status) {
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.status = $status AND accounts_id = ".$_SESSION['id']);
+        return $query;
+    }
+
 
     public function get_all_out_patients() {
         $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id");

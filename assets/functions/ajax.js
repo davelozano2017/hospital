@@ -80,6 +80,7 @@ function admission_modal() {
     modal.modal();
     $('#formAdmission')[0].reset();
     modal.find($('#btn-admissions')).html('Add In Patient <i class="icon-arrow-right14 position-right"></i>').attr('disabled',true);
+    $('#btn-admissions').removeClass('hidden');
 }
 
 function out_patient_modal() {
@@ -101,13 +102,7 @@ function room_modal() {
 function staff_modal() {
     var modal = $('#staff-modal');
     modal.modal();
-    modal.find($('#staff_accounts_id')).val('');
-    modal.find($('#staff_name')).val('');
-    modal.find($('#staff_contact')).val('');
-    modal.find($('#staff_email')).val('');
-    modal.find($('#staff_gender')).val('');
-    modal.find($('#staff_username')).val('');
-    modal.find($('#staff_address')).val('');
+    $('#formStaff')[0].reset();
     modal.find($('#btn-staff')).html('Add Staff <i class="icon-arrow-right14 position-right"></i>').attr('disabled',true);
 }
 
@@ -319,6 +314,11 @@ function view_admissions(admissions_id) {
             modal.find($('#principal_operation')).val(data.principal_operation);
             modal.find($('#disposition')).val(data.disposition);
             modal.find($('#outcome')).val(data.outcome);
+            if(data.status == 1) {
+                $('#btn-admissions').addClass('hidden');
+            } else {
+                $('#btn-admissions').removeClass('hidden');
+            }
             modal.find($('#btn-admissions')).html('Save Changes <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
         }
     })

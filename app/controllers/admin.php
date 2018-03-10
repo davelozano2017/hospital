@@ -73,7 +73,8 @@ class admin extends Controller {
     public function admissions_in_patients() {
         $data['token']       = $_SESSION['token'];
         $data['title']       = 'In Patients';
-        $data['admissions']  = $this->model('account')->get_all_admissions();
+        $data['admissions']  = $this->model('account')->get_all_admissions(0);
+        $data['discharged']  = $this->model('account')->get_all_admissions(1);
         $data['rooms']       = $this->model('account')->get_all_rooms();
         $data['physicians']  = $this->model('account')->get_all_physicians();
         $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
@@ -81,21 +82,39 @@ class admin extends Controller {
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);
-        $this->view('pages/admin/admission-and-disacharge-in-patients',$data);
+        $this->view('pages/admin/admission-in-patients',$data);
         $this->view('components/footer',$data);
         $this->view('components/scripts',$data);
     }
 
-    public function admissions_out_patients() {
+    public function appointment_in_patients() {
         $data['token']       = $_SESSION['token'];
-        $data['title']       = 'Out Patients';
+        $data['title']       = 'Appointment In Patients';
+        $data['admissions']  = $this->model('account')->get_all_admissions(0);
+        $data['discharged']  = $this->model('account')->get_all_admissions(1);
+        $data['outpatients'] = $this->model('account')->get_all_out_patients();
+        $data['rooms']       = $this->model('account')->get_all_rooms();
+        $data['physicians']  = $this->model('account')->get_all_physicians();
+        $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['nationality'] = $this->model('account')->countries();
+        $this->view('components/header',$data);
+        $this->view('components/top-bar',$data);
+        $this->view('components/sidebar',$data);
+        $this->view('pages/admin/doctor-appointment-in-patients',$data);
+        $this->view('components/footer',$data);
+        $this->view('components/scripts',$data);
+    }
+    
+    public function appointment_out_patients() {
+        $data['token']       = $_SESSION['token'];
+        $data['title']       = 'Appointment Out Patients';
         $data['physicians']  = $this->model('account')->get_all_physicians();
         $data['outpatients'] = $this->model('account')->get_all_out_patients();
         $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);
-        $this->view('pages/admin/admission-and-disacharge-out-patients',$data);
+        $this->view('pages/admin/doctor-appointment-out-patients',$data);
         $this->view('components/footer',$data);
         $this->view('components/scripts',$data);
     }
@@ -265,8 +284,6 @@ class admin extends Controller {
         $outpatients_id = $this->input->post('outpatients_id');
         $this->model('account')->get_out_patient_by_id($outpatients_id);
     }
-
-    
 
     public function get_admissions_by_id() {
         $admissions_id = $this->input->post('admissions_id');

@@ -45,11 +45,8 @@
 
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="form-group has-feedback has-feedback-left">
+                            <div class="form-group">
                                 <input disabled type="text" name="name" id="name" ng-model="name" class="form-control" placeholder="Name" required>
-                                <div class="form-control-feedback">
-                                    <i class="icon-user text-muted"></i>
-                                </div>
                                 <span ng-messages="formUpdateProfile.name.$error" ng-if="formUpdateProfile.name.$dirty">
                                     <strong ng-message="required" class="text-danger">This field is required.</strong>
                                 </span>
@@ -58,32 +55,23 @@
                         
 
                         <div class="col-sm-6">
-                            <div class="form-group has-feedback has-feedback-left">
+                            <div class="form-group">
                                 <input disabled type="text" name="contact" id="contact" ng-model="contact" class="form-control" placeholder="Contact #" required>
-                                <div class="form-control-feedback">
-                                    <i class="icon-phone2 text-muted"></i>
-                                </div>
                             </div>
                         </div>
     
                         <div class="col-sm-6">
-                            <div class="form-group has-feedback has-feedback-left">
+                            <div class="form-group">
                                 <input disabled type="email" name="email" id="email" ng-model="email" class="form-control" placeholder="Email Address" required>
-                                <div class="form-control-feedback">
-                                    <i class="icon-envelope text-muted"></i>
-                                </div>
                             </div>
                         </div>
 
                         <div class="col-sm-6">
-                            <div class="input-group form-group ">
-                                <select disabled name="gender" id="gender" ng-model="gender" class="selectbox" required>
+                            <div class="form-group ">
+                                <select disabled name="gender" id="gender" ng-model="gender" class="form-control" required>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
-                                <div class="input-group-addon ">
-                                    <i class="icon-people text-muted"></i>
-                                </div>
                             </div>
                         </div>
 
@@ -95,26 +83,27 @@
                                 </span>
                             </div>
                         </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="password" class="form-control" id="password" ng-minlength=6 ng-model="password" name="password" required password-verify="{{confirm_password}}">
+                                <span ng-messages="formUpdateProfile.password.$error" ng-if="formUpdateProfile.password.$dirty">
+                                    <strong ng-message="required" class="text-danger">This field is required.</strong>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="">Confirm Password</label>
+                            <input type="password" class="form-control" ng-model="confirm_password" name="confirm_password" id="confirm_password" required password-verify="{{password}}">
+                            <span ng-messages="formUpdateProfile.confirm_password.$error" ng-if="formUpdateProfile.confirm_password.$dirty">
+                                <strong ng-message="required" class="text-danger">This field is required.</strong>
+                                <strong ng-show="confirm_password != password" class="text-danger">Password not matched.</strong>
+                            </span>
+                        </div>
                     </div>
                     
-                    <div class="form-group has-feedback has-feedback-left">
-                    <input type="password" class="form-control" id="password" ng-minlength=6 placeholder="Password" ng-model="password" name="password" required password-verify="{{confirm_password}}">
-                        <div class="form-control-feedback">
-                            <i class="icon-lock2 text-muted"></i>
-                        </div>
-                    </div>
-
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="password" class="form-control" ng-model="confirm_password" placeholder="Confirm Password" name="confirm_password" id="confirm_password" required password-verify="{{password}}">
-                        <div class="form-control-feedback">
-                            <i class="icon-lock2 text-muted"></i>
-                        </div>
-                        <span ng-messages="formUpdateProfile.confirm_password.$error" ng-if="formUpdateProfile.confirm_password.$dirty">
-                            <strong ng-message="required" class="text-danger">This field is required.</strong>
-                            <strong ng-show="confirm_password != password" class="text-danger">Password not matched.</strong>
-                        </span>
-                    </div>
-
                     <div class="form-group">
                         <button type="submit" onclick="update_password()" id="btn-upload-profile" name="btn-upload-profile" ng-disabled="formUpdateProfile.$invalid"  class="btn-block btn bg-blue">Save Changes <i class="icon-arrow-right14 position-right"></i></button>
                     </div>
@@ -124,5 +113,3 @@
     </div>
 
 </div>
-
-

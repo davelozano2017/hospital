@@ -33,6 +33,8 @@
                 <li class="navigation-header"><span>MAIN NAVIGATION</span> <i class="icon-menu" title="MAIN NAVIGATION"></i></li>
                 <?php if($data['user']->role == 0) { ?> 
                     <li class="<?= $data['title'] == 'Dashboard' ? 'active':'';?>"><a href="<?=URL?>admin/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                
+                <li class="navigation-header"><span>Account Management Module</span> <i class="icon-menu" title="MISCELLANEOUS"></i></li>
                 <li>
                     <a href="#"><i class="icon-users"></i> <span>Accounts</span></a>
                     <ul>
@@ -40,14 +42,25 @@
                         <li class="<?= $data['title'] == 'Staff' ? 'active':'';?>"><a href="<?=URL?>admin/staff">Staff</a></li>
                     </ul>
                 </li>
+                
                 <li class="navigation-header"><span>PATIENT ADMISSION MODULE</span> <i class="icon-menu" title="PATIENT ADMISSION MODULE"></i></li>
                 <li>
-                    <a href="#"><i class="icon-users"></i> <span>Admissions & Discharge</span></a>
+                <a href="#"><i class="icon-users"></i> <span>Admissions</span></a>
                     <ul>
                         <li class="<?= $data['title'] == 'In Patients' ? 'active':'';?>"><a href="<?=URL?>admin/admissions_in_patients">In Patients</a></li>
-                        <li class="<?= $data['title'] == 'Out Patients' ? 'active':'';?>"><a href="<?=URL?>admin/admissions_out_patients">Out Patients</a></li>
                     </ul>
                 </li>
+
+                <li class="navigation-header"><span>DOCTORS SCHEDULE MODULE</span> <i class="icon-menu" title="DOCTORS SCHEDULE MODULE"></i></li>
+                <li>
+                <a href="#"><i class="icon-users4"></i> <span>Doctor's Appointment</span></a>
+                    <ul>
+                        <li class="<?= $data['title'] == 'Appointment In Patients' ? 'active':'';?>"><a href="<?=URL?>admin/appointment_in_patients">In Patients</a></li>
+                        <li class="<?= $data['title'] == 'Appointment Out Patients' ? 'active':'';?>"><a href="<?=URL?>admin/appointment_out_patients">Out Patients</a></li>
+                    </ul>
+                </li>
+
+                
                 <li class="navigation-header"><span>miscellaneous</span> <i class="icon-menu" title="MISCELLANEOUS"></i></li>
                 <li>
                     <a href="#"><i class="icon-cog3"></i> <span>Control Panel</span></a>
@@ -58,8 +71,35 @@
                 </li>
                 <?php } elseif($data['user']->role == 1) { ?>
                     <li class="<?= $data['title'] == 'Dashboard' ? 'active':'';?>"><a href="<?=URL?>doctor/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                    <li class="navigation-header"><span>PATIENT ADMISSION MODULE</span> <i class="icon-menu" title="PATIENT ADMISSION MODULE"></i></li>
+                    <li>
+                    <a href="#"><i class="icon-users"></i> <span>Admissions</span></a>
+                        <ul>
+                            <li class="<?= $data['title'] == 'In Patients' ? 'active':'';?>"><a href="<?=URL?>doctor/admissions_in_patients">In Patients</a></li>
+                        </ul>
+                    </li>
+                    
+                    
                 <?php } else { ?> 
                     <li class="<?= $data['title'] == 'Dashboard' ? 'active':'';?>"><a href="<?=URL?>staff/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                    
+                    <li class="navigation-header"><span>PATIENT ADMISSION MODULE</span> <i class="icon-menu" title="PATIENT ADMISSION MODULE"></i></li>
+                    <li>
+                    <a href="#"><i class="icon-users"></i> <span>Admissions</span></a>
+                        <ul>
+                            <li class="<?= $data['title'] == 'In Patients' ? 'active':'';?>"><a href="<?=URL?>staff/admission_in_patients">In Patients</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="navigation-header"><span>DOCTORS SCHEDULE MODULE</span> <i class="icon-menu" title="DOCTORS SCHEDULE MODULE"></i></li>
+                    <li>
+                    <a href="#"><i class="icon-users4"></i> <span>Doctor's Appointment</span></a>
+                        <ul>
+                            <li class="<?= $data['title'] == 'Appointment In Patients' ? 'active':'';?>"><a href="<?=URL?>staff/appointment_in_patients">In Patients</a></li>
+                            <li class="<?= $data['title'] == 'Appointment Out Patients' ? 'active':'';?>"><a href="<?=URL?>staff/appointment_out_patients">Out Patients</a></li>
+                        </ul>
+                    </li>
+
                 <?php } ?>
                 
                 <!-- /main -->

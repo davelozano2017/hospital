@@ -69,62 +69,53 @@
                 <form name="formStaff" id="formStaff" method="POST" novalidate>
                     <input type="hidden" id="token" name="token" value="<?=$data['token']?>'">
                     <input type="hidden" id="staff_accounts_id" name="staff_accounts_id">
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="text" ng-pattern ="/^[a-zA-Z\s]*$/"  name="staff_name" id="staff_name" ng-model="staff_name" class="form-control" placeholder="Name" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-user text-muted"></i>
-                        </div>
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" ng-pattern ="/^[a-zA-Z\s]*$/"  name="staff_name" id="staff_name" ng-model="staff_name" class="form-control" required>
                         <span ng-messages="formStaff.staff_name.$error" ng-if="formStaff.staff_name.$dirty">
                             <strong ng-message="pattern" class="text-danger">Please type alphabet only.</strong>
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="staff_contact" id="staff_contact" ng-model="staff_contact" class="form-control" placeholder="Contact #" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-phone2 text-muted"></i>
-                        </div>
+                    <div class="form-group">
+                        <label for="">Contact</label>
+                        <input type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="staff_contact" id="staff_contact" ng-model="staff_contact" class="form-control" required>
                         <span ng-messages="formStaff.staff_contact.$error" ng-if="formStaff.staff_contact.$dirty">
                             <strong ng-message="pattern" class="text-danger">Please type 10 digits number..</strong>
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="email" name="staff_email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" id="staff_email" ng-model="staff_email" class="form-control" placeholder="Email Address" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-envelope text-muted"></i>
-                        </div>
+                    <div class="form-group">
+                        <label for="">Email Address</label>
+                        <input type="email" name="staff_email" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" id="staff_email" ng-model="staff_email" class="form-control" required>
                         <span ng-messages="formStaff.staff_email.$error" ng-if="formStaff.staff_email.$dirty">
                             <strong ng-message="pattern" class="text-danger">Please enter a valid email address.</strong>
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
-                    <div class="input-group form-group ">
-                        <select name="staff_gender" id="staff_gender"  class="selectbox" required>
+                    <div class="form-group ">
+                        <label for="">Gender</label>
+                        <select name="staff_gender" id="staff_gender" class="form-control" required>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
-                        <div class="input-group-addon ">
-                            <i class="icon-people text-muted"></i>
-                        </div>
                     </div>
 
-                    <div class="form-group has-feedback has-feedback-left">
-                        <input type="text" name="staff_username" id="staff_username" ng-model="staff_username" class="form-control" placeholder="Username" required>
-                        <div class="form-control-feedback">
-                            <i class="icon-user text-muted"></i>
-                        </div>
-                        <span ng-messages="formStaff.staff_username.$error" ng-if="formStaff.staff_username.$dirty">
+                    <div class="form-group">
+                        <label for="">Address</label>
+                        <textarea class="form-control" name="staff_address" id="staff_address" ng-model="staff_address" style="resize:none;height:70px" required></textarea>
+                        <span ng-messages="formStaff.staff_address.$error" ng-if="formStaff.staff_address.$dirty">
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
 
                     <div class="form-group">
-                        <textarea class="form-control" name="staff_address" id="staff_address" placeholder="Address" ng-model="staff_address" style="resize:none;height:70px" required></textarea>
-                        <span ng-messages="formStaff.staff_address.$error" ng-if="formStaff.staff_address.$dirty">
+                        <label for="">Username</label>
+                        <input type="text" name="staff_username" id="staff_username" ng-model="staff_username" class="form-control" required>
+                        <span ng-messages="formStaff.staff_username.$error" ng-if="formStaff.staff_username.$dirty">
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
