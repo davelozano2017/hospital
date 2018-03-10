@@ -81,7 +81,7 @@ class doctor extends Controller {
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);
-        $this->view('pages/doctor/admission-and-disacharge-in-patients',$data);
+        $this->view('pages/doctor/admission-in-patients',$data);
         $this->view('components/footer',$data);
         $this->view('components/scripts',$data);
     }

@@ -128,7 +128,7 @@ class staff extends Controller {
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);
-        $this->view('pages/staff/admission-and-disacharge-out-patients',$data);
+        $this->view('pages/staff/out-patients',$data);
         $this->view('components/footer',$data);
         $this->view('components/scripts',$data);
     }
