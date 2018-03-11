@@ -122,6 +122,27 @@ class admin extends Controller {
         $this->view('components/scripts',$data);
     }
 
+    public function reports() {
+        
+        $pdf = new FPDF('P','mm','A4');
+        $pdf->AddPage();
+
+        // 0 = first line
+        // 1 = end line
+        $pdf->SetFont('Arial','',10);
+        $pdf->cell(190,5,'Online Health Facilities Statistical Reporting System',0,1,'C');
+
+        $pdf->SetFont('Arial','B',10);
+        $pdf->cell(80,5,'2. Implementing Beds: 23 beds',0,1);
+        $pdf->SetFont('Arial','B',8);
+        $pdf->Text(17,23,'Implementing beds: Actual beds used ( based on hospital management decision) ',0,1);
+        $pdf->SetFont('Arial','B',10);
+        $pdf->cell(80,14,'3. Bed Occupancy Rate (BOR) Based on Authorized beds: 41/61% beds',0,1);
+
+
+        $pdf->Output();     
+    }
+
     public function appointment_in_patients() {
         $data['token']       = $_SESSION['token'];
         $data['title']       = 'Appointment In Patients';
