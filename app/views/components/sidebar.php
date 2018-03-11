@@ -60,8 +60,10 @@
                     </ul>
                 </li>
 
-                
-                <li class="navigation-header"><span>miscellaneous</span> <i class="icon-menu" title="MISCELLANEOUS"></i></li>
+                <li class="navigation-header"><span>PATIENT PROFILE MODULE</span> <i class="icon-menu" title="PATIENT PROFILE MODULE"></i></li>
+                <li class="<?= $data['title'] == 'All Patients' ? 'active':'';?>"><a href="<?=URL?>admin/all_patients"><i class="icon-users"></i> <span>All Patients</span></a></li>
+
+                <li class="navigation-header"><span>MISCELLANEOUS</span> <i class="icon-menu" title="MISCELLANEOUS"></i></li>
                 <li>
                     <a href="#"><i class="icon-cog3"></i> <span>Control Panel</span></a>
                     <ul>
@@ -69,6 +71,7 @@
                         <li class="<?= $data['title'] == 'Room' ? 'active':'';?>"><a href="<?=URL?>admin/rooms">Rooms</a></li>
                     </ul>
                 </li>
+
                 <?php } elseif($data['user']->role == 1) { ?>
                     <li class="<?= $data['title'] == 'Dashboard' ? 'active':'';?>"><a href="<?=URL?>doctor/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                     <li class="navigation-header"><span>PATIENT ADMISSION MODULE</span> <i class="icon-menu" title="PATIENT ADMISSION MODULE"></i></li>
@@ -78,6 +81,9 @@
                             <li class="<?= $data['title'] == 'In Patients' ? 'active':'';?>"><a href="<?=URL?>doctor/admissions_in_patients">In Patients</a></li>
                         </ul>
                     </li>
+
+                    <li class="navigation-header"><span>PATIENT PROFILE MODULE</span> <i class="icon-menu" title="PATIENT PROFILE MODULE"></i></li>
+                    <li class="<?= $data['title'] == 'All Patients' ? 'active':'';?>"><a href="<?=URL?>doctor/all_patients"><i class="icon-users"></i> <span>All Patients</span></a></li>
                     
                     
                 <?php } else { ?> 
@@ -91,6 +97,9 @@
                         </ul>
                     </li>
 
+                    <li class="navigation-header"><span>PATIENT PROFILE MODULE</span> <i class="icon-menu" title="PATIENT PROFILE MODULE"></i></li>
+                    <li class="<?= $data['title'] == 'All Patients' ? 'active':'';?>"><a href="<?=URL?>staff/all_patients"><i class="icon-users"></i> <span>All Patients</span></a></li>
+
                     <li class="navigation-header"><span>DOCTORS SCHEDULE MODULE</span> <i class="icon-menu" title="DOCTORS SCHEDULE MODULE"></i></li>
                     <li>
                     <a href="#"><i class="icon-users4"></i> <span>Doctor's Appointment</span></a>
@@ -99,6 +108,7 @@
                             <li class="<?= $data['title'] == 'Appointment Out Patients' ? 'active':'';?>"><a href="<?=URL?>staff/appointment_out_patients">Out Patients</a></li>
                         </ul>
                     </li>
+                    
 
                 <?php } ?>
                 

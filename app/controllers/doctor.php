@@ -59,6 +59,42 @@ class doctor extends Controller {
         }
     }
 
+    public function all_patients() {
+        $data['token']        = $_SESSION['token'];
+        $data['title']        = 'All Patients';
+        $data['all_patients'] = $this->model('account')->get_doctor_patients($_SESSION['id']);
+        $data['rooms']        = $this->model('account')->get_all_rooms();
+        $data['physicians']   = $this->model('account')->get_all_physicians();
+        $data['user']         = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['nationality']  = $this->model('account')->countries();
+        $this->view('components/header',$data);
+        $this->view('components/top-bar',$data);
+        $this->view('components/sidebar',$data);
+        $this->view('pages/doctor/all-patients',$data);
+        $this->view('components/footer',$data);
+        $this->view('components/scripts',$data);
+    }
+
+    public function view_patients($id) {
+        $data['token']        = $_SESSION['token'];
+        $data['title']        = 'All Patients';
+        $data['row']          = $this->model('account')->get_patient($id);
+        $data['admissions']   = $this->model('account')->view_doctor_patients($data['row']->surname,$data['row']->firstname,0,$_SESSION['id']);
+        $data['discharged']   = $this->model('account')->view_doctor_patients($data['row']->surname,$data['row']->firstname,1,$_SESSION['id']);
+        $data['outpatients']  = $this->model('account')->get_out_patients_by_lastname($data['row']->surname,$data['row']->firstname);
+        $data['rooms']        = $this->model('account')->get_all_rooms();
+        $data['physicians']   = $this->model('account')->get_all_physicians();
+        $data['user']         = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['nationality']  = $this->model('account')->countries();
+        $this->view('components/header',$data);
+        $this->view('components/top-bar',$data);
+        $this->view('components/sidebar',$data);
+        $this->view('pages/doctor/view-patients',$data);
+        $this->view('components/footer',$data);
+        $this->view('components/scripts',$data);
+    }
+
+
     public function update_password() {
         if(isset($_SESSION['token']) == $this->input->post('token')) {
             $data = array(

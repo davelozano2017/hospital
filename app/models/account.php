@@ -59,14 +59,15 @@ class account extends Model {
 
     public function admissions_in_patients($data) {
         $admissions_id = $data['admissions_id'];
+        $patient_code  = rand(111111,999999);
         if(empty($admissions_id)) {
             $check = $this->db->query("SELECT * FROM admissions WHERE hospital_code = '".$data['hospital_code']."'");
             if($check->num_rows > 0) {
                 notify('error','Hospital code already exist.',false);
             } else {
             // insert here 
-                $query = $this->db->query("INSERT INTO `admissions`(`surname`, `firstname`, `middlename`, `birthday`, `address`, `birthplace`, `age`, `gender`, `civil_status`, `nationality`, `religion`, `occupation`, `name1`, `address1`, `contact1`, `name2`, `address2`, `contact2`, `name3`, `address3`, `contact3`, `hospital_code`, `medical_record_number`, `room`, `admission_date_time`, `discharged_date_time`, `days`, `admitting_personnel`, `attending_physicians`, `referred_by`, `alert`, `allergic`, `admission_type`, `health_insurance`, `philhealth`, `data_furnished`, `informant`, `patient_relation`, `admission_diagnosis`, `final_diagnosis`, `icd`, `principal_operation`, `disposition`, `outcome`) VALUES 
-                ('".$data['surname']."','".$data['firstname']."','".$data['middlename']."','".$data['birthday']."','".$data['patient_address']."','".$data['birthplace']."','".$data['age']."','".$data['gender']."','".$data['civil_status']."','".$data['nationality']."','".$data['religion']."','".$data['occupation']."','".$data['name1']."','".$data['address1']."','".$data['contact1']."','".$data['name2']."','".$data['address2']."','".$data['contact2']."','".$data['name3']."','".$data['address3']."','".$data['contact3']."','".$data['hospital_code']."','".$data['medical_record_number']."','".$data['room']."','".$data['admission_date_time']."','".$data['discharged_date_time']."','".$data['days']."','".$data['admitting_personnel']."','".$data['attending_physicians']."','".$data['referred_by']."','".$data['alert']."','".$data['allergic']."','".$data['admission_type']."','".$data['health_insurance']."','".$data['philhealth']."','".$data['data_furnished']."','".$data['informant']."','".$data['patient_relation']."','".$data['admission_diagnosis']."','".$data['final_diagnosis']."','".$data['icd']."','".$data['principal_operation']."','".$data['disposition']."','".$data['outcome']."')");
+                $query = $this->db->query("INSERT INTO `admissions`(`patient_code`,`surname`, `firstname`, `middlename`, `birthday`, `address`, `birthplace`, `age`, `gender`, `civil_status`, `nationality`, `religion`, `occupation`, `name1`, `address1`, `contact1`, `name2`, `address2`, `contact2`, `name3`, `address3`, `contact3`, `hospital_code`, `medical_record_number`, `room`, `admission_date_time`, `discharged_date_time`, `days`, `admitting_personnel`, `attending_physicians`, `referred_by`, `alert`, `allergic`, `admission_type`, `health_insurance`, `philhealth`, `data_furnished`, `informant`, `patient_relation`, `admission_diagnosis`, `final_diagnosis`, `icd`, `principal_operation`, `disposition`, `outcome`) VALUES 
+                ('$patient_code','".$data['surname']."','".$data['firstname']."','".$data['middlename']."','".$data['birthday']."','".$data['patient_address']."','".$data['birthplace']."','".$data['age']."','".$data['gender']."','".$data['civil_status']."','".$data['nationality']."','".$data['religion']."','".$data['occupation']."','".$data['name1']."','".$data['address1']."','".$data['contact1']."','".$data['name2']."','".$data['address2']."','".$data['contact2']."','".$data['name3']."','".$data['address3']."','".$data['contact3']."','".$data['hospital_code']."','".$data['medical_record_number']."','".$data['room']."','".$data['admission_date_time']."','".$data['discharged_date_time']."','".$data['days']."','".$data['admitting_personnel']."','".$data['attending_physicians']."','".$data['referred_by']."','".$data['alert']."','".$data['allergic']."','".$data['admission_type']."','".$data['health_insurance']."','".$data['philhealth']."','".$data['data_furnished']."','".$data['informant']."','".$data['patient_relation']."','".$data['admission_diagnosis']."','".$data['final_diagnosis']."','".$data['icd']."','".$data['principal_operation']."','".$data['disposition']."','".$data['outcome']."')");
                 if($query) {
                     notify('success','New patient has been added.',true);
                 } else {
@@ -85,6 +86,30 @@ class account extends Model {
         return $query;
     }
 
+    public function get_all_patients() {
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id GROUP BY surname,firstname,middlename");
+        return $query;
+    }
+
+    public function get_doctor_patients($id) {
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.attending_physicians = $id GROUP BY surname,firstname,middlename");
+        return $query;
+    }
+
+    public function view_doctor_patients($surname,$firstname,$status,$id) {
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.surname = '$surname' AND a.firstname = '$firstname' AND a.status = $status AND a.attending_physicians = $id");
+        return $query;
+    }
+    public function view_patients_by_lastname($surname,$firstname,$status) {
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.surname = '$surname' AND a.firstname = '$firstname' AND a.status = $status");
+        return $query;
+    }
+
+    public function get_patient($id) {
+        $query = $this->db->query("SELECT * FROM admissions WHERE admissions_id = $id");
+        return $query->fetch_object();
+    }
+
     public function get_all_admissions_by_doctor($status) {
         $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.status = $status AND accounts_id = ".$_SESSION['id']);
         return $query;
@@ -93,6 +118,11 @@ class account extends Model {
 
     public function get_all_out_patients() {
         $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id");
+        return $query;
+    }
+
+    public function get_out_patients_by_lastname($surname,$firstname) {
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id WHERE mrop.surname = '$surname' AND mrop.firstname = '$firstname'");
         return $query;
     }
 
@@ -236,6 +266,5 @@ class account extends Model {
         $query = $this->db->real_escape_string(htmlentities($_POST[$data]));
         return $query;
     }
-   
 
 }

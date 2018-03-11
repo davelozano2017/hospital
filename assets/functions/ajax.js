@@ -221,6 +221,40 @@ function view_doctor(accounts_id) {
     })
 }
 
+function view_out_patients_by_surname(outpatients_id) {
+    var modal = $('#out-patient-modal');
+    $.ajax({
+        type : 'POST',
+        url : url + '../get_out_patient_by_id',
+        data : {
+            outpatients_id : outpatients_id
+        },
+        dataType : 'json',
+        success:function(data) {
+            modal.modal();
+            modal.find($('#outpatients_id')).val(data.outpatients_id);
+            modal.find($('#ssurname')).val(data.surname);
+            modal.find($('#sfirstname')).val(data.firstname);
+            modal.find($('#smiddlename')).val(data.middlename);
+            modal.find($('#birthday')).val(data.birthday);
+            modal.find($('#sage')).val(data.age);
+            modal.find($('#sgender')).val(data.gender);
+            modal.find($('#spatient_address')).val(data.address);
+            modal.find($('#opd_case_number')).val(data.opd_case_number);
+            modal.find($('#chief_complaints')).val(data.chief_complaints);
+            modal.find($('#physicians_id')).val(data.physicians_id);
+            modal.find($('#hp')).val(data.hp);
+            modal.find($('#pulse_rate')).val(data.pulse_rate);
+            modal.find($('#respiratory_rate')).val(data.respiratory_rate);
+            modal.find($('#temperature')).val(data.temperature);
+            modal.find($('#weight')).val(data.weight);
+            modal.find($('#impression')).val(data.impression);
+            modal.find($('#treatment')).val(data.treatment);
+            $('#btn-out-patients').html('Save Changes <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
+        }
+    })
+}
+
 function view_out_patients(outpatients_id) {
     var modal = $('#out-patient-modal');
     $.ajax({
@@ -262,6 +296,73 @@ function view_admissions(admissions_id) {
     $.ajax({
         type : 'POST',
         url : url + 'get_admissions_by_id',
+        data : {
+            admissions_id : admissions_id
+        },
+        dataType : 'json',
+        success:function(data) {
+            modal.modal();
+            modal.find($('#admissions_id')).val(data.admissions_id);
+            modal.find($('#surname')).val(data.surname);
+            modal.find($('#firstname')).val(data.firstname);
+            modal.find($('#middlename')).val(data.middlename);
+            modal.find($('#birthday')).val(data.birthday);
+            modal.find($('#patient_address')).val(data.address);
+            modal.find($('#birthplace')).val(data.birthplace);
+            modal.find($('#age')).val(data.age);
+            modal.find($('#gender')).val(data.gender);
+            modal.find($('#civil_status')).val(data.civil_status);
+            modal.find($('#nationality')).val(data.nationality);
+            modal.find($('#religion')).val(data.religion);
+            modal.find($('#occupation')).val(data.occupation);
+            modal.find($('#name1')).val(data.name1);
+            modal.find($('#address1')).val(data.address1);
+            modal.find($('#contact1')).val(data.contact1);
+            modal.find($('#name2')).val(data.name2);
+            modal.find($('#address2')).val(data.address2);
+            modal.find($('#contact2')).val(data.contact2);
+            modal.find($('#name3')).val(data.name3);
+            modal.find($('#address3')).val(data.address3);
+            modal.find($('#contact3')).val(data.contact3);
+
+            modal.find($('#hospital_code')).val(data.hospital_code);
+            modal.find($('#medical_record_number')).val(data.medical_record_number);
+            modal.find($('#room')).val(data.room);
+            modal.find($('#admission_date_time')).val(data.admission_date_time);
+            modal.find($('#discharged_date_time')).val(data.discharged_date_time);
+            modal.find($('#days')).val(data.days);
+            modal.find($('#admitting_personnel')).val(data.admitting_personnel);
+            modal.find($('#attending_physicians')).val(data.attending_physicians);
+            modal.find($('#referred_by')).val(data.referred_by);
+            modal.find($('#alert')).val(data.alert);
+            modal.find($('#allergic')).val(data.allergic);
+            modal.find($('#admission_type')).val(data.admission_type);
+            modal.find($('#health_insurance')).val(data.health_insurance);
+            modal.find($('#philhealth')).val(data.philhealth);
+            modal.find($('#data_furnished')).val(data.data_furnished);
+            modal.find($('#informant')).val(data.informant);
+            modal.find($('#patient_relation')).val(data.patient_relation);
+            modal.find($('#admission_diagnosis')).val(data.admission_diagnosis);
+            modal.find($('#final_diagnosis')).val(data.final_diagnosis);
+            modal.find($('#icd')).val(data.icd);
+            modal.find($('#principal_operation')).val(data.principal_operation);
+            modal.find($('#disposition')).val(data.disposition);
+            modal.find($('#outcome')).val(data.outcome);
+            if(data.status == 1) {
+                $('#btn-admissions').addClass('hidden');
+            } else {
+                $('#btn-admissions').removeClass('hidden');
+            }
+            modal.find($('#btn-admissions')).html('Save Changes <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
+        }
+    })
+}
+
+function view_patients(admissions_id) {
+    var modal = $('#admission-modal');
+    $.ajax({
+        type : 'POST',
+        url : url + '../get_admissions_by_id',
         data : {
             admissions_id : admissions_id
         },
