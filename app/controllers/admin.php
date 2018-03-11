@@ -11,6 +11,11 @@ class admin extends Controller {
     public function index() {
         $data['token'] = $_SESSION['token'];
         $data['title'] = 'Dashboard';
+        $data['total_admitted'] = $this->model('account')->total_patients(0);
+        $data['total_discharged'] = $this->model('account')->total_patients(1);
+        $data['total_out_patients'] = $this->model('account')->total_out_patients();
+        $data['total_doctor'] = $this->model('account')->total_users(1);
+        $data['total_staff'] = $this->model('account')->total_users(2);
         $data['user'] = $this->model('account')->get_user_information($_SESSION['id']);
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
@@ -123,25 +128,370 @@ class admin extends Controller {
     }
 
     public function reports() {
+        $impatients = $this->model('account')->get_all_admissions(0)->num_rows;
+        $alive = $this->model('account')->get_all_admissions(1)->num_rows;
+        $out_patient = $this->model('account')->get_all_out_patients()->num_rows;
         
-        $pdf = new FPDF('P','mm','A4');
+        $pdf = new TCPDF('P','mm','Legal');
         $pdf->AddPage();
 
         // 0 = first line
         // 1 = end line
-        $pdf->SetFont('Arial','',10);
+        $pdf->SetFont('helvetica','',10);
         $pdf->cell(190,5,'Online Health Facilities Statistical Reporting System',0,1,'C');
 
-        $pdf->SetFont('Arial','B',10);
+        $pdf->SetFont('helvetica','B',10);
         $pdf->cell(80,5,'2. Implementing Beds: 23 beds',0,1);
-        $pdf->SetFont('Arial','B',8);
-        $pdf->Text(17,23,'Implementing beds: Actual beds used ( based on hospital management decision) ',0,1);
-        $pdf->SetFont('Arial','B',10);
-        $pdf->cell(80,14,'3. Bed Occupancy Rate (BOR) Based on Authorized beds: 41/61% beds',0,1);
+
+        $pdf->Text(17,23,'* Implementing beds: Actual beds used ( based on hospital management decision) ',0,1);
+
+        $pdf->SetFont('helvetica','B',10);
+        $pdf->cell(80,5,'                    2. Implementing Beds: 23 beds',0,1);
+
+        $pdf->cell(80,8,'3. Bed Occupancy Rate (BOR) Based on Authorized beds: 41/61% beds',0,1);
+    
+        $pdf->cell(80,0,'    _________________________________________________________ x 100',0,1);
+        $pdf->SetFont('helvetica','',8);
+        $pdf->cell(80,10,'    [Total Number of Authorized beds] x [Total days in the period (365 or 366 for leap year)]',0,1);
+       
+        $pdf->SetFont('helvetica','',8);
+        $pdf->cell(80,0,'       * Bed Occupancy Rate: The percentage of impatient beds occupied over a given period of time. It is a measure of the ideniaty of hospital resources utilized',0,1);
+        $pdf->cell(80,0,'         (given period of time in January 1 to December 31 each year for the annual statistics)',0,1);
+
+        $pdf->cell(80,10,'       * Impatient services days (Impatient bed days) Unit of measure demoting the services received by one in-patient in one 24 hour period.',0,1);
+
+        $pdf->cell(80,0,'       * Total Impatient Services  days or Impatient Bed days = [(Impatients remaining at midnight + Total admissions) + Total discharges/deaths)] + (member .',0,1);
+
+        $pdf->cell(80,8,'         of adona discharges on the same day)]',0,1);
+        
+        $pdf->SetFont('helvetica','B',12);
+        $pdf->cell(80,8,'II. HOSPITAL OPERATIONS',0,1);
+
+        $pdf->SetFont('helvetica','B',10);
+        $pdf->cell(80,8,' A. Summary of Patients in the hospital',0,1);
+        $pdf->cell(80,5,'     For each category listed below, please report the total volume of services or procedures performed',0,1);
+        $pdf->SetFont('helvetica','',10);
+        $pdf->cell(80,10,'           ** Inpatient: A patient who stays in a health facility licensed to admit patients. While under treatment. ',0,1);
+        $pdf->cell(175,7,'Impatient Care',1,0);
+        $pdf->cell(20,7,'Number',1,1);
+
+        $pdf->cell(175,7,'Total number of impatients',1,0);
+        $pdf->cell(20,7,$impatients,1,1,'R');
+
+        $pdf->cell(175,7,'Total number of (In facility deliveries)',1,0);
+        $pdf->cell(20,7,'0',1,1,'R');
+
+        $pdf->cell(175,7,'Total Discharges (Alive)',1,0);
+        $pdf->cell(20,7,$alive,1,1,'R');
+
+        $pdf->cell(175,7,'Total patients admitted and discharged on the same day',1,0);
+        $pdf->cell(20,7,$out_patient,1,1,'R');
+
+        $pdf->cell(175,7,'Total member of inpatient bed days (service days)',1,0);
+        $pdf->cell(20,7,'0',1,1,'R');
+
+        $pdf->cell(175,7,'Total number of inpatients transferred TO THIS FACILITIES from another facility for impatient care',1,0);
+        $pdf->cell(20,7,'0',1,1,'R');
+
+        $pdf->cell(175,7,'Total number of inpatients transferred FROM THIS FACILITIES from another facility for impatient care',1,0);
+        $pdf->cell(20,7,'0',1,1,'R');
+
+        $pdf->cell(175,7,'Total number of patients remaining in the hospital as of midnight last day of previous year',1,0);
+        $pdf->cell(20,7,'0',1,1,'R');
+
+        $pdf->SetFont('helvetica','B',10);
+        $pdf->cell(80,10,'B. Discharges',0,1);
+        $pdf->SetFont('helvetica','',8);
+        $tbl = <<<EOD
+<table width="100%" cellspacing="0" cellpadding="1" border="1">
+<tr>
+<td colspan="3" rowspan="3">Type of service</td>
+<td colspan="3" rowspan="3">No of patient</td>
+<td colspan="3" rowspan="3">total length of days / total no of days stay</td>
+<td colspan="13">Type of accomodation</td>
+<td colspan="12">Condition on Discharged</td>
+</tr>
+<tr>
+<td colspan="5">Non-Philhealth</td>
+<td colspan="5">Philhealt</td>
+<td rowspan="2">HMO</td>
+<td colspan="2" rowspan="2">OWWA</td>
+<td colspan="2" rowspan="2">R/I</td>
+<td rowspan="2">T</td>
+<td rowspan="2">H</td>
+<td rowspan="2">A</td>
+<td rowspan="2">U</td>
+<td colspan="4">Deaths</td>
+<td colspan="2" rowspan="2">Total Discharges</td>
+</tr>
+<tr>
+<td>Pay</td>
+<td colspan="3">Service/Charity</td>
+<td>Total</td>
+<td>Pay</td>
+<td colspan="3">Service/Charity</td>
+<td>Total</td>
+<td>< 48 Hrs</td>
+<td>> 48 Hrs</td>
+<td colspan="2">Total</td>
+</tr>
+<tr>
+<td colspan="3">Medicine</td>
+<td colspan="3">0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+<td colspan="2">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+</tr>
+
+<tr>
+<td colspan="3">Obstetrics</td>
+<td colspan="3">0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+<td colspan="2">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+</tr>
+
+<tr>
+<td colspan="3">Gynecology</td>
+<td colspan="3">0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+<td colspan="2">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+</tr>
+
+<tr>
+<td colspan="3">Pediatrics</td>
+<td colspan="3">0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+<td colspan="2">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+</tr>
+
+<tr>
+<td colspan="34">Surgery</td>
+</tr>
+
+<tr>
+<td colspan="3">Pedia</td>
+<td colspan="3">0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+<td colspan="2">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+</tr>
+
+<tr>
+<td colspan="3">Adult</td>
+<td colspan="3">0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+<td colspan="2">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+</tr>
 
 
-        $pdf->Output();     
-    }
+<tr>
+<td colspan="34">Others</td>
+</tr>
+
+
+<tr>
+<td colspan="3">Total</td>
+<td colspan="3">0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+<td colspan="2">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+</tr>
+
+<tr>
+<td colspan="3">Total new born</td>
+<td colspan="3">0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+<td colspan="2">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+</tr>
+
+
+
+<tr>
+<td colspan="3">Pathologic</td>
+<td colspan="3">0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+<td colspan="2">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+</tr>
+
+<tr>
+<td colspan="3">Non-Pathologic</td>
+<td colspan="3">0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="3">0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+<td colspan="2">0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td colspan="2">0</td>
+</tr>
+</table>
+EOD;
+
+$pdf->writeHTML($tbl, true, false, false, false, '');
+$pdf->Output();     
+}
 
     public function appointment_in_patients() {
         $data['token']       = $_SESSION['token'];

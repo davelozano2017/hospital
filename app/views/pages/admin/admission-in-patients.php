@@ -91,7 +91,7 @@
                         <div class="row">
                         <!-- 1st -->
                                 <div class="col-sm-4">
-                                    <label for="">Surname</label>
+                                    <label for="">Surname *</label>
                                     <div class="form-group ">
                                         <input type="text" ng-pattern ="/^[a-zA-Z\s]*$/"  name="surname" id="surname" ng-model="surname" class="form-control" required>
                                         <span ng-messages="formAdmission.surname.$error" ng-if="formAdmission.surname.$dirty">

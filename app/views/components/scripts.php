@@ -16,6 +16,8 @@
 
 <script type="text/javascript" src="<?=ASSETS?>js/core/app.js"></script>
 <script type="text/javascript" src="<?=ASSETS?>js/pages/datatables_responsive.js"></script>
+<script type="text/javascript" src="<?=ASSETS?>js/pages/general_widgets_stats.js"></script>
+
 <!-- /theme JS files -->
 <!-- /theme JS files -->
 <script type="text/javascript">

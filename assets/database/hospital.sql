@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2018 at 04:11 PM
+-- Generation Time: Mar 11, 2018 at 08:56 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -50,7 +50,7 @@ INSERT INTO `accounts` (`accounts_id`, `image`, `name`, `contact`, `email`, `gen
 (5, '21739969_832946646870749_5682883968502257100_n.jpg', 'Jeddahlyn Cabuga', '09265691158', 'cabugajeddahlyn@gmail.com', 'Female', 'Quezon City', 'jeddah', '$2y$10$rddRx8kzut27CEASuXSfUectym65HHgFN8oOXNMGtX/x01kxnIXcS', 1),
 (6, '18447118_1751904378170105_7854398647292800290_n.jpg', 'Judilyn Abcede', '09555773952', 'judilynabcede@gmail.com', 'Female', 'Bulacan City', 'judilyn', '$2y$10$B2RF9SfTfrOVlb.rowuh.eCPuKzXDc1A8XqYH61/AR2Sn2YLZvHxm', 2),
 (9, '', 'Janice Millanes', '09555773952', 'janicemillanes@gmail.com', 'Female', 'Bagong Silang Caloocan City', 'janice', '$2y$10$FjfQaTSZqbK/9mtYHoNrLu5R0qS6gYcR7sAOMNUMUPw.RE/VQHIY2', 2),
-(10, '', 'Jansel May Conception', '09555773952', 'janselmayconception@gmail.com', 'Female', 'Bagong Silang Caloocan City', 'jansel', '$2y$10$iTwzlw.tOBoSfOhRDW4H..TeZLiztiXOauHA/h8Yc2ZaGC.tmaV/i', 1);
+(10, '', 'Jansel May Conception', '09555773952', 'janselmayconception@gmail.com', 'Female', 'Bagong Silang Caloocan City', 'jansel', '$2y$10$doHTXhjCcjAZUpse16SUQuOTfmXJFuMH4XrUl9WQCGLqHkcmztUOS', 1);
 
 -- --------------------------------------------------------
 
@@ -60,6 +60,7 @@ INSERT INTO `accounts` (`accounts_id`, `image`, `name`, `contact`, `email`, `gen
 
 CREATE TABLE `admissions` (
   `admissions_id` int(11) NOT NULL,
+  `patient_code` int(11) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `middlename` varchar(255) NOT NULL,
@@ -104,15 +105,16 @@ CREATE TABLE `admissions` (
   `principal_operation` varchar(255) NOT NULL,
   `disposition` varchar(255) NOT NULL,
   `outcome` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `date_today` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admissions`
 --
 
-INSERT INTO `admissions` (`admissions_id`, `surname`, `firstname`, `middlename`, `birthday`, `address`, `birthplace`, `age`, `gender`, `civil_status`, `nationality`, `religion`, `occupation`, `name1`, `address1`, `contact1`, `name2`, `address2`, `contact2`, `name3`, `address3`, `contact3`, `hospital_code`, `medical_record_number`, `room`, `admission_date_time`, `discharged_date_time`, `days`, `admitting_personnel`, `attending_physicians`, `referred_by`, `alert`, `allergic`, `admission_type`, `health_insurance`, `philhealth`, `data_furnished`, `informant`, `patient_relation`, `admission_diagnosis`, `final_diagnosis`, `icd`, `principal_operation`, `disposition`, `outcome`, `status`) VALUES
-(11, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'asd', '22', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr.', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '41004975', '10-15-20', 17, '2018-03-09T04:50', '2018-03-09T20:00', '2', 'Unknown', 5, 'Unknown', '', '', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Improved', 1);
+INSERT INTO `admissions` (`admissions_id`, `patient_code`, `surname`, `firstname`, `middlename`, `birthday`, `address`, `birthplace`, `age`, `gender`, `civil_status`, `nationality`, `religion`, `occupation`, `name1`, `address1`, `contact1`, `name2`, `address2`, `contact2`, `name3`, `address3`, `contact3`, `hospital_code`, `medical_record_number`, `room`, `admission_date_time`, `discharged_date_time`, `days`, `admitting_personnel`, `attending_physicians`, `referred_by`, `alert`, `allergic`, `admission_type`, `health_insurance`, `philhealth`, `data_furnished`, `informant`, `patient_relation`, `admission_diagnosis`, `final_diagnosis`, `icd`, `principal_operation`, `disposition`, `outcome`, `status`, `date_today`) VALUES
+(14, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-10T01:00', '2018-03-10T12:00', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, '');
 
 -- --------------------------------------------------------
 
@@ -405,7 +407,16 @@ INSERT INTO `logs` (`logs_id`, `accounts_id`, `content`, `created_at`) VALUES
 (2, '6', 'updated his / her account details', '2018-03-08 18:54:20'),
 (3, '1', 'updated his / her account details', '2018-03-08 19:03:18'),
 (4, '1', 'updated his / her account details', '2018-03-08 19:11:54'),
-(5, '1', 'updated his / her account password', '2018-03-08 19:11:59');
+(5, '1', 'updated his / her account password', '2018-03-08 19:11:59'),
+(6, '1', 'updated his / her account details', '2018-03-09 16:01:11'),
+(7, '1', 'updated his / her account details', '2018-03-09 16:01:12'),
+(8, '1', 'updated his / her account details', '2018-03-09 16:01:12'),
+(9, '1', 'updated his / her account details', '2018-03-09 16:01:13'),
+(10, '5', 'updated his / her account details', '2018-03-09 16:09:48'),
+(11, '9', 'updated his / her account details', '2018-03-09 16:10:41'),
+(12, '9', 'updated his / her account details', '2018-03-09 16:10:44'),
+(13, '9', 'updated his / her account details', '2018-03-09 16:10:48'),
+(14, '1', 'updated his / her account details', '2018-03-10 03:53:52');
 
 -- --------------------------------------------------------
 
@@ -440,7 +451,7 @@ CREATE TABLE `medical_record_out_patient` (
 --
 
 INSERT INTO `medical_record_out_patient` (`outpatients_id`, `surname`, `firstname`, `middlename`, `birthday`, `age`, `gender`, `address`, `chief_complaints`, `opd_case_number`, `physicians_id`, `hp`, `pulse_rate`, `respiratory_rate`, `temperature`, `weight`, `impression`, `treatment`, `created_at`) VALUES
-(2, 'Lozano', 'John David', 'Sadia', '1994-03-31', '21', 'Male', 'Blk.1  L.50', 'Blk.1  L.50', '1000101', 5, '100', '70', '100', '35', '198', 'unknown', 'unknown', '2018-03-09 15:05:38');
+(2, 'Lozano', 'John David', 'Sadia', '1994-03-31', '21', 'Male', 'Blk.1  L.50', 'Blk.1  L.50', '1000101', 5, '100', '70', '100', '35', '198', 'unknown', 'unknown', '2018-03-09 18:29:53');
 
 -- --------------------------------------------------------
 
@@ -518,19 +529,19 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `admissions`
 --
 ALTER TABLE `admissions`
-  MODIFY `admissions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `admissions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `logs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `medical_record_out_patient`
 --
 ALTER TABLE `medical_record_out_patient`
-  MODIFY `outpatients_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `outpatients_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rooms`
