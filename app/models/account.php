@@ -60,14 +60,15 @@ class account extends Model {
     public function admissions_in_patients($data) {
         $admissions_id = $data['admissions_id'];
         $patient_code  = rand(111111,999999);
+        $date = date('Y-m-d');
         if(empty($admissions_id)) {
             $check = $this->db->query("SELECT * FROM admissions WHERE hospital_code = '".$data['hospital_code']."'");
             if($check->num_rows > 0) {
                 notify('error','Hospital code already exist.',false);
             } else {
             // insert here 
-                $query = $this->db->query("INSERT INTO `admissions`(`patient_code`,`surname`, `firstname`, `middlename`, `birthday`, `address`, `birthplace`, `age`, `gender`, `civil_status`, `nationality`, `religion`, `occupation`, `name1`, `address1`, `contact1`, `name2`, `address2`, `contact2`, `name3`, `address3`, `contact3`, `hospital_code`, `medical_record_number`, `room`, `admission_date_time`, `discharged_date_time`, `days`, `admitting_personnel`, `attending_physicians`, `referred_by`, `alert`, `allergic`, `admission_type`, `health_insurance`, `philhealth`, `data_furnished`, `informant`, `patient_relation`, `admission_diagnosis`, `final_diagnosis`, `icd`, `principal_operation`, `disposition`, `outcome`) VALUES 
-                ('$patient_code','".$data['surname']."','".$data['firstname']."','".$data['middlename']."','".$data['birthday']."','".$data['patient_address']."','".$data['birthplace']."','".$data['age']."','".$data['gender']."','".$data['civil_status']."','".$data['nationality']."','".$data['religion']."','".$data['occupation']."','".$data['name1']."','".$data['address1']."','".$data['contact1']."','".$data['name2']."','".$data['address2']."','".$data['contact2']."','".$data['name3']."','".$data['address3']."','".$data['contact3']."','".$data['hospital_code']."','".$data['medical_record_number']."','".$data['room']."','".$data['admission_date_time']."','".$data['discharged_date_time']."','".$data['days']."','".$data['admitting_personnel']."','".$data['attending_physicians']."','".$data['referred_by']."','".$data['alert']."','".$data['allergic']."','".$data['admission_type']."','".$data['health_insurance']."','".$data['philhealth']."','".$data['data_furnished']."','".$data['informant']."','".$data['patient_relation']."','".$data['admission_diagnosis']."','".$data['final_diagnosis']."','".$data['icd']."','".$data['principal_operation']."','".$data['disposition']."','".$data['outcome']."')");
+                $query = $this->db->query("INSERT INTO `admissions`(`patient_code`,`surname`, `firstname`, `middlename`, `birthday`, `address`, `birthplace`, `age`, `gender`, `civil_status`, `nationality`, `religion`, `occupation`, `name1`, `address1`, `contact1`, `name2`, `address2`, `contact2`, `name3`, `address3`, `contact3`, `hospital_code`, `medical_record_number`, `room`, `admission_date_time`, `discharged_date_time`, `days`, `admitting_personnel`, `attending_physicians`, `referred_by`, `alert`, `allergic`, `admission_type`, `health_insurance`, `philhealth`, `data_furnished`, `informant`, `patient_relation`, `admission_diagnosis`, `final_diagnosis`, `icd`, `principal_operation`, `disposition`, `outcome`,`date_today`) VALUES 
+                ('$patient_code','".$data['surname']."','".$data['firstname']."','".$data['middlename']."','".$data['birthday']."','".$data['patient_address']."','".$data['birthplace']."','".$data['age']."','".$data['gender']."','".$data['civil_status']."','".$data['nationality']."','".$data['religion']."','".$data['occupation']."','".$data['name1']."','".$data['address1']."','".$data['contact1']."','".$data['name2']."','".$data['address2']."','".$data['contact2']."','".$data['name3']."','".$data['address3']."','".$data['contact3']."','".$data['hospital_code']."','".$data['medical_record_number']."','".$data['room']."','".$data['admission_date_time']."','".$data['discharged_date_time']."','".$data['days']."','".$data['admitting_personnel']."','".$data['attending_physicians']."','".$data['referred_by']."','".$data['alert']."','".$data['allergic']."','".$data['admission_type']."','".$data['health_insurance']."','".$data['philhealth']."','".$data['data_furnished']."','".$data['informant']."','".$data['patient_relation']."','".$data['admission_diagnosis']."','".$data['final_diagnosis']."','".$data['icd']."','".$data['principal_operation']."','".$data['disposition']."','".$data['outcome']."','$date')");
                 if($query) {
                     notify('success','New patient has been added.',true);
                 } else {
@@ -89,6 +90,21 @@ class account extends Model {
     public function get_all_patients() {
         $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id GROUP BY surname,firstname,middlename");
         return $query;
+    }
+
+    public function total_patients($status) {
+        $query = $this->db->query("SELECT * FROM admissions WHERE status = $status");
+        return $query->num_rows;
+    }
+
+    public function total_out_patients() {
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient");
+        return $query->num_rows;
+    }
+
+    public function total_users($role) {
+        $query = $this->db->query("SELECT * FROM accounts WHERE role = $role");
+        return $query->num_rows;
     }
 
     public function get_doctor_patients($id) {

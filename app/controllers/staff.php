@@ -11,6 +11,11 @@ class staff extends Controller {
     public function index() {
         $data['token'] = $_SESSION['token'];
         $data['title'] = 'Dashboard';
+        $data['total_admitted'] = $this->model('account')->total_patients(0);
+        $data['total_discharged'] = $this->model('account')->total_patients(1);
+        $data['total_out_patients'] = $this->model('account')->total_out_patients();
+        $data['total_doctor'] = $this->model('account')->total_users(1);
+        $data['total_staff'] = $this->model('account')->total_users(2);
         $data['user'] = $this->model('account')->get_user_information($_SESSION['id']);
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
