@@ -265,9 +265,9 @@ class admin extends Controller {
         if(isset($_SESSION['token']) == $this->input->post('token')) {
             $data = array(
                 'admissions_id' => $this->input->post('admissions_id'),
-                'surname' => $this->input->post('surname'),
-                'firstname' => $this->input->post('firstname'),
-                'middlename' => $this->input->post('middlename'),
+                'surname'       => $this->input->post('surname'),
+                'firstname'     => $this->input->post('firstname'),
+                'middlename'    => $this->input->post('middlename'),
                 'birthday' => $this->input->post('birthday'),
                 'patient_address' => $this->input->post('patient_address'),
                 'birthplace' => $this->input->post('birthplace'),
