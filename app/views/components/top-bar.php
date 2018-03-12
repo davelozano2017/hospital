@@ -15,15 +15,6 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Text link</a></li>
-
-				<li>
-					<a href="#">
-						<i class="icon-cog3"></i>
-						<span class="visible-xs-inline-block position-right">Icon link</span>
-					</a>						
-				</li>
-
 				<li class="dropdown dropdown-user">
 					<a class="dropdown-toggle" data-toggle="dropdown">
 						<img src="<?= empty($data['user']->image) ? 'https://d2ln1xbi067hum.cloudfront.net/assets/default_user-abdf6434cda029ecd32423baac4ec238.png' : ASSETS.'/uploads/profile/'.$data['user']->image; ?>" alt="">

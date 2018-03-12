@@ -33,7 +33,7 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Hospital Code</th>
+                <th>OPD Case NUmber</th>
                 <th>Physicians</th>
                 <th colspan=3>Date</th>
                 </tr>

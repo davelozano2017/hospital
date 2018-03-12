@@ -24,27 +24,70 @@
 <!-- Basic responsive configuration -->
 <div class="panel panel-flat">
 
-<table id="doctor" class="table datatable-responsive">
-    <thead>
-        <tr>
-            <th colspan=5>Name</th>
-            <td style="width:1px" class="text-center">Action</td>
-            </tr>
-    </thead>
-    <tbody>
-        <?php foreach($data['all_patients'] as $row) { ?> 
-            <tr>
-                <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="text-center"><a href="<?=URL?>admin/view_patients/<?=$row['admissions_id']?>"><i class="icon-eye"></i></a></td>
-            </tr>
-        <?php } ?>
-    </tbody>
-</table>
+
+<div class="tabbable">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#Admission" data-toggle="tab">Admissions & Discharged Records</a></li>
+        <li><a href="#OutPatients" data-toggle="tab">Out Patient Records</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="Admission">
+            <table id="doctor" class="table datatable-responsive">
+                <thead>
+                    <tr>
+                        <th colspan=5>Name</th>
+                        <td style="width:1px" class="text-center">Action</td>
+                        </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($data['all_patients'] as $row) { ?> 
+                        <tr>
+                            <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-cexnter"><a href="<?=URL?>admin/view_patients/<?=$row['admissions_id']?>"><i class="icon-eye"></i></a></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="tab-pane" id="OutPatients">
+            <table id="doctor" class="table datatable-responsive">
+                <thead>
+                    <tr>
+                        <th colspan=5>Name</th>
+                        <td style="width:1px" class="text-center">Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($data['outpatients'] as $rows) { ?> 
+                        <tr>
+                            <td><?=$rows['firstname']. ' '.$rows['middlename']. ' '.$rows['surname']?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-cexnter"><a href="<?=URL?>admin/view_patients/<?=$rows['outpatients_id']?>"><i class="icon-eye"></i></a></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
 
     
 </div>
+
+
 <!-- /basic responsive configuration -->

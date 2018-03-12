@@ -123,7 +123,7 @@ class account extends Model {
     }
 
     public function get_patient($id) {
-        $query = $this->db->query("SELECT * FROM admissions WHERE admissions_id = $id");
+        $query = $this->db->query("SELECT * FROM admissions as a WHERE admissions_id = $id");
         return $query->fetch_object();
     }
 
