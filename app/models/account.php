@@ -83,7 +83,8 @@ class account extends Model {
     }
 
     public function get_all_admissions($status) {
-        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.status = $status");
+        $date_today = date('Y-m-d');
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.date_today = '$date_today' AND a.status = $status");
         return $query;
     }
 
@@ -127,7 +128,8 @@ class account extends Model {
     }
 
     public function get_all_admissions_by_doctor($status) {
-        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.status = $status AND accounts_id = ".$_SESSION['id']);
+        $date_today = date('Y-m-d');
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.date_today = '$date_today' AND a.status = $status AND accounts_id = ".$_SESSION['id']);
         return $query;
     }
 
