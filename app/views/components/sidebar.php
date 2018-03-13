@@ -88,7 +88,15 @@
                     <li class="navigation-header"><span>PATIENT PROFILE MODULE</span> <i class="icon-menu" title="PATIENT PROFILE MODULE"></i></li>
                     <li class="<?= $data['title'] == 'All Patients' ? 'active':'';?>"><a href="<?=URL?>doctor/all_patients"><i class="icon-users"></i> <span>All Patients</span></a></li>
                     
-                    
+                    <li class="navigation-header"><span>DOCTORS SCHEDULE MODULE</span> <i class="icon-menu" title="DOCTORS SCHEDULE MODULE"></i></li>
+                    <li>
+                    <a href="#"><i class="icon-users4"></i> <span>Doctor's Appointment</span></a>
+                        <ul>
+                            <li class="<?= $data['title'] == 'Appointment In Patients' ? 'active':'';?>"><a href="<?=URL?>doctor/appointment_in_patients">In Patients</a></li>
+                            <li class="<?= $data['title'] == 'Appointment Out Patients' ? 'active':'';?>"><a href="<?=URL?>doctor/appointment_out_patients">Out Patients</a></li>
+                        </ul>
+                    </li>
+
                 <?php } else { ?> 
                     <li class="<?= $data['title'] == 'Dashboard' ? 'active':'';?>"><a href="<?=URL?>staff/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                     
@@ -111,6 +119,9 @@
                             <li class="<?= $data['title'] == 'Appointment Out Patients' ? 'active':'';?>"><a href="<?=URL?>staff/appointment_out_patients">Out Patients</a></li>
                         </ul>
                     </li>
+                    
+                    <li class="navigation-header"><span>Statistical Report Module</span> <i class="icon-menu" title="STATISTICAL REPORT MODULE"></i></li>
+                    <li class="<?= $data['title'] == 'Reports' ? 'active':'';?>"><a href="<?=URL?>admin/reports"><i class="icon-graph"></i> <span>Statistical Reports</span></a></li>
                     
 
                 <?php } ?>

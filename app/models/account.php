@@ -31,6 +31,32 @@ class account extends Model {
         echo json_encode($jsonArray);
     }
 
+    public function chart_by_doctor($id) {
+        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM admissions WHERE attending_physicians = $id GROUP BY admission_date");
+        $jsonArray = array();
+        foreach($result as $row) {
+            $jsonArrayItem = array();
+            $jsonArrayItem['label'] = date('M d, Y',strtotime($row['admission_date']));
+            $jsonArrayItem['value'] = $row['c'];
+            array_push($jsonArray, $jsonArrayItem);
+        }    
+        header('Content-type: application/json');
+        echo json_encode($jsonArray);
+    }
+
+    public function chart_out_patients_by_doctor($id) {
+        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM medical_record_out_patient WHERE physicians_id = $id GROUP BY date");
+        $jsonArray = array();
+        foreach($result as $row) {
+            $jsonArrayItem = array();
+            $jsonArrayItem['label'] = date('M d, Y',strtotime($row['date']));
+            $jsonArrayItem['value'] = $row['c'];
+            array_push($jsonArray, $jsonArrayItem);
+        }    
+        header('Content-type: application/json');
+        echo json_encode($jsonArray);
+    }
+
     public function get_user_information($account_id) {
         $query = $this->db->query("SELECT * FROM accounts WHERE accounts_id = $account_id");
         return $query->fetch_object();
@@ -114,6 +140,13 @@ class account extends Model {
         return $query;
     }
 
+
+    public function get_all_doctor_admissions($status,$id) {
+        $date_today = date('Y-m-d');
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.date_today = '$date_today' AND a.status = $status AND a.attending_physicians = $id");
+        return $query;
+    }
+
     public function get_all_patients() {
         $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id GROUP BY surname,firstname,middlename");
         return $query;
@@ -121,6 +154,16 @@ class account extends Model {
 
     public function total_patients($status) {
         $query = $this->db->query("SELECT * FROM admissions WHERE status = $status");
+        return $query->num_rows;
+    }
+
+    public function total_patients_by_doctor($status,$id) {
+        $query = $this->db->query("SELECT * FROM admissions WHERE status = $status AND attending_physicians = $id");
+        return $query->num_rows;
+    }
+
+    public function total_out_patients_by_doctor($id) {
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE physicians_id = $id");
         return $query->num_rows;
     }
 
@@ -143,10 +186,18 @@ class account extends Model {
         $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.surname = '$surname' AND a.firstname = '$firstname' AND a.status = $status AND a.attending_physicians = $id");
         return $query;
     }
+    
     public function view_patients_by_lastname($surname,$firstname,$status) {
         $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.surname = '$surname' AND a.firstname = '$firstname' AND a.status = $status");
         return $query;
     }
+
+    public function view_patients_doctor_by_lastname($surname,$firstname,$status,$id) {
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.surname = '$surname' AND a.firstname = '$firstname' AND a.status = $status AND a.attending_physicians = $id");
+        return $query;
+    }
+
+    
 
     public function get_patient($id) {
         $query = $this->db->query("SELECT * FROM admissions WHERE admissions_id = $id");
@@ -172,12 +223,20 @@ class account extends Model {
         return $query;
     }
 
+    public function get_all_out_patients_by_doctor($id) {
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id WHERE mrop.physicians_id = $id");
+        return $query;
+    }
+
     public function get_out_patients_by_lastname($surname,$firstname) {
         $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id WHERE mrop.surname = '$surname' AND mrop.firstname = '$firstname'");
         return $query;
     }
 
-    
+    public function get_out_patients_doctor_by_lastname($surname,$firstname,$id) {
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id WHERE mrop.surname = '$surname' AND mrop.firstname = '$firstname' AND mrop.physicians_id = $id");
+        return $query;
+    }
 
     public function accounts($data) {
         $accounts_id = $data['accounts_id'];

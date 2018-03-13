@@ -77,6 +77,66 @@ function graph_out() {
     });
 }
 
+function graph_doctor() {
+    $.ajax({
+        url: url+'chart_by_doctor',
+        type: 'GET',
+        success: function(data) {
+            chartData = data;
+            var chartProperties = {
+                "caption": "",
+                "xAxisName": "Days",
+                "yAxisName": "Number of patients",
+                "rotatevalues": "2",
+                "theme": "fint"
+            };
+
+            apiChart = new FusionCharts({
+                type: 'column3d',
+                renderAt: 'chart-container',
+                width: '100%',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "data": chartData
+                }
+            });
+            apiChart.render();
+        }
+    });
+}
+
+function graph_out_doctor() {
+    $.ajax({
+        url: url+'chart_out_patients_by_doctor',
+        type: 'GET',
+        success: function(data) {
+            chartData = data;
+            var chartProperties = {
+                "caption": "",
+                "xAxisName": "Days",
+                "yAxisName": "Number of patients",
+                "rotatevalues": "",
+                "theme": "fint"
+            };
+
+            apiChart = new FusionCharts({
+                type: 'column3d',
+                renderAt: 'chart-container-out',
+                width: '100%',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "data": chartData
+                }
+            });
+            apiChart.render();
+        }
+    });
+}
+
 function update_profile() {
     var data = $('#formUpdateProfile').serialize();
     $.ajax({
@@ -186,7 +246,6 @@ function InsertOrUpdateRooms() {
 
 function InsertOrUpdateAdmission() {
     var data = $('#formAdmission').serialize();
-    alert(data);
     $.ajax({
         type : 'POST',
         url : url + 'InsertOrUpdateAdmissions',

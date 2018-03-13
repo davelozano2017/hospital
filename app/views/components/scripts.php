@@ -43,6 +43,8 @@ toastr_option();
 // $('select').select2();
 graph();
 graph_out();
+graph_doctor()
+graph_out_doctor()
 </script>
 </body>
 </html>

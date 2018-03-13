@@ -8,9 +8,14 @@ class doctor extends Controller {
         $this->input = $this->model('account');
     }
 
+   
+
     public function index() {
         $data['token'] = $_SESSION['token'];
         $data['title'] = 'Dashboard';
+        $data['total_admitted'] = $this->model('account')->total_patients_by_doctor(0,$_SESSION['id']);
+        $data['total_discharged'] = $this->model('account')->total_patients_by_doctor(1,$_SESSION['id']);
+        $data['total_out_patients'] = $this->model('account')->total_out_patients_by_doctor($_SESSION['id']);
         $data['user'] = $this->model('account')->get_user_information($_SESSION['id']);
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
@@ -20,6 +25,14 @@ class doctor extends Controller {
         $this->view('components/scripts',$data);
     }
 
+    public function chart_by_doctor() {
+        $this->model('account')->chart_by_doctor($_SESSION['id']);
+    }
+
+    public function chart_out_patients_by_doctor() {
+        $this->model('account')->chart_out_patients_by_doctor($_SESSION['id']);
+    }
+    
     public function profile() {
         $data['token'] = $_SESSION['token'];
         $data['title'] = 'Profile';
@@ -63,6 +76,7 @@ class doctor extends Controller {
         $data['token']        = $_SESSION['token'];
         $data['title']        = 'All Patients';
         $data['all_patients'] = $this->model('account')->get_doctor_patients($_SESSION['id']);
+        $data['outpatients']  = $this->model('account')->get_all_out_patients_by_doctor($_SESSION['id']);
         $data['rooms']        = $this->model('account')->get_all_rooms();
         $data['physicians']   = $this->model('account')->get_all_physicians();
         $data['user']         = $this->model('account')->get_user_information($_SESSION['id']);
@@ -79,9 +93,60 @@ class doctor extends Controller {
         $data['token']        = $_SESSION['token'];
         $data['title']        = 'All Patients';
         $data['row']          = $this->model('account')->get_patient($id);
-        $data['admissions']   = $this->model('account')->view_doctor_patients($data['row']->surname,$data['row']->firstname,0,$_SESSION['id']);
-        $data['discharged']   = $this->model('account')->view_doctor_patients($data['row']->surname,$data['row']->firstname,1,$_SESSION['id']);
-        $data['outpatients']  = $this->model('account')->get_out_patients_by_lastname($data['row']->surname,$data['row']->firstname);
+        $data['admissions']   = $this->model('account')->view_patients_doctor_by_lastname($data['row']->surname,$data['row']->firstname,0,$_SESSION['id']);
+        $data['discharged']   = $this->model('account')->view_patients_doctor_by_lastname($data['row']->surname,$data['row']->firstname,1,$_SESSION['id']);
+        $data['outpatients']  = $this->model('account')->get_out_patients_doctor_by_lastname($data['row']->surname,$data['row']->firstname,$_SESSION['id']);
+        $data['rooms']        = $this->model('account')->get_all_rooms();
+        $data['physicians']   = $this->model('account')->get_all_physicians();
+        $data['user']         = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['nationality']  = $this->model('account')->countries();
+        $this->view('components/header',$data);
+        $this->view('components/top-bar',$data);
+        $this->view('components/sidebar',$data);
+        $this->view('pages/doctor/view-patients',$data);
+        $this->view('components/footer',$data);
+        $this->view('components/scripts',$data);
+    }
+
+    public function appointment_in_patients() {
+        $data['token']       = $_SESSION['token'];
+        $data['title']       = 'Appointment In Patients';
+        $data['admissions']  = $this->model('account')->get_all_doctor_admissions(0,$_SESSION['id']);
+        $data['discharged']  = $this->model('account')->get_all_doctor_admissions(1,$_SESSION['id']);
+        $data['outpatients'] = $this->model('account')->get_all_out_patients_by_doctor($_SESSION['id']);
+        $data['rooms']       = $this->model('account')->get_all_rooms();
+        $data['physicians']  = $this->model('account')->get_all_physicians();
+        $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['nationality'] = $this->model('account')->countries();
+        $this->view('components/header',$data);
+        $this->view('components/top-bar',$data);
+        $this->view('components/sidebar',$data);
+        $this->view('pages/doctor/doctor-appointment-in-patients',$data);
+        $this->view('components/footer',$data);
+        $this->view('components/scripts',$data);
+    }
+    
+    public function appointment_out_patients() {
+        $data['token']       = $_SESSION['token'];
+        $data['title']       = 'Appointment Out Patients';
+        $data['physicians']  = $this->model('account')->get_all_physicians();
+        $data['outpatients'] = $this->model('account')->get_all_out_patients_by_doctor($_SESSION['id']);
+        $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
+        $this->view('components/header',$data);
+        $this->view('components/top-bar',$data);
+        $this->view('components/sidebar',$data);
+        $this->view('pages/doctor/doctor-appointment-out-patients',$data);
+        $this->view('components/footer',$data);
+        $this->view('components/scripts',$data);
+    }
+
+    public function view_patient($id) {
+        $data['token']        = $_SESSION['token'];
+        $data['title']        = 'All Patients';
+        $data['row']          = $this->model('account')->get_patients($id);
+        $data['admissions']   = $this->model('account')->view_patients_doctor_by_lastname($data['row']->surname,$data['row']->firstname,0,$_SESSION['id']);
+        $data['discharged']   = $this->model('account')->view_patients_doctor_by_lastname($data['row']->surname,$data['row']->firstname,1,$_SESSION['id']);
+        $data['outpatients']  = $this->model('account')->get_out_patients_doctor_by_lastname($data['row']->surname,$data['row']->firstname,$_SESSION['id']);
         $data['rooms']        = $this->model('account')->get_all_rooms();
         $data['physicians']   = $this->model('account')->get_all_physicians();
         $data['user']         = $this->model('account')->get_user_information($_SESSION['id']);
