@@ -374,22 +374,41 @@
 
                                 <!-- 2nd -->
                             <div class="row">
+                                
                                 <div class="col-sm-6">
-                                    <label for="">Admission ( Date / Time )</label>
+                                    <label for="">Admission ( Date ) *</label>
                                     <div class="form-group">
-                                        <input type="datetime-local" name="admission_date_time" id="admission_date_time" ng-model="admission_date_time" class="form-control" required>
-                                        <span ng-messages="formAdmission.admission_date_time.$error" ng-if="formAdmission.admission_date_time.$dirty">
+                                        <input type="date" name="admission_date" id="admission_date" ng-model="admission_date_time" class="form-control" required>
+                                        <span ng-messages="formAdmission.admission_date.$error" ng-if="formAdmission.admission_date.$dirty">
                                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                                         </span>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <label for="">Discharged ( Date / Time )</label>
+                                    <label for="">Admission ( Time ) *</label>
                                     <div class="form-group">
-                                        <input type="datetime-local" name="discharged_date_time" id="discharged_date_time" ng-model="discharged_date_time" class="form-control" >
+                                        <input type="time" name="admission_time" id="admission_time" ng-model="admission_time" class="form-control" required>
+                                        <span ng-messages="formAdmission.admission_time.$error" ng-if="formAdmission.admission_time.$dirty">
+                                            <strong ng-message="required" class="text-danger">This field is required.</strong>
+                                        </span>
                                     </div>
                                 </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Discharged ( Date )</label>
+                                    <div class="form-group">
+                                        <input type="date" name="discharged_date" id="discharged_date" ng-model="discharged_date" class="form-control" >
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Discharged ( Time )</label>
+                                    <div class="form-group">
+                                        <input type="time" name="discharged_time" id="discharged_time" ng-model="discharged_time" class="form-control" >
+                                    </div>
+                                </div>
+
                                 
                             </div>
 

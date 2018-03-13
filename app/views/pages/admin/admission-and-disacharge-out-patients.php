@@ -45,7 +45,7 @@
                     <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
                     <td><?=$row['opd_case_number']?></td>
                     <td>Dr. <?=$row['name']?></td>
-                    <td><?=date('M d, Y',strtotime($row['created_at']))?></td>
+                    <td><?=date('M d, Y',strtotime($row['date']))?></td>
                     <td></td>
                     <td class="text-center"><a onclick="view_out_patients('<?=$row['outpatients_id']?>')"><i class="icon-eye"></i></a></td>
                 </tr>

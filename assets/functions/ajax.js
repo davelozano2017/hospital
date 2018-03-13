@@ -17,6 +17,66 @@ function login() {
     })
 }
 
+function graph() {
+    $.ajax({
+        url: url+'chart',
+        type: 'GET',
+        success: function(data) {
+            chartData = data;
+            var chartProperties = {
+                "caption": "",
+                "xAxisName": "Days",
+                "yAxisName": "Number of patients",
+                "rotatevalues": "2",
+                "theme": "fint"
+            };
+
+            apiChart = new FusionCharts({
+                type: 'column3d',
+                renderAt: 'chart-container',
+                width: '100%',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "data": chartData
+                }
+            });
+            apiChart.render();
+        }
+    });
+}
+
+function graph_out() {
+    $.ajax({
+        url: url+'chart_out_patients',
+        type: 'GET',
+        success: function(data) {
+            chartData = data;
+            var chartProperties = {
+                "caption": "",
+                "xAxisName": "Days",
+                "yAxisName": "Number of patients",
+                "rotatevalues": "",
+                "theme": "fint"
+            };
+
+            apiChart = new FusionCharts({
+                type: 'column3d',
+                renderAt: 'chart-container-out',
+                width: '100%',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "data": chartData
+                }
+            });
+            apiChart.render();
+        }
+    });
+}
+
 function update_profile() {
     var data = $('#formUpdateProfile').serialize();
     $.ajax({
@@ -126,6 +186,7 @@ function InsertOrUpdateRooms() {
 
 function InsertOrUpdateAdmission() {
     var data = $('#formAdmission').serialize();
+    alert(data);
     $.ajax({
         type : 'POST',
         url : url + 'InsertOrUpdateAdmissions',
@@ -248,6 +309,8 @@ function view_out_patients_by_surname(outpatients_id) {
             modal.find($('#respiratory_rate')).val(data.respiratory_rate);
             modal.find($('#temperature')).val(data.temperature);
             modal.find($('#weight')).val(data.weight);
+            modal.find($('#date')).val(data.date);
+            modal.find($('#time')).val(data.time);
             modal.find($('#impression')).val(data.impression);
             modal.find($('#treatment')).val(data.treatment);
             $('#btn-out-patients').html('Save Changes <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
@@ -282,6 +345,8 @@ function view_out_patients(outpatients_id) {
             modal.find($('#respiratory_rate')).val(data.respiratory_rate);
             modal.find($('#temperature')).val(data.temperature);
             modal.find($('#weight')).val(data.weight);
+            modal.find($('#date')).val(data.date);
+            modal.find($('#time')).val(data.time);
             modal.find($('#impression')).val(data.impression);
             modal.find($('#treatment')).val(data.treatment);
             $('#btn-out-patients').html('Save Changes <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
@@ -328,8 +393,10 @@ function view_admissions(admissions_id) {
             modal.find($('#hospital_code')).val(data.hospital_code);
             modal.find($('#medical_record_number')).val(data.medical_record_number);
             modal.find($('#room')).val(data.room);
-            modal.find($('#admission_date_time')).val(data.admission_date_time);
-            modal.find($('#discharged_date_time')).val(data.discharged_date_time);
+            modal.find($('#admission_date')).val(data.admission_date);
+            modal.find($('#admission_time')).val(data.admission_time);
+            modal.find($('#discharged_date')).val(data.discharged_date);
+            modal.find($('#discharged_time')).val(data.discharged_time);
             modal.find($('#days')).val(data.days);
             modal.find($('#admitting_personnel')).val(data.admitting_personnel);
             modal.find($('#attending_physicians')).val(data.attending_physicians);
@@ -395,8 +462,10 @@ function view_patients(admissions_id) {
             modal.find($('#hospital_code')).val(data.hospital_code);
             modal.find($('#medical_record_number')).val(data.medical_record_number);
             modal.find($('#room')).val(data.room);
-            modal.find($('#admission_date_time')).val(data.admission_date_time);
-            modal.find($('#discharged_date_time')).val(data.discharged_date_time);
+            modal.find($('#admission_date')).val(data.admission_date);
+            modal.find($('#admission_time')).val(data.admission_time);
+            modal.find($('#discharged_date')).val(data.discharged_date);
+            modal.find($('#discharged_time')).val(data.discharged_time);
             modal.find($('#days')).val(data.days);
             modal.find($('#admitting_personnel')).val(data.admitting_personnel);
             modal.find($('#attending_physicians')).val(data.attending_physicians);

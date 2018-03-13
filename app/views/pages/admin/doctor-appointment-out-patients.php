@@ -44,7 +44,7 @@
                     <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
                     <td><?=$row['opd_case_number']?></td>
                     <td>Dr. <?=$row['name']?></td>
-                    <td><?=date('M d, Y',strtotime($row['created_at']))?></td>
+                    <td><?=date('M d, Y',strtotime($row['date']))?></td>
                     <td></td>
                     <td class="text-center"><a onclick="view_out_patients('<?=$row['outpatients_id']?>')"><i class="icon-eye"></i></a></td>
                 </tr>
@@ -242,7 +242,28 @@
                                         </span>
                                     </div>
                                 </div>
+                                
                                 <div class="clearfix"></div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Date</label>
+                                    <div class="form-group">
+                                        <input type="date" name="date" id="date" ng-model="date" class="form-control" required>
+                                        <span ng-messages="formOutPatients.date.$error" ng-if="formOutPatients.date.$dirty">
+                                            <strong ng-message="required" class="text-danger">This field is required.</strong>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Time</label>
+                                    <div class="form-group">
+                                        <input type="time" name="time" id="time" ng-model="time" class="form-control" required>
+                                        <span ng-messages="formOutPatients.time.$error" ng-if="formOutPatients.time.$dirty">
+                                            <strong ng-message="required" class="text-danger">This field is required.</strong>
+                                        </span>
+                                    </div>
+                                </div>
                                 
 
                                 <div class="col-sm-12">

@@ -64,18 +64,30 @@
 
     
 
-    <div class="panel panel-flat">
-        <div class="panel-body">
-            <!-- start  -->
-            <div class="col-md-3">
+<div class="panel panel-flat">
+    <div class="panel-body">
+        <!-- start  -->
+        <div class="row">
+            <div class="panel-body">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#basic-tab1" data-toggle="tab">Admission and Discharged</a></li>
+                        <li><a href="#basic-tab2" data-toggle="tab">Out Patients</a></li>
+                    </ul>
 
-                <!-- Productivity goal  -->
-                
-                <!-- /productivity goal -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="basic-tab1">
+                            <div id="chart-container"></div>
+                        </div>
 
+                        <div class="tab-pane" id="basic-tab2">
+                            <div id="chart-container-out"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- end -->
         </div>
+
+        <!-- end -->
     </div>
-
-
+</div>

@@ -7,6 +7,14 @@ class staff extends Controller {
         $_SESSION['token'] = TOKEN;
         $this->input = $this->model('account');
     }
+    
+    public function chart() {
+        $this->model('account')->chart();
+    }
+
+    public function chart_out_patients() {
+        $this->model('account')->chart_out_patients();
+    }
 
     public function index() {
         $data['token'] = $_SESSION['token'];
@@ -77,6 +85,7 @@ class staff extends Controller {
     public function all_patients() {
         $data['token']        = $_SESSION['token'];
         $data['title']        = 'All Patients';
+        $data['outpatients']  = $this->model('account')->get_all_out_patients();
         $data['all_patients'] = $this->model('account')->get_all_patients();
         $data['rooms']        = $this->model('account')->get_all_rooms();
         $data['physicians']   = $this->model('account')->get_all_physicians();
@@ -85,7 +94,7 @@ class staff extends Controller {
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);
-        $this->view('pages/admin/all-patients',$data);
+        $this->view('pages/staff/all-patients',$data);
         $this->view('components/footer',$data);
         $this->view('components/scripts',$data);
     }
@@ -104,7 +113,26 @@ class staff extends Controller {
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);
-        $this->view('pages/admin/view-patients',$data);
+        $this->view('pages/staff/view-patients',$data);
+        $this->view('components/footer',$data);
+        $this->view('components/scripts',$data);
+    }
+
+    public function view_patient($id) {
+        $data['token']        = $_SESSION['token'];
+        $data['title']        = 'All Patients';
+        $data['row']          = $this->model('account')->get_patients($id);
+        $data['admissions']   = $this->model('account')->view_patients_by_lastname($data['row']->surname,$data['row']->firstname,0);
+        $data['discharged']   = $this->model('account')->view_patients_by_lastname($data['row']->surname,$data['row']->firstname,1);
+        $data['outpatients']  = $this->model('account')->get_out_patients_by_lastname($data['row']->surname,$data['row']->firstname);
+        $data['rooms']        = $this->model('account')->get_all_rooms();
+        $data['physicians']   = $this->model('account')->get_all_physicians();
+        $data['user']         = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['nationality']  = $this->model('account')->countries();
+        $this->view('components/header',$data);
+        $this->view('components/top-bar',$data);
+        $this->view('components/sidebar',$data);
+        $this->view('pages/staff/view-patients',$data);
         $this->view('components/footer',$data);
         $this->view('components/scripts',$data);
     }
@@ -191,6 +219,8 @@ class staff extends Controller {
                 'respiratory_rate' => $this->input->post('respiratory_rate'),
                 'temperature'      => $this->input->post('temperature'),
                 'weight'           => $this->input->post('weight'),
+                'date'             => $this->input->post('date'),
+                'time'             => $this->input->post('time'),
                 'impression'       => $this->input->post('impression'),
                 'treatment'        => $this->input->post('treatment')
             );

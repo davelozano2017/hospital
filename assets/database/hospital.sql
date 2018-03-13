@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2018 at 08:56 PM
+-- Generation Time: Mar 13, 2018 at 02:00 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -85,8 +85,10 @@ CREATE TABLE `admissions` (
   `hospital_code` varchar(255) NOT NULL,
   `medical_record_number` varchar(255) NOT NULL,
   `room` int(11) NOT NULL,
-  `admission_date_time` varchar(255) NOT NULL,
-  `discharged_date_time` varchar(255) NOT NULL,
+  `admission_date` varchar(255) NOT NULL,
+  `admission_time` varchar(255) NOT NULL,
+  `discharged_date` varchar(255) NOT NULL,
+  `discharged_time` varchar(255) NOT NULL,
   `days` varchar(255) NOT NULL,
   `admitting_personnel` varchar(255) NOT NULL,
   `attending_physicians` int(11) NOT NULL,
@@ -113,8 +115,13 @@ CREATE TABLE `admissions` (
 -- Dumping data for table `admissions`
 --
 
-INSERT INTO `admissions` (`admissions_id`, `patient_code`, `surname`, `firstname`, `middlename`, `birthday`, `address`, `birthplace`, `age`, `gender`, `civil_status`, `nationality`, `religion`, `occupation`, `name1`, `address1`, `contact1`, `name2`, `address2`, `contact2`, `name3`, `address3`, `contact3`, `hospital_code`, `medical_record_number`, `room`, `admission_date_time`, `discharged_date_time`, `days`, `admitting_personnel`, `attending_physicians`, `referred_by`, `alert`, `allergic`, `admission_type`, `health_insurance`, `philhealth`, `data_furnished`, `informant`, `patient_relation`, `admission_diagnosis`, `final_diagnosis`, `icd`, `principal_operation`, `disposition`, `outcome`, `status`, `date_today`) VALUES
-(14, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-10T01:00', '2018-03-10T12:00', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, '');
+INSERT INTO `admissions` (`admissions_id`, `patient_code`, `surname`, `firstname`, `middlename`, `birthday`, `address`, `birthplace`, `age`, `gender`, `civil_status`, `nationality`, `religion`, `occupation`, `name1`, `address1`, `contact1`, `name2`, `address2`, `contact2`, `name3`, `address3`, `contact3`, `hospital_code`, `medical_record_number`, `room`, `admission_date`, `admission_time`, `discharged_date`, `discharged_time`, `days`, `admitting_personnel`, `attending_physicians`, `referred_by`, `alert`, `allergic`, `admission_type`, `health_insurance`, `philhealth`, `data_furnished`, `informant`, `patient_relation`, `admission_diagnosis`, `final_diagnosis`, `icd`, `principal_operation`, `disposition`, `outcome`, `status`, `date_today`) VALUES
+(14, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-10', '01:00', '2018-03-10T12:00', '', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, ''),
+(15, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-11', '01:00', '2018-03-11T12:00', '', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, ''),
+(16, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-10', '01:00', '2018-03-10T12:00', '', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, ''),
+(17, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-11', '01:00', '2018-03-11T12:00', '', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, ''),
+(18, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-10', '01:00', '2018-03-10T12:00', '', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, ''),
+(19, 225671, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Quezon City', 'Quezon City', '23', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '1002201102', '10-22-23', 17, '2018-03-12', '17:04', '', '', '', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 0, '2018-03-13');
 
 -- --------------------------------------------------------
 
@@ -443,15 +450,18 @@ CREATE TABLE `medical_record_out_patient` (
   `weight` varchar(255) NOT NULL,
   `impression` varchar(255) NOT NULL,
   `treatment` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `date` varchar(255) NOT NULL,
+  `time` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `medical_record_out_patient`
 --
 
-INSERT INTO `medical_record_out_patient` (`outpatients_id`, `surname`, `firstname`, `middlename`, `birthday`, `age`, `gender`, `address`, `chief_complaints`, `opd_case_number`, `physicians_id`, `hp`, `pulse_rate`, `respiratory_rate`, `temperature`, `weight`, `impression`, `treatment`, `created_at`) VALUES
-(2, 'Lozano', 'John David', 'Sadia', '1994-03-31', '21', 'Male', 'Blk.1  L.50', 'Blk.1  L.50', '1000101', 5, '100', '70', '100', '35', '198', 'unknown', 'unknown', '2018-03-09 18:29:53');
+INSERT INTO `medical_record_out_patient` (`outpatients_id`, `surname`, `firstname`, `middlename`, `birthday`, `age`, `gender`, `address`, `chief_complaints`, `opd_case_number`, `physicians_id`, `hp`, `pulse_rate`, `respiratory_rate`, `temperature`, `weight`, `impression`, `treatment`, `date`, `time`) VALUES
+(2, 'Lozano', 'John David', 'Sadia', '1994-03-31', '21', 'Male', 'Blk.1  L.50', 'Blk.1  L.50', '1000101', 5, '100', '70', '100', '35', '198', 'unknown', 'unknown', '2018-03-12', '20:00'),
+(3, 'Nino', 'Juffrey', 'De Guzman', '1994-03-31', '23', 'Male', 'Quezon City', 'unknown', '100222155', 5, '100', '70', '100', '35', '190', 'unknown', 'unknown', '2018-03-12', '13:00'),
+(4, 'Broncano', 'Sajer', 'Se', '1994-03-31', '23', 'Male', 'Quezon City', 'unknown', '10020010', 5, '100', '70', '100', '35', '190', 'unknown', 'unknown', '', '');
 
 -- --------------------------------------------------------
 
@@ -529,7 +539,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `admissions`
 --
 ALTER TABLE `admissions`
-  MODIFY `admissions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `admissions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `logs`
@@ -541,7 +551,7 @@ ALTER TABLE `logs`
 -- AUTO_INCREMENT for table `medical_record_out_patient`
 --
 ALTER TABLE `medical_record_out_patient`
-  MODIFY `outpatients_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `outpatients_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `rooms`

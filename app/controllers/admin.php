@@ -8,6 +8,14 @@ class admin extends Controller {
         $this->input = $this->model('account');
     }
 
+    public function chart() {
+        $this->model('account')->chart();
+    }
+
+    public function chart_out_patients() {
+        $this->model('account')->chart_out_patients();
+    }
+
     public function index() {
         $data['token'] = $_SESSION['token'];
         $data['title'] = 'Dashboard';
@@ -78,7 +86,7 @@ class admin extends Controller {
     public function all_patients() {
         $data['token']        = $_SESSION['token'];
         $data['title']        = 'All Patients';
-        $data['outpatients'] = $this->model('account')->get_all_out_patients();
+        $data['outpatients']  = $this->model('account')->get_all_out_patients();
         $data['all_patients'] = $this->model('account')->get_all_patients();
         $data['rooms']        = $this->model('account')->get_all_rooms();
         $data['physicians']   = $this->model('account')->get_all_physicians();
@@ -96,6 +104,25 @@ class admin extends Controller {
         $data['token']        = $_SESSION['token'];
         $data['title']        = 'All Patients';
         $data['row']          = $this->model('account')->get_patient($id);
+        $data['admissions']   = $this->model('account')->view_patients_by_lastname($data['row']->surname,$data['row']->firstname,0);
+        $data['discharged']   = $this->model('account')->view_patients_by_lastname($data['row']->surname,$data['row']->firstname,1);
+        $data['outpatients']  = $this->model('account')->get_out_patients_by_lastname($data['row']->surname,$data['row']->firstname);
+        $data['rooms']        = $this->model('account')->get_all_rooms();
+        $data['physicians']   = $this->model('account')->get_all_physicians();
+        $data['user']         = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['nationality']  = $this->model('account')->countries();
+        $this->view('components/header',$data);
+        $this->view('components/top-bar',$data);
+        $this->view('components/sidebar',$data);
+        $this->view('pages/admin/view-patients',$data);
+        $this->view('components/footer',$data);
+        $this->view('components/scripts',$data);
+    }
+
+    public function view_patient($id) {
+        $data['token']        = $_SESSION['token'];
+        $data['title']        = 'All Patients';
+        $data['row']          = $this->model('account')->get_patients($id);
         $data['admissions']   = $this->model('account')->view_patients_by_lastname($data['row']->surname,$data['row']->firstname,0);
         $data['discharged']   = $this->model('account')->view_patients_by_lastname($data['row']->surname,$data['row']->firstname,1);
         $data['outpatients']  = $this->model('account')->get_out_patients_by_lastname($data['row']->surname,$data['row']->firstname);
@@ -603,6 +630,8 @@ $pdf->Output();
                 'respiratory_rate' => $this->input->post('respiratory_rate'),
                 'temperature'      => $this->input->post('temperature'),
                 'weight'           => $this->input->post('weight'),
+                'date'             => $this->input->post('date'),
+                'time'             => $this->input->post('time'),
                 'impression'       => $this->input->post('impression'),
                 'treatment'        => $this->input->post('treatment')
             );
@@ -640,8 +669,10 @@ $pdf->Output();
                 'hospital_code' => $this->input->post('hospital_code'),
                 'medical_record_number' => $this->input->post('medical_record_number'),
                 'room' => $this->input->post('room'),
-                'admission_date_time' => $this->input->post('admission_date_time'),
-                'discharged_date_time' => $this->input->post('discharged_date_time'),
+                'admission_date' => $this->input->post('admission_date'),
+                'admission_time' => $this->input->post('admission_time'),
+                'discharged_date' => $this->input->post('discharged_date'),
+                'discharged_time' => $this->input->post('discharged_time'),
                 'days' => $this->input->post('days'),
                 'admitting_personnel' => $this->input->post('admitting_personnel'),
                 'attending_physicians' => $this->input->post('attending_physicians'),

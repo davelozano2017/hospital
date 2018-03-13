@@ -17,6 +17,12 @@
 <script type="text/javascript" src="<?=ASSETS?>js/core/app.js"></script>
 <script type="text/javascript" src="<?=ASSETS?>js/pages/datatables_responsive.js"></script>
 <script type="text/javascript" src="<?=ASSETS?>js/pages/general_widgets_stats.js"></script>
+<script src="<?=ASSETS?>graph/fusioncharts.js"></script>
+<script src="<?=ASSETS?>graph/fusioncharts.charts.js"></script>
+<script src="<?=ASSETS?>graph/themes/fusioncharts.theme.zune.js"></script>
+<script src="<?=ASSETS?>graph/themes/fusioncharts.theme.ocean.js"></script>
+<script src="<?=ASSETS?>graph/themes/fusioncharts.theme.carbon.js"></script>
+<script src="<?=ASSETS?>graph/themes/fusioncharts.theme.fint.js"></script>
 
 <!-- /theme JS files -->
 <!-- /theme JS files -->
@@ -35,7 +41,8 @@ $('.picture').change( function(event) {
 });
 toastr_option();
 // $('select').select2();
-
+graph();
+graph_out();
 </script>
 </body>
 </html>
