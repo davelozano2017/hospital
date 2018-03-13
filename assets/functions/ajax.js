@@ -93,7 +93,7 @@ function graph_doctor() {
 
             apiChart = new FusionCharts({
                 type: 'column3d',
-                renderAt: 'chart-container',
+                renderAt: 'chart-container-doctor',
                 width: '100%',
                 height: '350',
                 dataFormat: 'json',
@@ -123,7 +123,7 @@ function graph_out_doctor() {
 
             apiChart = new FusionCharts({
                 type: 'column3d',
-                renderAt: 'chart-container-out',
+                renderAt: 'chart-container-out-doctor',
                 width: '100%',
                 height: '350',
                 dataFormat: 'json',

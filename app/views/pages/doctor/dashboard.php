@@ -57,11 +57,11 @@
 
                         <div class="tab-content">
                             <div class="tab-pane active" id="basic-tab1">
-                                <div id="chart-container"></div>
+                                <div id="chart-container-doctor"></div>
                             </div>
 
                             <div class="tab-pane" id="basic-tab2">
-                                <div id="chart-container-out"></div>
+                                <div id="chart-container-out-doctor"></div>
                             </div>
                         </div>
                     </div>
