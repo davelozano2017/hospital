@@ -45,7 +45,7 @@
                         <th>Hospital Code</th>
                         <th>Physicians</th>
                         <th>Room</th>
-                        <td style="width:1px"></td>
+                        <td>Date</td>
                         <td style="width:1px" class="text-center">Action</td>
                         </tr>
                 </thead>
@@ -56,7 +56,7 @@
                             <td><?=$row['hospital_code']?></td>
                             <td>Dr. <?=$row['name']?></td>
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
-                            <td></td>
+                            <td><?=date('M d,Y',strtotime($row['admission_date']))?></td>
                             <td class="text-center"><a onclick="view_admissions('<?=$row['admissions_id']?>')"><i class="icon-eye"></i></a></td>
                         </tr>
                     <?php } ?>
@@ -378,7 +378,7 @@
                                 <div class="col-sm-6">
                                     <label for="">Admission ( Date ) *</label>
                                     <div class="form-group">
-                                        <input type="date" name="admission_date" id="admission_date" ng-model="admission_date_time" class="form-control" required>
+                                        <input type="date"  max="<?=date('Y-m-d')?>" name="admission_date" id="admission_date" ng-model="admission_date_time" class="form-control" required>
                                         <span ng-messages="formAdmission.admission_date.$error" ng-if="formAdmission.admission_date.$dirty">
                                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                                         </span>
@@ -436,9 +436,9 @@
                                 <div class="col-sm-6">
                                     <label for="">Attending Physician * </label>
                                     <div class="form-group">
-                                        <select name="attending_physicians" id="attending_physicians"  class="form-control" required>
+                                        <select multiple name="attending_physicians" id="attending_physicians"  class="form-control" required>
                                             <?php foreach($data['physicians'] as $physicians_list) { ?>
-                                                <option value="<?=$physicians_list['accounts_id']?>" selected><?=$physicians_list['name']?></option>
+                                                <option value="<?=$physicians_list['accounts_id']?>"><?=$physicians_list['name']?></option>
                                             <?php } ?>
                                         </select>
                                     </div>

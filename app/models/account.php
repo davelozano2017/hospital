@@ -245,6 +245,7 @@ class account extends Model {
         $email       = $data['email'];
         $gender      = $data['gender'];
         $address     = $data['address'];
+        $status      = $data['status'];
         $username    = $data['username'];
         $password    = $data['password'];
         $role        = $data['role'];
@@ -257,7 +258,7 @@ class account extends Model {
                 notify('success','New user has been added.',true);
             }
         } else {
-            $query = $this->db->query("UPDATE accounts SET name = '$name', contact = '$contact', email = '$email', gender = '$gender', address = '$address', username = '$username', password = '$password', role = '$role' WHERE accounts_id = $accounts_id");
+            $query = $this->db->query("UPDATE accounts SET name = '$name', contact = '$contact', email = '$email', gender = '$gender', address = '$address', status = '$status', username = '$username', password = '$password', role = '$role' WHERE accounts_id = $accounts_id");
             notify('info','Data has been changed.',true);
         }
 
@@ -266,7 +267,7 @@ class account extends Model {
     public function user_login($data) {
         $username = $data['username'];
         $password = $data['password'];
-        $check = $this->db->query("SELECT * FROM accounts WHERE username = '$username'");
+        $check = $this->db->query("SELECT * FROM accounts WHERE username = '$username' AND status = 0");
         if($check->num_rows > 0) {
             $row = $check->fetch_object();
             $role = $row->role;
@@ -304,7 +305,7 @@ class account extends Model {
         $floor       = $data['floor'];
         $room_number = $data['room_number'];
         if(empty($rooms_id)) {
-            $check       = $this->db->query("SELECT * FROM rooms WHERE floor = '$floor'");
+            $check       = $this->db->query("SELECT * FROM rooms WHERE floor = '$floor' AND room_number = '$room_number'");
             if($check->num_rows > 0) {
                 notify('error','Room already exist.',false);
             } else {

@@ -23,10 +23,11 @@
 <script src="<?=ASSETS?>graph/themes/fusioncharts.theme.ocean.js"></script>
 <script src="<?=ASSETS?>graph/themes/fusioncharts.theme.carbon.js"></script>
 <script src="<?=ASSETS?>graph/themes/fusioncharts.theme.fint.js"></script>
-
+<script type="text/javascript" src="<?=ASSETS?>js/jquery-ui.js"></script>
 <!-- /theme JS files -->
 <!-- /theme JS files -->
 <script type="text/javascript">
+$( "#date" ).datepicker();
 var app = angular.module('app', ['ngMessages']);
 app.controller('mainController',function($scope){
     $scope.name     = '<?=$data['user']->name?>',
@@ -40,7 +41,7 @@ $('.picture').change( function(event) {
     $("#preview").attr('src',URL.createObjectURL(event.target.files[0]));
 });
 toastr_option();
-// $('select').select2();
+$('select').select2();
 graph();
 graph_out();
 graph_doctor()

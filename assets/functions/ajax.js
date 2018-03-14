@@ -238,8 +238,9 @@ function InsertOrUpdateRooms() {
         },
         success:function(data) {
             data.success === true ? notify(data.type,data.message) : notify(data.type,data.message);
-            var content = data.type == 'info' ? 'Save Changes' : 'Add Doctor';
+            var content = data.type == 'info' ? 'Save Changes' : 'Add Room';
             $('#btn-rooms').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
+            $('#rooms-modal').modal('hide');
         }
     })
 }
@@ -258,6 +259,7 @@ function InsertOrUpdateAdmission() {
             data.success === true ? notify(data.type,data.message) : notify(data.type,data.message);
             var content = data.type == 'info' ? 'Save Changes' : 'Add In Patients';
             $('#btn-admissions').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
+            $("#admission-modal").modal('hide');
         }
     })
 }
@@ -276,6 +278,7 @@ function InsertOrUpdateOutPatients() {
             data.success === true ? notify(data.type,data.message) : notify(data.type,data.message);
             var content = data.type == 'info' ? 'Save Changes' : 'Add Out Patients';
             $('#btn-out-patients').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
+            $('#out-patient-modal').modal('hide');
         }
     })
 }
@@ -296,6 +299,7 @@ function InsertOrUpdateDoctor() {
             data.success === true ? notify(data.type,data.message) : notify(data.type,data.message);
             var content = data.type == 'info' ? 'Save Changes' : 'Add Doctor';
             $('#btn-doctor').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
+            $('#doctor-modal').modal('hide');
         }
     })
 }
@@ -314,6 +318,7 @@ function InsertOrUpdateStaff() {
             data.success === true ? notify(data.type,data.message) : notify(data.type,data.message);
             var content = data.type == 'info' ? 'Save Changes' : 'Add Staff';
             $('#btn-staff').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
+            $('#staff-modal').modal('hide');
         }
     })
 }
@@ -336,6 +341,7 @@ function view_doctor(accounts_id) {
             modal.find($('#doctor_gender')).val(data.gender);
             modal.find($('#doctor_username')).val(data.username);
             modal.find($('#doctor_address')).val(data.address);
+            modal.find($('#status')).val(data.status);
             $('#btn-doctor').html('Save Changes <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
         }
     })

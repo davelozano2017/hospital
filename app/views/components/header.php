@@ -15,6 +15,7 @@
 	<link href="<?=ASSETS?>css/components.css" rel="stylesheet" type="text/css">
 	<link href="<?=ASSETS?>css/colors.css" rel="stylesheet" type="text/css">
 	<link href="<?=ASSETS?>toastr/css/toastr.min.css" rel="stylesheet" type="text/css">
+	<link href="<?=ASSETS?>css/jquery-ui.css" rel="stylesheet" type="text/css">
 	<!-- /global stylesheets -->
 	<style>button { border-radius:0px !important }</style>
 	

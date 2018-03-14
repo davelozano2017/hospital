@@ -80,9 +80,9 @@
 
                     <div class="form-group">
                         <label for="">Contact</label>
-                        <input type="text" ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/" name="staff_contact" id="staff_contact" ng-model="staff_contact" class="form-control" required>
+                        <input type="text" ng-pattern="/^[0-9]*$/" name="staff_contact" id="staff_contact" ng-model="staff_contact" class="form-control" required>
                         <span ng-messages="formStaff.staff_contact.$error" ng-if="formStaff.staff_contact.$dirty">
-                            <strong ng-message="pattern" class="text-danger">Please type 10 digits number..</strong>
+                            <strong ng-message="pattern" class="text-danger">Please type valid number..</strong>
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
                     </div>
@@ -110,6 +110,14 @@
                         <span ng-messages="formStaff.staff_address.$error" ng-if="formStaff.staff_address.$dirty">
                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                         </span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Status</label>
+                        <select name="status" class="form-control" id="status">
+                            <option value="0">Active</option>
+                            <option value="1">Not Active</option>
+                        </select>
                     </div>
 
                     <div class="form-group">

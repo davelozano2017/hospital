@@ -40,7 +40,7 @@
                         <th>Hospital Code</th>
                         <th>Physicians</th>
                         <th>Room</th>
-                        <td style="width:1px"></td>
+                        <td>Date</td>
                         <td style="width:1px" class="text-center">Action</td>
                         </tr>
                 </thead>
@@ -51,7 +51,7 @@
                             <td><?=$row['hospital_code']?></td>
                             <td>Dr. <?=$row['name']?></td>
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
-                            <td></td>
+                            <td><?=date('M d,Y',strtotime($row['admission_date']))?></td>
                             <td class="text-center"><a onclick="view_admissions('<?=$row['admissions_id']?>')"><i class="icon-eye"></i></a></td>
                         </tr>
                     <?php } ?>

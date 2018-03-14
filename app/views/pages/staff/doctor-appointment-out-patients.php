@@ -248,7 +248,7 @@
                                 <div class="col-sm-6">
                                     <label for="">Date</label>
                                     <div class="form-group">
-                                        <input type="date" name="date" id="date" ng-model="date" class="form-control" required>
+                                        <input type="date" max="<?=date('Y-m-d')?>" name="date" id="date" ng-model="date" class="form-control" required>
                                         <span ng-messages="formOutPatients.date.$error" ng-if="formOutPatients.date.$dirty">
                                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                                         </span>

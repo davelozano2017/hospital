@@ -603,6 +603,7 @@ $pdf->Output();
                 'email'       => $this->input->post('doctor_email'),
                 'gender'      => $this->input->post('doctor_gender'),
                 'address'     => $this->input->post('doctor_address'),
+                'status'      => $this->input->post('status'),
                 'role'        => 1,
                 'username'    => $this->input->post('doctor_username'),
                 'password'    => hashing('12345123')
@@ -705,6 +706,7 @@ $pdf->Output();
                 'email'       => $this->input->post('staff_email'),
                 'gender'      => $this->input->post('staff_gender'),
                 'address'     => $this->input->post('staff_address'),
+                'status'      => $this->input->post('status'),
                 'role'        => 2,
                 'username'    => $this->input->post('staff_username'),
                 'password'    => hashing('12345123')
