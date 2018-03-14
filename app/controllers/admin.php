@@ -676,7 +676,7 @@ $pdf->Output();
                 'discharged_time' => $this->input->post('discharged_time'),
                 'days' => $this->input->post('days'),
                 'admitting_personnel' => $this->input->post('admitting_personnel'),
-                'attending_physicians' => $this->input->post('attending_physicians'),
+                'attending_physicians' => $_POST['attending_physicians'],
                 'referred_by' => $this->input->post('referred_by'),
                 'alert' => $this->input->post('alert'),
                 'allergic' => $this->input->post('allergic'),

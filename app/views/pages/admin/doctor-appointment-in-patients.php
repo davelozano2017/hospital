@@ -436,7 +436,7 @@
                                 <div class="col-sm-6">
                                     <label for="">Attending Physician * </label>
                                     <div class="form-group">
-                                        <select multiple name="attending_physicians" id="attending_physicians"  class="form-control" required>
+                                        <select  multiple name="attending_physicians[]" id="attending_physicians"  class="form-control" required>
                                             <?php foreach($data['physicians'] as $physicians_list) { ?>
                                                 <option value="<?=$physicians_list['accounts_id']?>"><?=$physicians_list['name']?></option>
                                             <?php } ?>

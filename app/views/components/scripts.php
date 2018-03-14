@@ -41,7 +41,7 @@ $('.picture').change( function(event) {
     $("#preview").attr('src',URL.createObjectURL(event.target.files[0]));
 });
 toastr_option();
-$('select').select2();
+// $('select').select2();
 graph();
 graph_out();
 graph_doctor()
