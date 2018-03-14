@@ -100,6 +100,11 @@ class admin extends Controller {
         $this->view('components/scripts',$data);
     }
 
+    public function filter_patient() {
+        $search = $this->input->post('search');
+        $this->model('account')->filter_patient_code($search);
+    }
+
     public function view_patients($id) {
         $data['token']        = $_SESSION['token'];
         $data['title']        = 'All Patients';

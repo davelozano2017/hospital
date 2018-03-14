@@ -43,10 +43,9 @@
                     <tr>
                         <th>Name</th>
                         <th>Hospital Code</th>
-                        <th>Physicians</th>
                         <th>Room</th>
                         <td>Date</td>
-                        <td style="width:1px" class="text-center">Action</td>
+                        <td colspan=2 style="width:1px" class="text-center">Action</td>
                         </tr>
                 </thead>
                 <tbody>
@@ -54,9 +53,9 @@
                         <tr>
                             <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
                             <td><?=$row['hospital_code']?></td>
-                            <td>Dr. <?=$row['name']?></td>
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
                             <td><?=date('M d,Y',strtotime($row['admission_date']))?></td>
+                        <td style="width:1px"></td>
                             <td class="text-center"><a onclick="view_admissions('<?=$row['admissions_id']?>')"><i class="icon-eye"></i></a></td>
                         </tr>
                     <?php } ?>
@@ -70,8 +69,8 @@
                     <tr>
                         <th>Name</th>
                         <th>Hospital Code</th>
-                        <th>Physicians</th>
                         <th>Room</th>
+                        <td style="width:1px"></td>
                         <td style="width:1px"></td>
                         <td style="width:1px" class="text-center">Action</td>
                         </tr>
@@ -81,8 +80,8 @@
                         <tr>
                             <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
                             <td><?=$row['hospital_code']?></td>
-                            <td>Dr. <?=$row['name']?></td>
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
+                            <td></td>
                             <td></td>
                             <td class="text-center"><a onclick="view_admissions('<?=$row['admissions_id']?>')"><i class="icon-eye"></i></a></td>
                         </tr>
@@ -122,6 +121,13 @@
                             
                         <div class="row">
                         <!-- 1st -->
+                                <div class="col-sm-12">
+                                    <label for="">Patient Code </label>
+                                    <div class="form-group ">
+                                        <input type="text" name="parent_code" onchange="filter_patient()" id="parent_code" class="form-control">
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-4">
                                     <label for="">Surname *</label>
                                     <div class="form-group ">

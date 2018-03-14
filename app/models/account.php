@@ -31,6 +31,17 @@ class account extends Model {
         echo json_encode($jsonArray);
     }
 
+    public function filter_patient_code($search) {
+        $check = $this->db->query("SELECT * FROM admissions WHERE patient_code = '$search'");
+        if($check->num_rows > 0) {
+            $row = $check->fetch_object();
+            echo json_encode(array('success'=>true,'data'=>$row));
+        } else {
+            echo json_encode(array('success'=>false));
+
+        }
+    }
+
     public function chart_by_doctor($id) {
         $result = $this->db->query("SELECT *, COUNT(*) as c  FROM admissions WHERE attending_physicians = $id GROUP BY admission_date");
         $jsonArray = array();
@@ -132,21 +143,19 @@ class account extends Model {
         } else {
             // update here 
             $status = $data['discharged_date'] == '' ? 0 : 1;
-            foreach($data['attending_physicians'] as $key => $value) {
-                $query = $this->db->query("UPDATE `admissions` SET `surname`= '".$data['surname']."' ,`firstname`= '".$data['firstname']."', `middlename`= '".$data['middlename']."',`birthday`= '".$data['birthday']."',`address`= '".$data['patient_address']."',`birthplace`= '".$data['birthplace']."',`age`= '".$data['age']."',`gender`= '".$data['gender']."',`civil_status`= '".$data['civil_status']."',`nationality`= '".$data['nationality']."',`religion`= '".$data['religion']."',`occupation`= '".$data['occupation']."',`name1`= '".$data['name1']."',`address1`= '".$data['address1']."',`contact1`= '".$data['contact1']."',`name2`= '".$data['name2']."',`address2`= '".$data['address2']."',`contact2`= '".$data['contact2']."',`name3` = '".$data['name3']."',`address3`= '".$data['address3']."',`contact3`= '".$data['contact3']."',`hospital_code`= '".$data['hospital_code']."',`medical_record_number`= '".$data['medical_record_number']."',`room`= '".$data['room']."',`admission_date`= '".$data['admission_date']."',`admission_time` = '".$data['admission_time']."', `discharged_date` = '".$data['discharged_date']."',`discharged_time` = '".$data['discharged_time']."',`days`= '".$data['days']."',`admitting_personnel`= '".$data['admitting_personnel']."',`attending_physicians`= '".$data['attending_physicians'][$key]."',`referred_by`='".$data['referred_by']."',`alert`= '".$data['alert']."',`allergic`= '".$data['allergic']."',`admission_type`='".$data['admission_type']."',`health_insurance`='".$data['health_insurance']."',`philhealth`='".$data['philhealth']."',`data_furnished`='".$data['data_furnished']."',`informant`='".$data['informant']."',`patient_relation`= '".$data['patient_relation']."',`admission_diagnosis`='".$data['admission_diagnosis']."',`final_diagnosis`='".$data['final_diagnosis']."',`icd`='".$data['icd']."',`principal_operation`='".$data['principal_operation']."',`disposition`='".$data['disposition']."',`outcome`='".$data['outcome']."', status = $status WHERE admissions_id = $admissions_id");
+                $query = $this->db->query("UPDATE `admissions` SET `surname`= '".$data['surname']."' ,`firstname`= '".$data['firstname']."', `middlename`= '".$data['middlename']."',`birthday`= '".$data['birthday']."',`address`= '".$data['patient_address']."',`birthplace`= '".$data['birthplace']."',`age`= '".$data['age']."',`gender`= '".$data['gender']."',`civil_status`= '".$data['civil_status']."',`nationality`= '".$data['nationality']."',`religion`= '".$data['religion']."',`occupation`= '".$data['occupation']."',`name1`= '".$data['name1']."',`address1`= '".$data['address1']."',`contact1`= '".$data['contact1']."',`name2`= '".$data['name2']."',`address2`= '".$data['address2']."',`contact2`= '".$data['contact2']."',`name3` = '".$data['name3']."',`address3`= '".$data['address3']."',`contact3`= '".$data['contact3']."',`hospital_code`= '".$data['hospital_code']."',`medical_record_number`= '".$data['medical_record_number']."',`room`= '".$data['room']."',`admission_date`= '".$data['admission_date']."',`admission_time` = '".$data['admission_time']."', `discharged_date` = '".$data['discharged_date']."',`discharged_time` = '".$data['discharged_time']."',`days`= '".$data['days']."',`admitting_personnel`= '".$data['admitting_personnel']."',`attending_physicians`= '".$data['attending_physicians']."',`referred_by`='".$data['referred_by']."',`alert`= '".$data['alert']."',`allergic`= '".$data['allergic']."',`admission_type`='".$data['admission_type']."',`health_insurance`='".$data['health_insurance']."',`philhealth`='".$data['philhealth']."',`data_furnished`='".$data['data_furnished']."',`informant`='".$data['informant']."',`patient_relation`= '".$data['patient_relation']."',`admission_diagnosis`='".$data['admission_diagnosis']."',`final_diagnosis`='".$data['final_diagnosis']."',`icd`='".$data['icd']."',`principal_operation`='".$data['principal_operation']."',`disposition`='".$data['disposition']."',`outcome`='".$data['outcome']."', status = $status WHERE admissions_id = $admissions_id");
 
                 if($query) {
 
                     notify('info','Hospital code '.$data['hospital_code'].' has been updated.',true);
                 }
-            }
             
         }
     }
 
     public function get_all_admissions($status) {
         $date_today = date('Y-m-d');
-        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.date_today = '$date_today' AND a.status = $status");
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.date_today = '$date_today' AND a.status = $status GROUP BY patient_code");
         return $query;
     }
 

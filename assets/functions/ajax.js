@@ -17,6 +17,44 @@ function login() {
     })
 }
 
+function filter_patient() {
+    var search = $('#parent_code').val();
+    $.ajax({
+        type: 'POST',
+        url : url + 'filter_patient',
+        data : { search : search },
+        dataType : 'json',
+        success:function(data) {
+            if(data.success == true) {
+                $('#surname').val(data.data.surname);
+                $('#firstname').val(data.data.firstname);
+                $('#middlename').val(data.data.middlename);
+                $('#birthday').val(data.data.birthday);
+                $('#patient_address').val(data.data.address);
+                $('#birthplace').val(data.data.birthplace);
+                $('#age').val(data.data.age);
+                $('#gender').val(data.data.gender);
+                $('#civil_status').val(data.data.civil_status);
+                $('#nationality').val(data.data.nationality);
+                $('#religion').val(data.data.religion);
+                $('#occupation').val(data.data.occupation);
+                $('#name1').val(data.data.name1);
+                $('#address1').val(data.data.address1);
+                $('#contact1').val(data.data.contact1);
+                $('#name2').val(data.data.name2);
+                $('#address2').val(data.data.address2);
+                $('#contact2').val(data.data.contact2);
+                $('#name3').val(data.data.name3);
+                $('#address3').val(data.data.address3);
+                $('#contact3').val(data.data.contact3);
+            } else {
+                $('#formAdmission')[0].reset();
+            }
+           
+        }
+    })
+}
+
 function graph() {
     $.ajax({
         url: url+'chart',
@@ -192,6 +230,7 @@ function doctor_modal() {
     var modal = $('#doctor-modal');
     modal.modal();
     $('#formDoctor')[0].reset();
+    
     modal.find($('#btn-doctor')).html('Add Doctor <i class="icon-arrow-right14 position-right"></i>').attr('disabled',true);
 }
 
