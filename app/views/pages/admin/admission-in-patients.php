@@ -589,7 +589,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" ng-disabled="formAdmission.$invalid" id="btn-admissions" name="btn-admissions" onclick="InsertOrUpdateAdmission()"  class="btn btn-primary"> <i class="icon-arrow-right14 position-right"></i></button>
+                <!-- <button type="submit" ng-disabled="formAdmission.$invalid" id="btn-admissions" name="btn-admissions" onclick="InsertOrUpdateAdmission()"  class="btn btn-primary"> <i class="icon-arrow-right14 position-right"></i></button> -->
             </div>
             </form>
         </div>

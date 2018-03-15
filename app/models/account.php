@@ -6,7 +6,20 @@ class account extends Model {
     }
 
     public function chart() {
-        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM admissions GROUP BY admission_date");
+        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM admissions WHERE status = 0 GROUP BY admission_date,patient_code");
+        $jsonArray = array();
+        foreach($result as $row) {
+            $jsonArrayItem = array();
+            $jsonArrayItem['label'] = date('M d, Y',strtotime($row['admission_date']));
+            $jsonArrayItem['value'] = $row['c'];
+            array_push($jsonArray, $jsonArrayItem);
+        }    
+        header('Content-type: application/json');
+        echo json_encode($jsonArray);
+    }
+
+    public function chart_discharged() {
+        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM admissions WHERE status = 1 GROUP BY admission_date,patient_code");
         $jsonArray = array();
         foreach($result as $row) {
             $jsonArrayItem = array();

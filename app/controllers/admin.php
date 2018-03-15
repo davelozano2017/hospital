@@ -12,6 +12,10 @@ class admin extends Controller {
         $this->model('account')->chart();
     }
 
+    public function chart_discharged() {
+        $this->model('account')->chart_discharged();
+    }
+
     public function chart_out_patients() {
         $this->model('account')->chart_out_patients();
     }

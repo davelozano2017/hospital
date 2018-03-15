@@ -43,6 +43,7 @@ $('.picture').change( function(event) {
 toastr_option();
 // $('select').select2();
 graph();
+graph_discharged();
 graph_out();
 graph_doctor()
 graph_out_doctor()

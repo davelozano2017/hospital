@@ -115,6 +115,37 @@ function graph() {
     });
 }
 
+function graph_discharged() {
+    $.ajax({
+        url: url+'chart_discharged',
+        type: 'GET',
+        success: function(data) {
+            chartData = data;
+            var chartProperties = {
+                "caption": "",
+                "xAxisName": "Days",
+                "yAxisName": "Number of patients",
+                "rotatevalues": "2",
+                "theme": "fint"
+            };
+
+            apiChart = new FusionCharts({
+                type: 'column3d',
+                renderAt: 'chart-container-discharged',
+                width: '100%',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "data": chartData
+                }
+            });
+            apiChart.render();
+        }
+    });
+}
+
+
 function graph_out() {
     $.ajax({
         url: url+'chart_out_patients',
