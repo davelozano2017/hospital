@@ -32,13 +32,18 @@ class account extends Model {
     }
 
     public function filter_patient_code($search) {
-        $check = $this->db->query("SELECT * FROM admissions WHERE patient_code = '$search'");
+        $check = $this->db->query("SELECT * FROM medical_record_out_patient WHERE patient_code = '$search'");
         if($check->num_rows > 0) {
             $row = $check->fetch_object();
             echo json_encode(array('success'=>true,'data'=>$row));
         } else {
-            echo json_encode(array('success'=>false));
-
+            $check = $this->db->query("SELECT * FROM admissions WHERE patient_code = '$search'");
+            if($check->num_rows > 0) {
+                $row = $check->fetch_object();
+                echo json_encode(array('success'=>true,'data'=>$row));
+            } else {
+                echo json_encode(array('success'=>false));
+            }
         }
     }
 
@@ -48,8 +53,13 @@ class account extends Model {
             $row = $check->fetch_object();
             echo json_encode(array('success'=>true,'data'=>$row));
         } else {
-            echo json_encode(array('success'=>false));
-
+            $check = $this->db->query("SELECT * FROM admissions WHERE patient_code = '$search'");
+            if($check->num_rows > 0) {
+                $row = $check->fetch_object();
+                echo json_encode(array('success'=>true,'data'=>$row));
+            } else {
+                echo json_encode(array('success'=>false));
+            }
         }
     }
 

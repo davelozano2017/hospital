@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2018 at 02:00 AM
+-- Generation Time: Mar 15, 2018 at 03:42 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -38,19 +38,20 @@ CREATE TABLE `accounts` (
   `address` varchar(1000) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` int(11) NOT NULL
+  `role` int(11) NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`accounts_id`, `image`, `name`, `contact`, `email`, `gender`, `address`, `username`, `password`, `role`) VALUES
-(1, 'my picture.jpg', 'John David Lozano', '09555773952', 'lozanojohndavid@gmail.com', 'Male', 'Quezon City5345353534534', 'Administrator', '$2y$10$kFtdMa3t.JMHaxdXQRgH5.CENCEcZ1Qt4CSRnYvZ61UAVq5q8c8rS', 0),
-(5, '21739969_832946646870749_5682883968502257100_n.jpg', 'Jeddahlyn Cabuga', '09265691158', 'cabugajeddahlyn@gmail.com', 'Female', 'Quezon City', 'jeddah', '$2y$10$rddRx8kzut27CEASuXSfUectym65HHgFN8oOXNMGtX/x01kxnIXcS', 1),
-(6, '18447118_1751904378170105_7854398647292800290_n.jpg', 'Judilyn Abcede', '09555773952', 'judilynabcede@gmail.com', 'Female', 'Bulacan City', 'judilyn', '$2y$10$B2RF9SfTfrOVlb.rowuh.eCPuKzXDc1A8XqYH61/AR2Sn2YLZvHxm', 2),
-(9, '', 'Janice Millanes', '09555773952', 'janicemillanes@gmail.com', 'Female', 'Bagong Silang Caloocan City', 'janice', '$2y$10$FjfQaTSZqbK/9mtYHoNrLu5R0qS6gYcR7sAOMNUMUPw.RE/VQHIY2', 2),
-(10, '', 'Jansel May Conception', '09555773952', 'janselmayconception@gmail.com', 'Female', 'Bagong Silang Caloocan City', 'jansel', '$2y$10$doHTXhjCcjAZUpse16SUQuOTfmXJFuMH4XrUl9WQCGLqHkcmztUOS', 1);
+INSERT INTO `accounts` (`accounts_id`, `image`, `name`, `contact`, `email`, `gender`, `address`, `username`, `password`, `role`, `status`) VALUES
+(1, 'my picture.jpg', 'John David Lozano', '09555773952', 'lozanojohndavid@gmail.com', 'Male', 'Quezon City5345353534534', 'Administrator', '$2y$10$kFtdMa3t.JMHaxdXQRgH5.CENCEcZ1Qt4CSRnYvZ61UAVq5q8c8rS', 0, 0),
+(5, '21739969_832946646870749_5682883968502257100_n.jpg', 'Jeddahlyn Cabuga', '09265691158', 'cabugajeddahlyn@gmail.com', 'Female', 'Quezon City', 'jeddah', '$2y$10$rddRx8kzut27CEASuXSfUectym65HHgFN8oOXNMGtX/x01kxnIXcS', 1, 0),
+(6, '18447118_1751904378170105_7854398647292800290_n.jpg', 'Judilyn Abcede', '09555773952', 'judilynabcede@gmail.com', 'Female', 'Bulacan City', 'judilyn', '$2y$10$B2RF9SfTfrOVlb.rowuh.eCPuKzXDc1A8XqYH61/AR2Sn2YLZvHxm', 2, 1),
+(9, '', 'Janice Millanes', '09555773952', 'janicemillanes@gmail.com', 'Female', 'Bagong Silang Caloocan City', 'janice', '$2y$10$fQaE0NKROXG1UvuKWFyV9ejrkM.yaWuUxSS8MTIhJ/uo3OVPGaKDG', 2, 0),
+(10, '', 'Jansel May Conception', '09555773952', 'janselmayconception@gmail.com', 'Female', 'Bagong Silang Caloocan City', 'jansel', '$2y$10$E2pzoa90wGOJUQge/8EmeuDr7W4oApDugs9w73v7UX17iqlSM7aGe', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -116,12 +117,8 @@ CREATE TABLE `admissions` (
 --
 
 INSERT INTO `admissions` (`admissions_id`, `patient_code`, `surname`, `firstname`, `middlename`, `birthday`, `address`, `birthplace`, `age`, `gender`, `civil_status`, `nationality`, `religion`, `occupation`, `name1`, `address1`, `contact1`, `name2`, `address2`, `contact2`, `name3`, `address3`, `contact3`, `hospital_code`, `medical_record_number`, `room`, `admission_date`, `admission_time`, `discharged_date`, `discharged_time`, `days`, `admitting_personnel`, `attending_physicians`, `referred_by`, `alert`, `allergic`, `admission_type`, `health_insurance`, `philhealth`, `data_furnished`, `informant`, `patient_relation`, `admission_diagnosis`, `final_diagnosis`, `icd`, `principal_operation`, `disposition`, `outcome`, `status`, `date_today`) VALUES
-(14, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-10', '01:00', '2018-03-10T12:00', '', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, ''),
-(15, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-11', '01:00', '2018-03-11T12:00', '', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, ''),
-(16, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-10', '01:00', '2018-03-10T12:00', '', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, ''),
-(17, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-11', '01:00', '2018-03-11T12:00', '', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, ''),
-(18, 798019, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Blk.1  L.50', 'Quezon City', '21', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '4100497', '10-15-20', 17, '2018-03-10', '01:00', '2018-03-10T12:00', '', '1', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 1, ''),
-(19, 225671, 'Lozano', 'John David', 'Sadia', '1994-03-31', 'Quezon City', 'Quezon City', '23', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Web Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '1002201102', '10-22-23', 17, '2018-03-12', '17:04', '', '', '', 'Unknown', 5, 'Unknown', 'Unknown', 'Unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Unknown', 'Discharged', 'Recovered', 0, '2018-03-13');
+(1, 531084, 'Lozano', 'John David', 'Sadia', '1994-03-03', 'Blk.1  L.50', 'Quezon City', '23', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '10002920290', '10-10-20', 20, '2018-03-15', '08:30', '2018-03-16', '08:45', '1', 'unknown', 5, 'unknown', 'unknown', 'unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'unknown', 'unknown', 'unknown', 'unknown', 'unknown', 'unknown', 'unknown', 'Discharged', 'Recovered', 1, '2018-03-15'),
+(2, 531084, 'Lozano', 'John David', 'Sadia', '1994-03-03', 'Blk.1  L.50', 'Quezon City', '23', 'Male', 'Single', 'Philippine, Filipino', 'Islam', 'Developer', '', '', '', 'David James Lozano Sr', 'Blk.1  L.50', '2819734', 'Adora Lozano', 'Blk.1  L.50', '2819734', '10002920290', '10-10-20', 20, '2018-03-15', '08:30', '2018-03-16', '08:45', '1', 'unknown', 10, 'unknown', 'unknown', 'unknown', 'New', 'Indigent', 'Formal (GSIS/PS)', 'unknown', 'unknown', 'unknown', 'unknown', 'unknown', 'unknown', 'unknown', 'Discharged', 'Recovered', 1, '2018-03-15');
 
 -- --------------------------------------------------------
 
@@ -433,6 +430,7 @@ INSERT INTO `logs` (`logs_id`, `accounts_id`, `content`, `created_at`) VALUES
 
 CREATE TABLE `medical_record_out_patient` (
   `outpatients_id` int(11) NOT NULL,
+  `patient_code` int(11) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `firstname` varchar(255) NOT NULL,
   `middlename` varchar(255) NOT NULL,
@@ -458,10 +456,11 @@ CREATE TABLE `medical_record_out_patient` (
 -- Dumping data for table `medical_record_out_patient`
 --
 
-INSERT INTO `medical_record_out_patient` (`outpatients_id`, `surname`, `firstname`, `middlename`, `birthday`, `age`, `gender`, `address`, `chief_complaints`, `opd_case_number`, `physicians_id`, `hp`, `pulse_rate`, `respiratory_rate`, `temperature`, `weight`, `impression`, `treatment`, `date`, `time`) VALUES
-(2, 'Lozano', 'John David', 'Sadia', '1994-03-31', '21', 'Male', 'Blk.1  L.50', 'Blk.1  L.50', '1000101', 5, '100', '70', '100', '35', '198', 'unknown', 'unknown', '2018-03-12', '20:00'),
-(3, 'Nino', 'Juffrey', 'De Guzman', '1994-03-31', '23', 'Male', 'Quezon City', 'unknown', '100222155', 5, '100', '70', '100', '35', '190', 'unknown', 'unknown', '2018-03-12', '13:00'),
-(4, 'Broncano', 'Sajer', 'Se', '1994-03-31', '23', 'Male', 'Quezon City', 'unknown', '10020010', 5, '100', '70', '100', '35', '190', 'unknown', 'unknown', '', '');
+INSERT INTO `medical_record_out_patient` (`outpatients_id`, `patient_code`, `surname`, `firstname`, `middlename`, `birthday`, `age`, `gender`, `address`, `chief_complaints`, `opd_case_number`, `physicians_id`, `hp`, `pulse_rate`, `respiratory_rate`, `temperature`, `weight`, `impression`, `treatment`, `date`, `time`) VALUES
+(2, 954169, 'Lozano', 'John David', 'Sadia', '2018-03-15', '21', 'Male', 'Blk.1  L.50', '10002', '10002', 5, '100', '90', '100', '35', '190', '10002', '10002', '2018-03-15', '09:30'),
+(3, 528493, 'Nino', 'Juffrey', 'De Guzman', '1994-03-31', '23', 'Male', 'Quezon City', 'unknown', '100222155', 5, '100', '70', '100', '35', '190', 'unknown', 'unknown', '2018-03-12', '13:00'),
+(4, 421196, 'Broncano', 'Sajer', 'Se', '1994-03-31', '23', 'Male', 'Quezon City', 'unknown', '10020010', 5, '100', '70', '100', '35', '190', 'unknown', 'unknown', '', ''),
+(6, 886486, 'Lozano', 'John David', 'Sadia', '1994-03-03', '23', 'Male', 'Blk.1  L.50', 'unknown', '100292029', 5, '100', '100', '100', '35', '190', 'unknown', 'unknown', '2018-03-15', '09:55');
 
 -- --------------------------------------------------------
 
@@ -481,7 +480,11 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`rooms_id`, `room_type`, `floor`, `room_number`) VALUES
-(17, 'Ward', '1st Floor', '101');
+(17, 'Ward', '1st Floor', '101'),
+(19, 'Ward', '1st', '102'),
+(20, 'Ward', '1st', '103'),
+(21, 'Ward', '1st', '104'),
+(22, 'Ward', '1st', '105');
 
 --
 -- Indexes for dumped tables
@@ -539,7 +542,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `admissions`
 --
 ALTER TABLE `admissions`
-  MODIFY `admissions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `admissions_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `logs`
@@ -551,13 +554,13 @@ ALTER TABLE `logs`
 -- AUTO_INCREMENT for table `medical_record_out_patient`
 --
 ALTER TABLE `medical_record_out_patient`
-  MODIFY `outpatients_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `outpatients_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `rooms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `rooms_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
