@@ -68,6 +68,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Hospital Code</th>
+                        <th>Patient Code</th>
                         <th>Physicians</th>
                         <th>Room</th>
                         <td style="width:1px"></td>
@@ -79,6 +80,7 @@
                         <tr>
                             <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
                             <td><?=$row['hospital_code']?></td>
+                            <td><?=$row['patient_code']?></td>
                             <td>Dr. <?=$row['name']?></td>
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
                             <td></td>
@@ -95,6 +97,7 @@
                     <tr>
                         <th>Name</th>
                         <th>OPD Case Number</th>
+                        <th>Patient Code</th>
                         <th>Physicians</th>
                         <th colspan=3>Date</th>
                     </tr>
@@ -104,6 +107,7 @@
                         <tr>
                             <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
                             <td><?=$row['opd_case_number']?></td>
+                            <td><?=$row['patient_code']?></td>
                             <td>Dr. <?=$row['name']?></td>
                             <td><?=date('M d, Y',strtotime($row['date']))?></td>
                             <td></td>
