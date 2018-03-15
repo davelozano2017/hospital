@@ -16,6 +16,16 @@ class staff extends Controller {
         $this->model('account')->chart_out_patients();
     }
 
+    public function filter_patient() {
+        $search = $this->input->post('search');
+        $this->model('account')->filter_patient_code($search);
+    }
+
+    public function filter_out_patient() {
+        $search = $this->input->post('search');
+        $this->model('account')->filter_out_patient($search);
+    }
+
     public function index() {
         $data['token'] = $_SESSION['token'];
         $data['title'] = 'Dashboard';

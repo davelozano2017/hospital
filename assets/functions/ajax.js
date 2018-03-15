@@ -18,7 +18,7 @@ function login() {
 }
 
 function filter_patient() {
-    var search = $('#parent_code').val();
+    var search = $('#patient_code').val();
     $.ajax({
         type: 'POST',
         url : url + 'filter_patient',
@@ -54,6 +54,36 @@ function filter_patient() {
         }
     })
 }
+
+function filter_out_patient() {
+    var search = $('#patient_code').val();
+    $.ajax({
+        type: 'POST',
+        url : url + 'filter_out_patient',
+        data : { search : search },
+        dataType : 'json',
+        success:function(data) {
+            if(data.success == true) {
+                $('#outpatients_id').val(data.data.outpatients_id);
+                $('#surname').val(data.data.surname);
+                $('#firstname').val(data.data.firstname);
+                $('#middlename').val(data.data.middlename);
+                $('#birthday').val(data.data.birthday);
+                $('#age').val(data.data.age);
+                $('#gender').val(data.data.gender);
+                $('#patient_address').val(data.data.address);
+                $("#btn-out-patients").attr('disabled',false);
+            } else {
+                $('#formOutPatients')[0].reset();
+                $("#btn-out-patients").attr('disabled',true);
+            }
+           
+        }
+    })
+}
+
+
+
 
 function graph() {
     $.ajax({
@@ -472,6 +502,7 @@ function view_admissions(admissions_id) {
         success:function(data) {
             modal.modal();
             modal.find($('#admissions_id')).val(data.admissions_id);
+            modal.find($('#patient_code')).val(data.patient_code);
             modal.find($('#surname')).val(data.surname);
             modal.find($('#firstname')).val(data.firstname);
             modal.find($('#middlename')).val(data.middlename);

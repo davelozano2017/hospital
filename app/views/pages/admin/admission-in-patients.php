@@ -51,7 +51,7 @@
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
                             <td><?=date('M d,Y',strtotime($row['admission_date']))?></td>
                             <td></td>
-                            <td class="text-center"><a onclick="view_admissions('<?=$row['admissions_id']?>')"><i class="icon-eye"></i></a></td>
+                            <td class="text-center"><a  class="btn btn-primary"  onclick="view_admissions('<?=$row['admissions_id']?>')">view</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>

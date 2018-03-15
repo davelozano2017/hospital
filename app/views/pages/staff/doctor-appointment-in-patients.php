@@ -43,7 +43,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Hospital Code</th>
-                        <th>Physicians</th>
+                        <th>Physician</th>
                         <th>Room</th>
                         <td>Date</td>
                         <td style="width:1px" class="text-center">Action</td>
@@ -57,7 +57,8 @@
                             <td>Dr. <?=$row['name']?></td>
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
                             <td><?=date('M d,Y',strtotime($row['admission_date']))?></td>
-                            <td class="text-center"><a onclick="view_admissions('<?=$row['admissions_id']?>')"><i class="icon-eye"></i></a></td>
+                        <td style="width:1px"></td>
+                            <td class="text-center"><a  class="btn btn-primary" onclick="view_admissions('<?=$row['admissions_id']?>')">view</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -70,8 +71,9 @@
                     <tr>
                         <th>Name</th>
                         <th>Hospital Code</th>
-                        <th>Physicians</th>
+                        <th>Physician</th>
                         <th>Room</th>
+                        <td style="width:1px"></td>
                         <td style="width:1px"></td>
                         <td style="width:1px" class="text-center">Action</td>
                         </tr>
@@ -84,7 +86,8 @@
                             <td>Dr. <?=$row['name']?></td>
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
                             <td></td>
-                            <td class="text-center"><a onclick="view_admissions('<?=$row['admissions_id']?>')"><i class="icon-eye"></i></a></td>
+                            <td></td>
+                            <td class="text-center"><a  class="btn btn-primary" onclick="view_admissions('<?=$row['admissions_id']?>')">view</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -122,8 +125,15 @@
                             
                         <div class="row">
                         <!-- 1st -->
+                                <div class="col-sm-12">
+                                    <label for="">Patient Code </label>
+                                    <div class="form-group ">
+                                        <input type="text" name="patient_code" onchange="filter_patient()" id="patient_code" class="form-control">
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-4">
-                                    <label for="">Surname</label>
+                                    <label for="">Surname *</label>
                                     <div class="form-group ">
                                         <input type="text" ng-pattern ="/^[a-zA-Z\s]*$/"  name="surname" id="surname" ng-model="surname" class="form-control" required>
                                         <span ng-messages="formAdmission.surname.$error" ng-if="formAdmission.surname.$dirty">
@@ -134,7 +144,7 @@
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <label for="">First Name</label>
+                                    <label for="">First Name *</label>
                                     <div class="form-group ">
                                         <input type="text" ng-pattern ="/^[a-zA-Z\s]*$/"  name="firstname" id="firstname" ng-model="firstname" class="form-control" required>
                                         <span ng-messages="formAdmission.firstname.$error" ng-if="formAdmission.firstname.$dirty">
@@ -145,7 +155,7 @@
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <label for="">Middle Name</label>
+                                    <label for="">Middle Name *</label>
                                     <div class="form-group ">
                                         <input type="text" ng-pattern ="/^[a-zA-Z\s]*$/"  name="middlename" id="middlename" ng-model="middlename" class="form-control">
                                         <span ng-messages="formAdmission.middlename.$error" ng-if="formAdmission.middlename.$dirty">
@@ -156,7 +166,7 @@
                                 </div>
                                 <!-- 2nd  -->
                                 <div class="col-sm-4">
-                                    <label for="">Birthday</label>
+                                    <label for="">Birthday *</label>
                                     <div class="form-group ">
                                         <input type="date" name="birthday" id="birthday" ng-model="birthday" class="form-control" required>
                                         <span ng-messages="formAdmission.birthday.$error" ng-if="formAdmission.birthday.$dirty">
@@ -166,7 +176,7 @@
                                 </div>
 
                                  <div class="col-sm-8">
-                                    <label for="">Address</label>
+                                    <label for="">Address *</label>
                                     <div class="form-group">
                                         <input type="text" name="patient_address" id="patient_address" ng-model="patient_address" class="form-control" required>
                                     </div>
@@ -174,7 +184,7 @@
                                <!-- 3rd  -->
                                 
                                 <div class="col-sm-4">
-                                    <label for="">Birth Place</label>
+                                    <label for="">Birth Place *</label>
                                     <div class="form-group">
                                         <input type="text" name="birthplace" id="birthplace" ng-model="birthplace" class="form-control" required>
                                         <span ng-messages="formAdmission.birthplace.$error" ng-if="formAdmission.birthplace.$dirty">
@@ -184,7 +194,7 @@
                                 </div>
 
                                  <div class="col-sm-2">
-                                    <label for="">Age</label>
+                                    <label for="">Age *</label>
                                     <div class="form-group">
                                         <input type="text" name="age" id="age" ng-model="age" class="form-control" required>
                                         <span ng-messages="formAdmission.age.$error" ng-if="formAdmission.age.$dirty">
@@ -232,7 +242,7 @@
                                 <div class="col-sm-4">
                                     <label for="">Religion</label>
                                     <div class="form-group">
-                                        <input type="text" name="religion" id="religion" ng-model="religion" class="form-control" required>
+                                        <input type="text" name="religion" id="religion" ng-model="religion" class="form-control" >
                                         <span ng-messages="formAdmission.religion.$error" ng-if="formAdmission.religion.$dirty">
                                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                                         </span>
@@ -341,7 +351,7 @@
                             <div class="row">
                                 <!-- 1st -->
                                 <div class="col-sm-4">
-                                    <label for="">Hospital Code.</label>
+                                    <label for="">Hospital Code. *</label>
                                     <div class="form-group">
                                         <input type="text" name="hospital_code" id="hospital_code" ng-model="hospital_code" class="form-control" required>
                                         <span ng-messages="formAdmission.hospital_code.$error" ng-if="formAdmission.hospital_code.$dirty">
@@ -351,7 +361,7 @@
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <label for="">Medical Record No.</label>
+                                    <label for="">Medical Record No. *</label>
                                     <div class="form-group">
                                         <input type="text" name="medical_record_number" id="medical_record_number" ng-model="medical_record_number" class="form-control" required>
                                         <span ng-messages="formAdmission.medical_record_number.$error" ng-if="formAdmission.medical_record_number.$dirty">
@@ -361,7 +371,7 @@
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <label for="">Room</label>
+                                    <label for="">Room *</label>
                                     <select name="room" id="room" class="form-control">
                                         <?php foreach($data['rooms'] as $room_list) { ?>
                                             <option value="<?=$room_list['rooms_id']?>"><?=$room_list['room_type'].' - '.$room_list['floor'].' - '.$room_list['room_number']?></option>
@@ -378,7 +388,7 @@
                                 <div class="col-sm-6">
                                     <label for="">Admission ( Date ) *</label>
                                     <div class="form-group">
-                                        <input type="date" max="<?=date('Y-m-d')?>" name="admission_date" id="admission_date" ng-model="admission_date_time" class="form-control" required>
+                                        <input type="date"  max="<?=date('Y-m-d')?>" name="admission_date" id="admission_date" ng-model="admission_date_time" class="form-control" required>
                                         <span ng-messages="formAdmission.admission_date.$error" ng-if="formAdmission.admission_date.$dirty">
                                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                                         </span>
@@ -408,7 +418,6 @@
                                         <input type="time" name="discharged_time" id="discharged_time" ng-model="discharged_time" class="form-control" >
                                     </div>
                                 </div>
-
                                 
                             </div>
 
@@ -417,7 +426,7 @@
                                 <div class="col-sm-2">
                                     <label for="">No of Days.</label>
                                     <div class="form-group">
-                                        <input type="text" name="days" id="days" ng-model="days" class="form-control" required>
+                                        <input type="text" name="days" id="days" ng-model="days" class="form-control">
                                         <span ng-messages="formAdmission.days.$error" ng-if="formAdmission.days.$dirty">
                                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                                         </span>
@@ -425,7 +434,7 @@
                                 </div>
 
                                 <div class="col-sm-4">
-                                    <label for="">Admitting Personel</label>
+                                    <label for="">Admitting Personel *</label>
                                     <div class="form-group">
                                         <input type="text" name="admitting_personnel" id="admitting_personnel" ng-model="admitting_personnel" class="form-control" required>
                                         <span ng-messages="formAdmission.admitting_personnel.$error" ng-if="formAdmission.admitting_personnel.$dirty">
@@ -435,11 +444,11 @@
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <label for="">Attending Physician</label>
+                                    <label for="">Attending Physician * </label>
                                     <div class="form-group">
-                                        <select name="attending_physicians" id="attending_physicians"  class="form-control" required>
+                                        <select  multiple name="attending_physicians[]" id="attending_physicians"  class="form-control" required>
                                             <?php foreach($data['physicians'] as $physicians_list) { ?>
-                                                <option value="<?=$physicians_list['accounts_id']?>" selected><?=$physicians_list['name']?></option>
+                                                <option value="<?=$physicians_list['accounts_id']?>"><?=$physicians_list['name']?></option>
                                             <?php } ?>
                                         </select>
                                     </div>

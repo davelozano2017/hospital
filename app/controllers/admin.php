@@ -105,6 +105,11 @@ class admin extends Controller {
         $this->model('account')->filter_patient_code($search);
     }
 
+    public function filter_out_patient() {
+        $search = $this->input->post('search');
+        $this->model('account')->filter_out_patient($search);
+    }
+
     public function view_patients($id) {
         $data['token']        = $_SESSION['token'];
         $data['title']        = 'All Patients';
@@ -621,6 +626,7 @@ $pdf->Output();
         if(isset($_SESSION['token']) == $this->input->post('token')) {
             $data = array(
                 'outpatients_id'   => $this->input->post('outpatients_id'),
+                'patient_code'     => $this->input->post('patient_code'),
                 'surname'          => $this->input->post('surname'),
                 'firstname'        => $this->input->post('firstname'),
                 'middlename'       => $this->input->post('middlename'),
@@ -651,6 +657,7 @@ $pdf->Output();
         if(isset($_SESSION['token']) == $this->input->post('token')) {
             $data = array(
                 'admissions_id' => $this->input->post('admissions_id'),
+                'patient_code'  => $this->input->post('patient_code'),
                 'surname'       => $this->input->post('surname'),
                 'firstname'     => $this->input->post('firstname'),
                 'middlename'    => $this->input->post('middlename'),

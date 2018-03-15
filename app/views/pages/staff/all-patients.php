@@ -48,7 +48,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="text-cexnter"><a href="<?=URL?>admin/view_patients/<?=$row['admissions_id']?>"><i class="icon-eye"></i></a></td>
+                            <td class="text-cexnter"><a class="btn btn-primary" href="<?=URL?>admin/view_patients/<?=$row['admissions_id']?>">View</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -72,7 +72,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td class="text-cexnter"><a href="<?=URL?>admin/view_patient/<?=$rows['outpatients_id']?>"><i class="icon-eye"></i></a></td>
+                            <td class="text-cexnter"><a class="btn btn-primary" href="<?=URL?>admin/view_patient/<?=$rows['outpatients_id']?>">View</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>

@@ -46,7 +46,7 @@
                     <td>Dr. <?=$row['name']?></td>
                     <td><?=date('M d, Y',strtotime($row['date']))?></td>
                     <td></td>
-                    <td class="text-center"><a onclick="view_out_patients('<?=$row['outpatients_id']?>')"><i class="icon-eye"></i></a></td>
+                    <td class="text-center"><a  class="btn btn-primary" onclick="view_out_patients('<?=$row['outpatients_id']?>')">view</a></td>
                 </tr>
             <?php } ?>
         </tbody>
@@ -77,6 +77,13 @@
                             
                         <div class="row">
                         <!-- 1st -->
+                                <div class="col-sm-12">
+                                    <label for="">Patient Code</label>
+                                    <div class="form-group ">
+                                        <input type="text" name="patient_code" id="patient_code" onchange="filter_out_patient()" class="form-control">
+                                    </div>
+                                </div>
+
                                 <div class="col-sm-4">
                                     <label for="">Surname</label>
                                     <div class="form-group ">

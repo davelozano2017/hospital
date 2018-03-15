@@ -42,6 +42,19 @@ class account extends Model {
         }
     }
 
+    public function filter_out_patient($search) {
+        $check = $this->db->query("SELECT * FROM medical_record_out_patient WHERE patient_code = '$search'");
+        if($check->num_rows > 0) {
+            $row = $check->fetch_object();
+            echo json_encode(array('success'=>true,'data'=>$row));
+        } else {
+            echo json_encode(array('success'=>false));
+
+        }
+    }
+
+    
+
     public function chart_by_doctor($id) {
         $result = $this->db->query("SELECT *, COUNT(*) as c  FROM admissions WHERE attending_physicians = $id GROUP BY admission_date");
         $jsonArray = array();
@@ -100,13 +113,14 @@ class account extends Model {
 
     public function medical_record_out_patients($data) {
         $outpatients_id = $data['outpatients_id'];
+        $patient_code  = rand(111111,999999);
         if(empty($outpatients_id)) {
             $check = $this->db->query("SELECT * FROM medical_record_out_patient WHERE opd_case_number = '".$data['opd_case_number']."'");
             if($check->num_rows > 0) {
                 notify('error','OPD case number already exist.',false);
             } else {
-                $query = $this->db->query("INSERT INTO `medical_record_out_patient`(`surname`, `firstname`, `middlename`, `birthday`, `age`, `gender`, `address`, `chief_complaints`, `opd_case_number`, `physicians_id`, `hp`, `pulse_rate`, `respiratory_rate`, `temperature`, `weight`,`date`,`time`, `impression`, `treatment`) VALUES 
-                ('".$data['surname']."','".$data['firstname']."','".$data['middlename']."','".$data['birthday']."','".$data['age']."','".$data['gender']."','".$data['address']."','".$data['chief_complaints']."','".$data['opd_case_number']."','".$data['physicians_id']."','".$data['hp']."','".$data['pulse_rate']."','".$data['respiratory_rate']."','".$data['temperature']."','".$data['weight']."','".$data['date']."','".$data['time']."','".$data['impression']."','".$data['treatment']."')");
+                $query = $this->db->query("INSERT INTO `medical_record_out_patient`(`patient_code`,`surname`, `firstname`, `middlename`, `birthday`, `age`, `gender`, `address`, `chief_complaints`, `opd_case_number`, `physicians_id`, `hp`, `pulse_rate`, `respiratory_rate`, `temperature`, `weight`,`date`,`time`, `impression`, `treatment`) VALUES 
+                ('$patient_code','".$data['surname']."','".$data['firstname']."','".$data['middlename']."','".$data['birthday']."','".$data['age']."','".$data['gender']."','".$data['address']."','".$data['chief_complaints']."','".$data['opd_case_number']."','".$data['physicians_id']."','".$data['hp']."','".$data['pulse_rate']."','".$data['respiratory_rate']."','".$data['temperature']."','".$data['weight']."','".$data['date']."','".$data['time']."','".$data['impression']."','".$data['treatment']."')");
                 if($query) {
                     notify('success','New out-patient has been added.',true);
                 } else {
@@ -122,6 +136,7 @@ class account extends Model {
 
     public function admissions_in_patients($data) {
         $admissions_id = $data['admissions_id'];
+        $p_code = $data['patient_code'];
         $patient_code  = rand(111111,999999);
         $date = date('Y-m-d');
         if(empty($admissions_id)) {
@@ -143,10 +158,11 @@ class account extends Model {
         } else {
             // update here 
             $status = $data['discharged_date'] == '' ? 0 : 1;
-                $query = $this->db->query("UPDATE `admissions` SET `surname`= '".$data['surname']."' ,`firstname`= '".$data['firstname']."', `middlename`= '".$data['middlename']."',`birthday`= '".$data['birthday']."',`address`= '".$data['patient_address']."',`birthplace`= '".$data['birthplace']."',`age`= '".$data['age']."',`gender`= '".$data['gender']."',`civil_status`= '".$data['civil_status']."',`nationality`= '".$data['nationality']."',`religion`= '".$data['religion']."',`occupation`= '".$data['occupation']."',`name1`= '".$data['name1']."',`address1`= '".$data['address1']."',`contact1`= '".$data['contact1']."',`name2`= '".$data['name2']."',`address2`= '".$data['address2']."',`contact2`= '".$data['contact2']."',`name3` = '".$data['name3']."',`address3`= '".$data['address3']."',`contact3`= '".$data['contact3']."',`hospital_code`= '".$data['hospital_code']."',`medical_record_number`= '".$data['medical_record_number']."',`room`= '".$data['room']."',`admission_date`= '".$data['admission_date']."',`admission_time` = '".$data['admission_time']."', `discharged_date` = '".$data['discharged_date']."',`discharged_time` = '".$data['discharged_time']."',`days`= '".$data['days']."',`admitting_personnel`= '".$data['admitting_personnel']."',`attending_physicians`= '".$data['attending_physicians']."',`referred_by`='".$data['referred_by']."',`alert`= '".$data['alert']."',`allergic`= '".$data['allergic']."',`admission_type`='".$data['admission_type']."',`health_insurance`='".$data['health_insurance']."',`philhealth`='".$data['philhealth']."',`data_furnished`='".$data['data_furnished']."',`informant`='".$data['informant']."',`patient_relation`= '".$data['patient_relation']."',`admission_diagnosis`='".$data['admission_diagnosis']."',`final_diagnosis`='".$data['final_diagnosis']."',`icd`='".$data['icd']."',`principal_operation`='".$data['principal_operation']."',`disposition`='".$data['disposition']."',`outcome`='".$data['outcome']."', status = $status WHERE admissions_id = $admissions_id");
-
+            foreach($data['attending_physicians'] as $key => $value) {
+                $query = $this->db->query("UPDATE `admissions` SET `surname`= '".$data['surname']."' ,`firstname`= '".$data['firstname']."', `middlename`= '".$data['middlename']."',`birthday`= '".$data['birthday']."',`address`= '".$data['patient_address']."',`birthplace`= '".$data['birthplace']."',`age`= '".$data['age']."',`gender`= '".$data['gender']."',`civil_status`= '".$data['civil_status']."',`nationality`= '".$data['nationality']."',`religion`= '".$data['religion']."',`occupation`= '".$data['occupation']."',`name1`= '".$data['name1']."',`address1`= '".$data['address1']."',`contact1`= '".$data['contact1']."',`name2`= '".$data['name2']."',`address2`= '".$data['address2']."',`contact2`= '".$data['contact2']."',`name3` = '".$data['name3']."',`address3`= '".$data['address3']."',`contact3`= '".$data['contact3']."',`hospital_code`= '".$data['hospital_code']."',`medical_record_number`= '".$data['medical_record_number']."',`room`= '".$data['room']."',`admission_date`= '".$data['admission_date']."',`admission_time` = '".$data['admission_time']."', `discharged_date` = '".$data['discharged_date']."',`discharged_time` = '".$data['discharged_time']."',`days`= '".$data['days']."',`admitting_personnel`= '".$data['admitting_personnel']."',`referred_by`='".$data['referred_by']."',`alert`= '".$data['alert']."',`allergic`= '".$data['allergic']."',`admission_type`='".$data['admission_type']."',`health_insurance`='".$data['health_insurance']."',`philhealth`='".$data['philhealth']."',`data_furnished`='".$data['data_furnished']."',`informant`='".$data['informant']."',`patient_relation`= '".$data['patient_relation']."',`admission_diagnosis`='".$data['admission_diagnosis']."',`final_diagnosis`='".$data['final_diagnosis']."',`icd`='".$data['icd']."',`principal_operation`='".$data['principal_operation']."',`disposition`='".$data['disposition']."',`outcome`='".$data['outcome']."', status = $status WHERE patient_code = $p_code");
+            }
+            // ,`attending_physicians`= '".$data['attending_physicians'][$key]."',
                 if($query) {
-
                     notify('info','Hospital code '.$data['hospital_code'].' has been updated.',true);
                 }
             

@@ -39,6 +39,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Hospital Code</th>
+                        <th>Patient Code</th>
                         <th>Physicians</th>
                         <th>Room</th>
                         <td>Date</td>
@@ -50,10 +51,11 @@
                         <tr>
                             <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
                             <td><?=$row['hospital_code']?></td>
+                            <td><?=$row['patient_code']?></td>
                             <td>Dr. <?=$row['name']?></td>
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
                             <td><?=date('M d,Y',strtotime($row['admission_date']))?></td>
-                            <td class="text-center"><a onclick="view_patients('<?=$row['admissions_id']?>')"><i class="icon-eye"></i></a></td>
+                            <td class="text-center"><a class="btn btn-primary" onclick="view_patients('<?=$row['admissions_id']?>')">view</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -80,7 +82,7 @@
                             <td>Dr. <?=$row['name']?></td>
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
                             <td></td>
-                            <td class="text-center"><a onclick="view_patients('<?=$row['admissions_id']?>')"><i class="icon-eye"></i></a></td>
+                            <td class="text-center"><a class="btn btn-primary" onclick="view_patients('<?=$row['admissions_id']?>')">view</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -105,7 +107,7 @@
                             <td>Dr. <?=$row['name']?></td>
                             <td><?=date('M d, Y',strtotime($row['date']))?></td>
                             <td></td>
-                            <td class="text-center"><a onclick="view_out_patients_by_surname('<?=$row['outpatients_id']?>')"><i class="icon-eye"></i></a></td>
+                            <td class="text-center"><a class="btn btn-primary" onclick="view_out_patients_by_surname('<?=$row['outpatients_id']?>')">view</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>
