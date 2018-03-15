@@ -347,7 +347,7 @@
                                 <div class="col-sm-6">
                                     <label for="">Admission ( Date ) *</label>
                                     <div class="form-group">
-                                        <input type="date" max="<?=date('Y-m-d')?>" name="admission_date" id="admission_date" ng-model="admission_date_time" class="form-control" required>
+                                        <input type="date" max="<?=date('Y-m-d')?>" name="admission_date" id="admission_date" ng-model="admission_date" class="form-control" required>
                                         <span ng-messages="formAdmission.admission_date.$error" ng-if="formAdmission.admission_date.$dirty">
                                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                                         </span>
@@ -405,7 +405,7 @@
                                 <div class="col-sm-6">
                                     <label for="">Attending Physician</label>
                                     <div class="form-group">
-                                        <select name="attending_physicians" id="attending_physicians"  class="form-control" required>
+                                        <select name="attending_physicians[]" id="attending_physicians"  class="form-control" required>
                                             <?php foreach($data['physicians'] as $physicians_list) { ?>
                                                 <option value="<?=$physicians_list['accounts_id']?>" selected><?=$physicians_list['name']?></option>
                                             <?php } ?>
