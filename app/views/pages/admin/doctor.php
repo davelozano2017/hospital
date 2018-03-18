@@ -38,7 +38,7 @@
                 <th>Email</th>
                 <th>Gender</th>
                 <th>Username</th>
-                <th class="text-center"></th>
+                <th class="text-center">Action</th>
                 </tr>
         </thead>
         <tbody>
@@ -49,7 +49,7 @@
                     <td><?=$row['email']?></td>
                     <td><?=$row['gender']?></td>
                     <td><?=$row['username']?></td>
-                    <td class="text-center"><a onclick="view_doctor('<?=$row['accounts_id']?>')"><i class="icon-eye"></i></a></td>
+                    <td class="text-center"><a class="btn btn-primary" onclick="view_doctor('<?=$row['accounts_id']?>')">Update</a></td>
                 </tr>
             <?php } ?>
         </tbody>
