@@ -38,7 +38,6 @@
                     <tr>
                         <th>Name</th>
                         <th>Hospital Code</th>
-                        <th>Physicians</th>
                         <th>Room</th>
                         <td>Date</td>
                         <td style="width:1px" class="text-center">Action</td>
@@ -49,7 +48,6 @@
                         <tr>
                             <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
                             <td><?=$row['hospital_code']?></td>
-                            <td>Dr. <?=$row['name']?></td>
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
                             <td><?=date('M d,Y',strtotime($row['admission_date']))?></td>
                             <td class="text-center"><a class="btn btn-primary" onclick="view_admissions('<?=$row['admissions_id']?>')">View</a></td>

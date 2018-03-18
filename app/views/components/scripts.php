@@ -45,8 +45,10 @@ toastr_option();
 graph();
 graph_discharged();
 graph_out();
-graph_doctor()
-graph_out_doctor()
+
+graph_doctor();
+graph_doctor_discharged();
+graph_out_doctor();
 </script>
 </body>
 </html>

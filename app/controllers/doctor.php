@@ -29,6 +29,10 @@ class doctor extends Controller {
         $this->model('account')->chart_by_doctor($_SESSION['id']);
     }
 
+    public function chart_by_doctor_discharged() {
+        $this->model('account')->chart_by_doctor_discharged($_SESSION['id']);
+    }
+
     public function chart_out_patients_by_doctor() {
         $this->model('account')->chart_out_patients_by_doctor($_SESSION['id']);
     }

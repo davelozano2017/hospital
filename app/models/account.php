@@ -79,7 +79,7 @@ class account extends Model {
     
 
     public function chart_by_doctor($id) {
-        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM admissions WHERE attending_physicians = $id GROUP BY admission_date");
+        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM admissions WHERE status = 0 AND attending_physicians = $id GROUP BY admission_date");
         $jsonArray = array();
         foreach($result as $row) {
             $jsonArrayItem = array();
@@ -92,7 +92,7 @@ class account extends Model {
     }
 
     public function chart_out_patients_by_doctor($id) {
-        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM medical_record_out_patient WHERE physicians_id = $id GROUP BY date");
+        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM medical_record_out_patient status = 1 AND WHERE physicians_id = $id GROUP BY date");
         $jsonArray = array();
         foreach($result as $row) {
             $jsonArrayItem = array();

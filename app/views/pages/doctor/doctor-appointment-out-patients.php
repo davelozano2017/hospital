@@ -29,7 +29,6 @@
             <tr>
                 <th>Name</th>
                 <th>OPD Case NUmber</th>
-                <th>Physicians</th>
                 <th colspan=3>Date</th>
                 </tr>
         </thead>
@@ -38,7 +37,6 @@
                 <tr>
                     <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
                     <td><?=$row['opd_case_number']?></td>
-                    <td>Dr. <?=$row['name']?></td>
                     <td><?=date('M d, Y',strtotime($row['date']))?></td>
                     <td></td>
                     <td class="text-center"><a class="btn btn-primary" onclick="view_out_patients('<?=$row['outpatients_id']?>')">View</a></td>

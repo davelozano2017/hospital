@@ -47,6 +47,7 @@ function filter_patient() {
                 $('#name3').val(data.data.name3);
                 $('#address3').val(data.data.address3);
                 $('#contact3').val(data.data.contact3);
+                $('#btn-admissions').attr('disabled',false)
             } else {
                 $('#formAdmission')[0].reset();
             }
@@ -206,6 +207,37 @@ function graph_doctor() {
     });
 }
 
+function graph_doctor_discharged() {
+    $.ajax({
+        url: url+'chart_by_doctor_discharged',
+        type: 'GET',
+        success: function(data) {
+            chartData = data;
+            var chartProperties = {
+                "caption": "",
+                "xAxisName": "Days",
+                "yAxisName": "Number of patients",
+                "rotatevalues": "2",
+                "theme": "fint"
+            };
+
+            apiChart = new FusionCharts({
+                type: 'column3d',
+                renderAt: 'chart-container-doctor-discharged',
+                width: '100%',
+                height: '350',
+                dataFormat: 'json',
+                dataSource: {
+                    "chart": chartProperties,
+                    "data": chartData
+                }
+            });
+            apiChart.render();
+        }
+    });
+}
+
+
 function graph_out_doctor() {
     $.ajax({
         url: url+'chart_out_patients_by_doctor',
@@ -347,21 +379,26 @@ function InsertOrUpdateRooms() {
 
 function InsertOrUpdateAdmission() {
     var data = $('#formAdmission').serialize();
-    $.ajax({
-        type : 'POST',
-        url : url + 'InsertOrUpdateAdmissions',
-        data : data,
-        dataType : 'json',
-        beforeSend:function() {
-            $('#btn-admissions').html(' <i class="icon-spinner2 spinner"></i>').attr('disabled',true);
-        },
-        success:function(data) {
-            data.success === true ? notify(data.type,data.message) : notify(data.type,data.message);
-            var content = data.type == 'info' ? 'Save Changes' : 'Add In Patients';
-            $('#btn-admissions').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
-            $("#admission-modal").modal('hide');
-        }
-    })
+    if( $('#principal_operation').val() == '') {
+        $('#btn-admissions').html('Add In Patients <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
+        notify('error','Please fill up all fields');
+    } else {
+        $.ajax({
+            type : 'POST',
+            url : url + 'InsertOrUpdateAdmissions',
+            data : data,
+            dataType : 'json',
+            beforeSend:function() {
+                $('#btn-admissions').html(' <i class="icon-spinner2 spinner"></i>').attr('disabled',true);
+            },
+            success:function(data) {
+                data.success === true ? notify(data.type,data.message) : notify(data.type,data.message);
+                var content = data.type == 'info' ? 'Save Changes' : 'Add In Patients';
+                $('#btn-admissions').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
+            }
+        })
+    }
+    
 }
 
 function InsertOrUpdateOutPatients() {
@@ -378,7 +415,6 @@ function InsertOrUpdateOutPatients() {
             data.success === true ? notify(data.type,data.message) : notify(data.type,data.message);
             var content = data.type == 'info' ? 'Save Changes' : 'Add Out Patients';
             $('#btn-out-patients').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
-            $('#out-patient-modal').modal('hide');
         }
     })
 }
@@ -399,7 +435,6 @@ function InsertOrUpdateDoctor() {
             data.success === true ? notify(data.type,data.message) : notify(data.type,data.message);
             var content = data.type == 'info' ? 'Save Changes' : 'Add Doctor';
             $('#btn-doctor').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
-            $('#doctor-modal').modal('hide');
         }
     })
 }
@@ -418,7 +453,6 @@ function InsertOrUpdateStaff() {
             data.success === true ? notify(data.type,data.message) : notify(data.type,data.message);
             var content = data.type == 'info' ? 'Save Changes' : 'Add Staff';
             $('#btn-staff').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
-            $('#staff-modal').modal('hide');
         }
     })
 }

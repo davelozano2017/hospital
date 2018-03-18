@@ -425,7 +425,7 @@
                                 <div class="col-sm-2">
                                     <label for="">No of Days.</label>
                                     <div class="form-group">
-                                        <input type="text" name="days" id="days" ng-model="days" class="form-control">
+                                        <input type="number" name="days" id="days" ng-model="days" class="form-control">
                                         <span ng-messages="formAdmission.days.$error" ng-if="formAdmission.days.$dirty">
                                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                                         </span>

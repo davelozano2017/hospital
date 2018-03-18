@@ -51,13 +51,19 @@
                 <div class="panel-body">
                     <div class="tabbable">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#basic-tab1" data-toggle="tab">Admission and Discharged</a></li>
-                            <li><a href="#basic-tab2" data-toggle="tab">Out Patients</a></li>
+                            <li class="active"><a href="#basic-tab1" data-toggle="tab">Admission</a></li>
+                            <li><a href="#basic-tab2" data-toggle="tab">Discharged</a></li>
+                                <li><a href="#basic-tab3" data-toggle="tab">Out Patients</a></li>
+                            </ul>
                         </ul>
 
                         <div class="tab-content">
                             <div class="tab-pane active" id="basic-tab1">
                                 <div id="chart-container-doctor"></div>
+                            </div>
+                            
+                            <div class="tab-pane active" id="basic-tab2">
+                                <div id="chart-container-doctor-discharged"></div>
                             </div>
 
                             <div class="tab-pane" id="basic-tab2">
