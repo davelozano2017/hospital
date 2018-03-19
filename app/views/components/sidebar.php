@@ -64,7 +64,7 @@
                 <li class="<?= $data['title'] == 'All Patients' ? 'active':'';?>"><a href="<?=URL?>admin/all_patients"><i class="icon-users"></i> <span>All Patients</span></a></li>
                 
                 <li class="navigation-header"><span>Statistical Report Module</span> <i class="icon-menu" title="STATISTICAL REPORT MODULE"></i></li>
-                <li class="<?= $data['title'] == 'Reports' ? 'active':'';?>"><a href="<?=URL?>admin/reports"><i class="icon-graph"></i> <span>Statistical Reports</span></a></li>
+                <li class="<?= $data['title'] == 'Reports' ? 'active':'';?>"><a href="<?=URL?>admin/statistical"><i class="icon-graph"></i> <span>Statistical Reports</span></a></li>
 
                 <li class="navigation-header"><span>MISCELLANEOUS</span> <i class="icon-menu" title="MISCELLANEOUS"></i></li>
                 <li>
