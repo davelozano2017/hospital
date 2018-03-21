@@ -182,12 +182,78 @@ class admin extends Controller {
     }
 
     public function reports() {
-        $impatients = $this->model('account')->get_all_admissions(0)->num_rows;
-        $alive = $this->model('account')->get_all_admissions(1)->num_rows;
-        $out_patient = $this->model('account')->get_all_out_patients()->num_rows;
-
         $from = $_POST['from'];
         $to = $_POST['to'];
+
+        $inpatients = array( 'from' => $from, 'to' => $to );
+        $total_inpatients = $this->model('account')->get_all_inpatients($inpatients);
+
+        $all_pateints = array('from' => $from,'to'=>$to);
+        $total_all_pateints = $this->model('account')->all_patients($all_pateints);
+
+        $out_patients = array('from' => $from,'to'=>$to);
+        $all_out_patients = $this->model('account')->all_out_patients($out_patients);
+        
+        
+        $transferred = array( 'from' => $from, 'to' => $to, 'disposition' => 'Transferred' );
+        $transferred_patients = $this->model('account')->filter_disposition($transferred);
+
+        $admission_type_new = array( 'from' => $from, 'to' => $to, 'admission_type' => 'Old');
+        $total_admission_type_new = $this->model('account')->filter_admission($admission_type_new);
+
+        $admission_type_old = array( 'from' => $from, 'to' => $to, 'admission_type' => 'New');
+        $total_admission_type_old = $this->model('account')->filter_admission($admission_type_old);
+
+        $deaths = array( 'from' => $from, 'to' => $to, 'disposition' => 'Deaths' );
+        $deaths_patients = $this->model('account')->filter_disposition($deaths);
+
+        $discharged = array( 'from' => $from, 'to' => $to);
+        $discharged_patients = $this->model('account')->get_all_discharged_patients($discharged);
+
+        $admitted_discharged = array( 'from' => $from);
+        $total_admitted_discharged = $this->model('account')->get_all_admitted_discharged_patients($admitted_discharged);
+
+        $jan_in = $this->model('account')->jan_in();
+        $feb_in = $this->model('account')->feb_in();
+        $mar_in = $this->model('account')->mar_in();
+        $apr_in = $this->model('account')->apr_in();
+        $may_in = $this->model('account')->may_in();
+        $jun_in = $this->model('account')->jun_in();
+        $jul_in = $this->model('account')->jul_in();
+        $aug_in = $this->model('account')->aug_in();
+        $sep_in = $this->model('account')->sep_in();
+        $oct_in = $this->model('account')->oct_in();
+        $nov_in = $this->model('account')->nov_in();
+        $dec_in = $this->model('account')->dec_in();
+
+        $jan_out = $this->model('account')->jan_out();
+        $feb_out = $this->model('account')->feb_out();
+        $mar_out = $this->model('account')->mar_out();
+        $apr_out = $this->model('account')->apr_out();
+        $may_out = $this->model('account')->may_out();
+        $jun_out = $this->model('account')->jun_out();
+        $jul_out = $this->model('account')->jul_out();
+        $aug_out = $this->model('account')->aug_out();
+        $sep_out = $this->model('account')->sep_out();
+        $oct_out = $this->model('account')->oct_out();
+        $nov_out = $this->model('account')->nov_out();
+        $dec_out = $this->model('account')->dec_out();
+
+        $jan_total = $jan_in + $jan_out;
+        $feb_total = $feb_in + $feb_out;
+        $mar_total = $mar_in + $mar_out;
+        $apr_total = $apr_in + $apr_out;
+        $may_total = $may_in + $may_out;
+        $jun_total = $jun_in + $jun_out;
+        $jul_total = $jul_in + $jul_out;
+        $aug_total = $aug_in + $aug_out;
+        $sep_total = $sep_in + $sep_out;
+        $oct_total = $oct_in + $oct_out;
+        $nov_total = $nov_in + $nov_out;
+        $dec_total = $dec_in + $dec_out;
+
+        $grand_total = $jan_total + $feb_total + $mar_total + $apr_total + $may_total + $jun_total + $jul_total + $aug_total + $sep_total + $oct_total + $nov_total + $dec_total;
+        
 
         $from1 = date('F d, Y',strtotime($from));
         $to1  = date('F d, Y',strtotime($to));
@@ -214,157 +280,119 @@ class admin extends Controller {
         $pdf->cell(190,5,'Date : From '.$from1.' To '.$to1.'',0,1,'C');
         $pdf->cell(190,5,'',0,1,'C');
 
-
-
-
         $pdf->SetFont('helvetica','B',10);
         $pdf->cell(80,8,' A. Summary of Patients in the hospital',0,1);
 
-        $pdf->cell(175,7,'Impatient Care',1,0);
+        $pdf->cell(175,7,'Inpatient Care',1,0);
         $pdf->cell(20,7,'Number',1,1);
 
-        $pdf->cell(175,7,'Total number of impatients',1,0);
-        $pdf->cell(20,7,$impatients,1,1,'R');
+        $pdf->cell(175,7,'Total number of inpatients',1,0);
+        $pdf->cell(20,7,$total_inpatients,1,1,'C');
 
-        $pdf->cell(175,7,'Total number of (In facility deliveries)',1,0);
-        $pdf->cell(20,7,'0',1,1,'R');
+        $pdf->cell(175,7,'Total number of discharged',1,0);
+        $pdf->cell(20,7,$discharged_patients,1,1,'C');
 
-        $pdf->cell(175,7,'Total Discharges (Alive)',1,0);
-        $pdf->cell(20,7,$alive,1,1,'R');
+        $pdf->cell(175,7,'Total number of admitted and discharged on the same day',1,0);
+        $pdf->cell(20,7,$total_admitted_discharged,1,1,'C');
 
-        $pdf->cell(175,7,'Total patients admitted and discharged on the same day',1,0);
-        $pdf->cell(20,7,$out_patient,1,1,'R');
+        $pdf->cell(175,7,'Total number of transferred patients',1,0);
+        $pdf->cell(20,7,$transferred_patients,1,1,'C');
 
-        $pdf->cell(175,7,'Total member of inpatient bed days (service days)',1,0);
-        $pdf->cell(20,7,'0',1,1,'R');
+        $pdf->cell(175,7,'Total number of out patient visit (new patient)',1,0);
+        $pdf->cell(20,7,$total_admission_type_new,1,1,'C');
 
-        $pdf->cell(175,7,'Total number of inpatients transferred TO THIS FACILITIES from another facility for impatient care',1,0);
-        $pdf->cell(20,7,'0',1,1,'R');
+        $pdf->cell(175,7,'Total number of out patient visit (revisit)',1,0);
+        $pdf->cell(20,7,$total_admission_type_old,1,1,'C');
 
-        $pdf->cell(175,7,'Total number of inpatients transferred FROM THIS FACILITIES from another facility for impatient care',1,0);
-        $pdf->cell(20,7,'0',1,1,'R');
+        $pdf->cell(175,7,'Total number of all outpatients',1,0);
+        $pdf->cell(20,7,$all_out_patients,1,1,'C');
 
-        $pdf->cell(175,7,'Total number of patients remaining in the hospital as of midnight last day of previous year',1,0);
-        $pdf->cell(20,7,'0',1,1,'R');
+        $pdf->cell(175,7,'Total number of deaths',1,0);
+        $pdf->cell(20,7,$deaths_patients,1,1,'C');
+
+        $pdf->cell(175,7,'Total number of all patients',1,0);
+        $pdf->cell(20,7,$total_all_pateints,1,1,'C');
 
         $pdf->SetFont('helvetica','B',10);
-        $pdf->cell(80,10,'B. Discharges',0,1);
+        $pdf->cell(80,10,'B. Graph',0,1);
+
         $pdf->SetFont('helvetica','',8);
-        $tbl = <<<EOD
-
-
-EOD;
-
-$pdf->writeHTML($tbl, true, false, false, false, '');
+        
+        $graph = new SVGGraph(500, 400);
 
         $pdf->SetFont('helvetica','B',10);
         $pdf->cell(80,12,'C. Table',0,1);
         $pdf->SetFont('helvetica','',8);
-        $tbl1 = <<<EOD
-        <table width="100%" cellspacing="0" cellpadding="1" border="1">
-            <tr>
-            <td> </td>
-            <td> Inpatient</td>
-            <td> Outpatient</td>
-            <td> Total</td>
-            </tr>
 
-            <tr>
-            <td> January</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'Month',1,0);
+        $pdf->cell(48.7,7,'Inpatients',1,0);
+        $pdf->cell(48.7,7,'Outpatients',1,0);
+        $pdf->cell(48.7,7,'Total',1,1);
 
-            <tr>
-            <td> February</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'January',1,0);
+        $pdf->cell(48.7,7,$jan_in,1,0);
+        $pdf->cell(48.7,7,$jan_out,1,0);
+        $pdf->cell(48.7,7,$jan_total,1,1);
 
-            <tr>
-            <td> March</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'February',1,0);
+        $pdf->cell(48.7,7,$feb_in,1,0);
+        $pdf->cell(48.7,7,$feb_out,1,0);
+        $pdf->cell(48.7,7,$feb_total,1,1);
 
-            <tr>
-            <td> April</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'March',1,0);
+        $pdf->cell(48.7,7,$mar_in,1,0);
+        $pdf->cell(48.7,7,$mar_out,1,0);
+        $pdf->cell(48.7,7,$mar_total,1,1);
 
-            <tr>
-            <td> May</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'April',1,0);
+        $pdf->cell(48.7,7,$apr_in,1,0);
+        $pdf->cell(48.7,7,$apr_out,1,0);
+        $pdf->cell(48.7,7,$apr_total,1,1);
 
-            <tr>
-            <td> June</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'May',1,0);
+        $pdf->cell(48.7,7,$may_in,1,0);
+        $pdf->cell(48.7,7,$may_out,1,0);
+        $pdf->cell(48.7,7,$may_total,1,1);
 
-            <tr>
-            <td> July</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'June',1,0);
+        $pdf->cell(48.7,7,$jun_in,1,0);
+        $pdf->cell(48.7,7,$jun_out,1,0);
+        $pdf->cell(48.7,7,$jun_total,1,1);
 
-            <tr>
-            <td> August</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'July',1,0);
+        $pdf->cell(48.7,7,$jul_in,1,0);
+        $pdf->cell(48.7,7,$jul_out,1,0);
+        $pdf->cell(48.7,7,$jul_total,1,1);
 
-            <tr>
-            <td> September</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'Augost',1,0);
+        $pdf->cell(48.7,7,$aug_in,1,0);
+        $pdf->cell(48.7,7,$aug_out,1,0);
+        $pdf->cell(48.7,7,$aug_total,1,1);
 
-            <tr>
-            <td> October</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'September',1,0);
+        $pdf->cell(48.7,7,$sep_in,1,0);
+        $pdf->cell(48.7,7,$sep_out,1,0);
+        $pdf->cell(48.7,7,$sep_total,1,1);
 
-            <tr>
-            <td> November</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'October',1,0);
+        $pdf->cell(48.7,7,$oct_in,1,0);
+        $pdf->cell(48.7,7,$oct_out,1,0);
+        $pdf->cell(48.7,7,$oct_total,1,1);
 
-            <tr>
-            <td> December</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'November',1,0);
+        $pdf->cell(48.7,7,$nov_in,1,0);
+        $pdf->cell(48.7,7,$nov_out,1,0);
+        $pdf->cell(48.7,7,$nov_total,1,1);
 
-            <tr>
-            <td> Total</td>
-            <td> 0</td>
-            <td> 0</td>
-            <td> 0</td>
-            </tr>
+        $pdf->cell(48.7,7,'December',1,0);
+        $pdf->cell(48.7,7,$dec_in,1,0);
+        $pdf->cell(48.7,7,$dec_out,1,0);
+        $pdf->cell(48.7,7,$dec_total,1,1);
 
-        </table>
-EOD;
-$pdf->writeHTML($tbl1, true, false, false, false, '');
+        $pdf->cell(146.1,7,'',1,0);
+        $pdf->cell(48.7,7,$grand_total,1,1);
 
-$pdf->Output();     
+        $pdf->Output();     
 }
 
     public function appointment_in_patients() {

@@ -14,4 +14,5 @@ require_once 'core/model.php';
 require_once 'core/functions.php';
 require_once 'core/PHPMailerAutoload.php';
 require_once 'core/tcpdf.php';
+require_once 'core/graph/SVGGraph.php';
 

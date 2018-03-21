@@ -78,7 +78,7 @@
 
                         <div class="tab-content">
                             <div class="tab-pane active" id="basic-tab1">
-                                <div id="chart-container"></div>
+                            <div id="chart-container"></div>
                             </div>
 
                             <div class="tab-pane" id="basic-tab2">
