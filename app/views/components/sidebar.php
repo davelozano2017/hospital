@@ -34,7 +34,6 @@
                 <?php if($data['user']->role == 0) { ?> 
                     <li class="<?= $data['title'] == 'Dashboard' ? 'active':'';?>"><a href="<?=URL?>admin/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                 
-                <li class="navigation-header"><span>Account Management Module</span> <i class="icon-menu" title="MISCELLANEOUS"></i></li>
                 <li>
                     <a href="#"><i class="icon-users"></i> <span>Accounts</span></a>
                     <ul>
@@ -43,7 +42,6 @@
                     </ul>
                 </li>
                 
-                <li class="navigation-header"><span>PATIENT ADMISSION MODULE</span> <i class="icon-menu" title="PATIENT ADMISSION MODULE"></i></li>
                 <li>
                 <a href="#"><i class="icon-users"></i> <span>Admissions</span></a>
                     <ul>
@@ -51,7 +49,6 @@
                     </ul>
                 </li>
 
-                <li class="navigation-header"><span>DOCTORS SCHEDULE MODULE</span> <i class="icon-menu" title="DOCTORS SCHEDULE MODULE"></i></li>
                 <li>
                 <a href="#"><i class="icon-users4"></i> <span>Doctor's Appointment</span></a>
                     <ul>
@@ -60,13 +57,10 @@
                     </ul>
                 </li>
 
-                <li class="navigation-header"><span>PATIENT PROFILE MODULE</span> <i class="icon-menu" title="PATIENT PROFILE MODULE"></i></li>
                 <li class="<?= $data['title'] == 'All Patients' ? 'active':'';?>"><a href="<?=URL?>admin/all_patients"><i class="icon-users"></i> <span>All Patients</span></a></li>
                 
-                <li class="navigation-header"><span>Statistical Report Module</span> <i class="icon-menu" title="STATISTICAL REPORT MODULE"></i></li>
                 <li class="<?= $data['title'] == 'Reports' ? 'active':'';?>"><a href="<?=URL?>admin/statistical"><i class="icon-graph"></i> <span>Statistical Reports</span></a></li>
 
-                <li class="navigation-header"><span>MISCELLANEOUS</span> <i class="icon-menu" title="MISCELLANEOUS"></i></li>
                 <li>
                     <a href="#"><i class="icon-cog3"></i> <span>Control Panel</span></a>
                     <ul>
@@ -77,7 +71,6 @@
 
                 <?php } elseif($data['user']->role == 1) { ?>
                     <li class="<?= $data['title'] == 'Dashboard' ? 'active':'';?>"><a href="<?=URL?>doctor/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
-                    <li class="navigation-header"><span>PATIENT ADMISSION MODULE</span> <i class="icon-menu" title="PATIENT ADMISSION MODULE"></i></li>
                     <li>
                     <a href="#"><i class="icon-users"></i> <span>Admissions</span></a>
                         <ul>
@@ -85,10 +78,8 @@
                         </ul>
                     </li>
 
-                    <li class="navigation-header"><span>PATIENT PROFILE MODULE</span> <i class="icon-menu" title="PATIENT PROFILE MODULE"></i></li>
                     <li class="<?= $data['title'] == 'All Patients' ? 'active':'';?>"><a href="<?=URL?>doctor/all_patients"><i class="icon-users"></i> <span>All Patients</span></a></li>
                     
-                    <li class="navigation-header"><span>DOCTORS SCHEDULE MODULE</span> <i class="icon-menu" title="DOCTORS SCHEDULE MODULE"></i></li>
                     <li>
                     <a href="#"><i class="icon-users4"></i> <span>Doctor's Appointment</span></a>
                         <ul>
@@ -100,7 +91,6 @@
                 <?php } else { ?> 
                     <li class="<?= $data['title'] == 'Dashboard' ? 'active':'';?>"><a href="<?=URL?>staff/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                     
-                    <li class="navigation-header"><span>PATIENT ADMISSION MODULE</span> <i class="icon-menu" title="PATIENT ADMISSION MODULE"></i></li>
                     <li>
                     <a href="#"><i class="icon-users"></i> <span>Admissions</span></a>
                         <ul>
@@ -108,10 +98,8 @@
                         </ul>
                     </li>
 
-                    <li class="navigation-header"><span>PATIENT PROFILE MODULE</span> <i class="icon-menu" title="PATIENT PROFILE MODULE"></i></li>
                     <li class="<?= $data['title'] == 'All Patients' ? 'active':'';?>"><a href="<?=URL?>staff/all_patients"><i class="icon-users"></i> <span>All Patients</span></a></li>
 
-                    <li class="navigation-header"><span>DOCTORS SCHEDULE MODULE</span> <i class="icon-menu" title="DOCTORS SCHEDULE MODULE"></i></li>
                     <li>
                     <a href="#"><i class="icon-users4"></i> <span>Doctor's Appointment</span></a>
                         <ul>
@@ -120,7 +108,6 @@
                         </ul>
                     </li>
                     
-                    <li class="navigation-header"><span>Statistical Report Module</span> <i class="icon-menu" title="STATISTICAL REPORT MODULE"></i></li>
                     <li class="<?= $data['title'] == 'Reports' ? 'active':'';?>"><a href="<?=URL?>admin/reports"><i class="icon-graph"></i> <span>Statistical Reports</span></a></li>
                     
 

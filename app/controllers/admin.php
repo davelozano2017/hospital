@@ -319,7 +319,9 @@ class admin extends Controller {
         $pdf->SetFont('helvetica','',8);
         
         $graph = new SVGGraph(500, 400);
+        $graph->Values(1, 4, 8, 9, 16, 25, 27); 
 
+        
         $pdf->SetFont('helvetica','B',10);
         $pdf->cell(80,12,'C. Table',0,1);
         $pdf->SetFont('helvetica','',8);
@@ -393,7 +395,10 @@ class admin extends Controller {
         $pdf->cell(48.7,7,$grand_total,1,1);
 
         $pdf->Output();     
+        $graph->Render('Bar3DGraph', true,false);
 }
+
+    
 
     public function appointment_in_patients() {
         $data['token']       = $_SESSION['token'];
@@ -425,6 +430,10 @@ class admin extends Controller {
         $this->view('pages/admin/doctor-appointment-out-patients',$data);
         $this->view('components/footer',$data);
         $this->view('components/scripts',$data);
+    }
+
+    public function test() {
+        $this->view('pages/admin/test');
     }
 
     public function logs() {
