@@ -348,7 +348,7 @@ class account extends Model {
     }
 
     public function get_all_physicians() {
-        $query = $this->db->query("SELECT * FROM accounts WHERE role = 1");
+        $query = $this->db->query("SELECT * FROM accounts WHERE role = 1 AND status = 0");
         return $query;
     }
 
@@ -429,7 +429,8 @@ class account extends Model {
     }
 
     public function total_patients($status) {
-        $query = $this->db->query("SELECT * FROM admissions WHERE status = $status");
+        $date = date('Y-m-d');
+        $query = $this->db->query("SELECT * FROM admissions WHERE status = $status  AND date_today = '$date'");
         return $query->num_rows;
     }
 
