@@ -313,17 +313,10 @@ class admin extends Controller {
         $pdf->cell(175,7,'Total number of all patients',1,0);
         $pdf->cell(20,7,$total_all_pateints,1,1,'C');
 
-        $pdf->SetFont('helvetica','B',10);
-        $pdf->cell(80,10,'B. Graph',0,1);
-
         $pdf->SetFont('helvetica','',8);
         
-        $graph = new SVGGraph(500, 400);
-        $graph->Values(1, 4, 8, 9, 16, 25, 27); 
-
-        
         $pdf->SetFont('helvetica','B',10);
-        $pdf->cell(80,12,'C. Table',0,1);
+        $pdf->cell(80,12,'B. Table',0,1);
         $pdf->SetFont('helvetica','',8);
 
         $pdf->cell(48.7,7,'Month',1,0);
@@ -393,8 +386,6 @@ class admin extends Controller {
 
         $pdf->cell(146.1,7,'',1,0);
         $pdf->cell(48.7,7,$grand_total,1,1);
-        $graph->Render('Bar3DGraph', true,true);
-
         $pdf->Output();     
 }
 
