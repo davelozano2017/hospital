@@ -38,6 +38,7 @@
                 <th>Email</th>
                 <th>Gender</th>
                 <th>Username</th>
+                <th>Status</th>
                 <th class="text-center">Action</th>
                 </tr>
         </thead>
@@ -49,6 +50,7 @@
                     <td><?=$row['email']?></td>
                     <td><?=$row['gender']?></td>
                     <td><?=$row['username']?></td>
+                    <td><?=$row['status'] == 0 ? 'Active' : 'Not Active';?></td>
                     <td class="text-center"><a class="btn btn-primary" onclick="view_doctor('<?=$row['accounts_id']?>')">Update</a></td>
                 </tr>
             <?php } ?>

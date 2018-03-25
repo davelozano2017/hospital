@@ -750,6 +750,7 @@ function view_staff(accounts_id) {
             modal.find($('#staff_gender')).val(data.gender);
             modal.find($('#staff_username')).val(data.username);
             modal.find($('#staff_address')).val(data.address);
+            modal.find($('#status')).val(data.status);
             $('#btn-staff').html('Save Changes <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
         }
     })

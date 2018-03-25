@@ -393,9 +393,9 @@ class admin extends Controller {
 
         $pdf->cell(146.1,7,'',1,0);
         $pdf->cell(48.7,7,$grand_total,1,1);
+        $graph->Render('Bar3DGraph', true,true);
 
         $pdf->Output();     
-        $graph->Render('Bar3DGraph', true,false);
 }
 
     
