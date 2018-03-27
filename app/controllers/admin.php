@@ -198,10 +198,10 @@ class admin extends Controller {
         $transferred = array( 'from' => $from, 'to' => $to, 'disposition' => 'Transferred' );
         $transferred_patients = $this->model('account')->filter_disposition($transferred);
 
-        $admission_type_new = array( 'from' => $from, 'to' => $to, 'admission_type' => 'Old');
+        $admission_type_new = array( 'from' => $from, 'to' => $to, 'admission_type' => 'New');
         $total_admission_type_new = $this->model('account')->filter_admission($admission_type_new);
 
-        $admission_type_old = array( 'from' => $from, 'to' => $to, 'admission_type' => 'New');
+        $admission_type_old = array( 'from' => $from, 'to' => $to, 'admission_type' => 'Old');
         $total_admission_type_old = $this->model('account')->filter_admission($admission_type_old);
 
         $deaths = array( 'from' => $from, 'to' => $to, 'disposition' => 'Deaths' );

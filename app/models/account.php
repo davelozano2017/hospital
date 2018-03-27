@@ -36,168 +36,168 @@ class account extends Model {
     }
 
     public function jan_in() {
-        $from = date('Y').'-01-31';
+        $from = date('Y').'-01-1';
         $to = date('Y').'-01-31';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function feb_in() {
-        $from = date('Y').'-02-28';
+        $from = date('Y').'-02-1';
         $to = date('Y').'-02-28';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function mar_in() {
-        $from = date('Y').'-03-31';
+        $from = date('Y').'-03-1';
         $to = date('Y').'-03-31';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function apr_in() {
-        $from = date('Y').'-04-31';
-        $to = date('Y').'-04-31';
+        $from = date('Y').'-04-1';
+        $to = date('Y').'-04-30';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function may_in() {
-        $from = date('Y').'-05-31';
+        $from = date('Y').'-05-1';
         $to = date('Y').'-05-31';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function jun_in() {
-        $from = date('Y').'-06-31';
-        $to = date('Y').'-06-31';
+        $from = date('Y').'-06-1';
+        $to = date('Y').'-06-30';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function jul_in() {
-        $from = date('Y').'-07-31';
+        $from = date('Y').'-07-1';
         $to = date('Y').'-07-31';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function aug_in() {
-        $from = date('Y').'-08-31';
+        $from = date('Y').'-08-1';
         $to = date('Y').'-08-31';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function sep_in() {
-        $from = date('Y').'-09-31';
-        $to = date('Y').'-09-31';
+        $from = date('Y').'-09-1';
+        $to = date('Y').'-09-30';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function oct_in() {
-        $from = date('Y').'-10-31';
+        $from = date('Y').'-10-1';
         $to = date('Y').'-10-31';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function nov_in() {
-        $from = date('Y').'-11-31';
-        $to = date('Y').'-11-31';
+        $from = date('Y').'-11-1';
+        $to = date('Y').'-11-30';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function dec_in() {
-        $from = date('Y').'-12-31';
+        $from = date('Y').'-12-1';
         $to = date('Y').'-12-31';
         $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND discharged_date <= '$to' ");
         return $query->num_rows;
     }
 
     public function jan_out() {
-        $from = date('Y').'-01-31';
+        $from = date('Y').'-01-1';
         $to = date('Y').'-01-31';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
     }
 
     public function feb_out() {
-        $from = date('Y').'-02-28';
+        $from = date('Y').'-02-1';
         $to = date('Y').'-02-28';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
     }
 
     public function mar_out() {
-        $from = date('Y').'-03-31';
+        $from = date('Y').'-03-1';
         $to = date('Y').'-03-31';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
     }
 
     public function apr_out() {
-        $from = date('Y').'-04-31';
-        $to = date('Y').'-04-31';
+        $from = date('Y').'-04-1';
+        $to = date('Y').'-04-30';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
     }
 
     public function may_out() {
-        $from = date('Y').'-05-31';
+        $from = date('Y').'-05-1';
         $to = date('Y').'-05-31';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
     }
 
     public function jun_out() {
-        $from = date('Y').'-06-31';
-        $to = date('Y').'-06-31';
+        $from = date('Y').'-06-1';
+        $to = date('Y').'-06-30';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
     }
 
     public function jul_out() {
-        $from = date('Y').'-07-31';
-        $to = date('Y').'-07-31';
+        $from = date('Y').'-07-1';
+        $to = date('Y').'-07-30';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
     }
 
     public function aug_out() {
-        $from = date('Y').'-08-31';
+        $from = date('Y').'-08-1';
         $to = date('Y').'-08-31';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
     }
 
     public function sep_out() {
-        $from = date('Y').'-09-31';
+        $from = date('Y').'-09-1';
         $to = date('Y').'-09-31';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
     }
 
     public function oct_out() {
-        $from = date('Y').'-10-31';
+        $from = date('Y').'-10-1';
         $to = date('Y').'-10-31';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
     }
 
     public function nov_out() {
-        $from = date('Y').'-11-31';
-        $to = date('Y').'-11-31';
+        $from = date('Y').'-11-1';
+        $to = date('Y').'-11-30';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
     }
 
     public function dec_out() {
-        $from = date('Y').'-12-31';
+        $from = date('Y').'-12-1';
         $to = date('Y').'-12-31';
         $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
         return $query->num_rows;
@@ -430,7 +430,7 @@ class account extends Model {
 
     public function total_patients($status) {
         $date = date('Y-m-d');
-        $query = $this->db->query("SELECT * FROM admissions WHERE status = $status  AND date_today = '$date'");
+        $query = $this->db->query("SELECT * FROM admissions WHERE status = $status");
         return $query->num_rows;
     }
 
