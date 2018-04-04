@@ -574,10 +574,6 @@
                                     </select>
                                 </div>
 
-                                <div class="col-sm-5">
-                                    <label for="">Attending Physician ( Signature )</label>
-                                </div>
-
                             </div>
                         </div>
 

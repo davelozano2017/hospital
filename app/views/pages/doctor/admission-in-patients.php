@@ -104,6 +104,7 @@
                 <form name="formAdmission" id="formAdmission" method="POST" novalidate>
                     <input type="hidden" id="token" name="token" value="<?=$data['token']?>'">
                     <input type="hidden" id="admissions_id" name="admissions_id">
+                    <input type="hidden" name="patient_code" id="patient_code" class="form-control">
                     <div class="tabbable">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#basic-tab1" data-toggle="tab">Patient Details</a></li>
@@ -118,7 +119,7 @@
                                 <div class="col-sm-4">
                                     <label for="">Surname</label>
                                     <div class="form-group ">
-                                        <input readonly type="text" ng-pattern ="/^[a-zA-Z\s]*$/"  name="surname" id="surname" ng-model="surname" class="form-control" required>
+                                    <input readonly type="text" ng-pattern ="/^[a-zA-Z\s]*$/"  name="surname" id="surname" ng-model="surname" class="form-control" required>
                                         <span ng-messages="formAdmission.surname.$error" ng-if="formAdmission.surname.$dirty">
                                             <strong ng-message="pattern" class="text-danger">Please type alphabet only.</strong>
                                             <strong ng-message="required" class="text-danger">This field is required.</strong>
@@ -367,20 +368,37 @@
 
                                 <!-- 2nd -->
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="">Admission ( Date / Time )</label>
+                            <div class="col-sm-6">
+                                    <label for="">Admission ( Date ) *</label>
                                     <div class="form-group">
-                                        <input type="datetime-local" name="admission_date_time" id="admission_date_time" ng-model="admission_date_time" class="form-control" required>
-                                        <span ng-messages="formAdmission.admission_date_time.$error" ng-if="formAdmission.admission_date_time.$dirty">
+                                        <input  type="date" max="<?=date('Y-m-d')?>" name="admission_date" id="admission_date" ng-model="admission_date_time" class="form-control" required>
+                                        <span ng-messages="formAdmission.admission_date.$error" ng-if="formAdmission.admission_date.$dirty">
                                             <strong ng-message="required" class="text-danger">This field is required.</strong>
                                         </span>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <label for="">Discharged ( Date / Time )</label>
+                                    <label for="">Admission ( Time ) *</label>
                                     <div class="form-group">
-                                        <input type="datetime-local" name="discharged_date_time" id="discharged_date_time" ng-model="discharged_date_time" class="form-control" >
+                                        <input type="time" name="admission_time" id="admission_time" ng-model="admission_time" class="form-control" required>
+                                        <span ng-messages="formAdmission.admission_time.$error" ng-if="formAdmission.admission_time.$dirty">
+                                            <strong ng-message="required" class="text-danger">This field is required.</strong>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Discharged ( Date )</label>
+                                    <div class="form-group">
+                                        <input type="date" name="discharged_date" id="discharged_date" ng-model="discharged_date" class="form-control" >
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="">Discharged ( Time )</label>
+                                    <div class="form-group">
+                                        <input type="time" name="discharged_time" id="discharged_time" ng-model="discharged_time" class="form-control" >
                                     </div>
                                 </div>
                                 
@@ -411,7 +429,7 @@
                                 <div class="col-sm-6">
                                     <label for="">Attending Physician</label>
                                     <div class="form-group">
-                                        <select name="attending_physicians" id="attending_physicians"  class="form-control" required>
+                                        <select name="attending_physicians[]" id="attending_physicians"  class="form-control" required>
                                             <?php foreach($data['physicians'] as $physicians_list) { ?>
                                                 <option value="<?=$physicians_list['accounts_id']?>" selected><?=$physicians_list['name']?></option>
                                             <?php } ?>
@@ -580,10 +598,6 @@
                                         <option value="Autopsy">Autopsy</option>
                                         <option value="No Autopsy">No Autopsy</option>
                                     </select>
-                                </div>
-
-                                <div class="col-sm-5">
-                                    <label for="">Attending Physician ( Signature )</label>
                                 </div>
 
                             </div>
