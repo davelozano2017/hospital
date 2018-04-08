@@ -188,8 +188,8 @@ class admin extends Controller {
         $inpatients = array( 'from' => $from, 'to' => $to );
         $total_inpatients = $this->model('account')->get_all_inpatients($inpatients);
 
-        $all_pateints = array('from' => $from,'to'=>$to);
-        $total_all_pateints = $this->model('account')->all_patients($all_pateints);
+        $all_patients = array('from' => $from,'to'=>$to);
+        $total_all_patients = $this->model('account')->all_patients($all_patients);
 
         $out_patients = array('from' => $from,'to'=>$to);
         $all_out_patients = $this->model('account')->all_out_patients($out_patients);
@@ -212,6 +212,10 @@ class admin extends Controller {
 
         $admitted_discharged = array( 'from' => $from);
         $total_admitted_discharged = $this->model('account')->get_all_admitted_discharged_patients($admitted_discharged);
+
+        $outpatient_new = array( 'from' => $from, 'to' => $to);
+        $total_out_patient_new = $this->model('account')->all_out_patients_new($outpatient_new);
+        $total_out_patient_old = $this->model('account')->all_out_patients_new($outpatient_new);
 
         $jan_in = $this->model('account')->jan_in();
         $feb_in = $this->model('account')->feb_in();
@@ -238,6 +242,18 @@ class admin extends Controller {
         $oct_out = $this->model('account')->oct_out();
         $nov_out = $this->model('account')->nov_out();
         $dec_out = $this->model('account')->dec_out();
+        $jan_di  = $this->model('account')->jan_di();
+        $feb_di  = $this->model('account')->feb_di();
+        $mar_di  = $this->model('account')->mar_di();
+        $apr_di  = $this->model('account')->apr_di();
+        $may_di  = $this->model('account')->may_di();
+        $jun_di  = $this->model('account')->jun_di();
+        $jul_di  = $this->model('account')->jul_di();
+        $aug_di  = $this->model('account')->aug_di();
+        $sep_di  = $this->model('account')->sep_di();
+        $oct_di  = $this->model('account')->oct_di();
+        $nov_di  = $this->model('account')->nov_di();
+        $dec_di  = $this->model('account')->dec_di();
 
         $jan_total = $jan_in + $jan_out;
         $feb_total = $feb_in + $feb_out;
@@ -251,6 +267,12 @@ class admin extends Controller {
         $oct_total = $oct_in + $oct_out;
         $nov_total = $nov_in + $nov_out;
         $dec_total = $dec_in + $dec_out;
+
+        $total_in = $jan_in + $feb_in + $mar_in + $apr_in + $may_in + $jun_in + $jul_in + $aug_in + $sep_in + $oct_in + $nov_in + $dec_in;
+
+        $total_di = $jan_di + $feb_di + $mar_di + $apr_di + $may_di + $jun_di + $jul_di + $aug_di + $sep_di + $oct_di + $nov_di + $dec_di;
+
+        $total_out = $jan_out + $feb_out + $mar_out + $apr_out + $may_out + $jun_out + $jul_out + $aug_out + $sep_out + $oct_out + $nov_out + $dec_out;
 
         $grand_total = $jan_total + $feb_total + $mar_total + $apr_total + $may_total + $jun_total + $jul_total + $aug_total + $sep_total + $oct_total + $nov_total + $dec_total;
         
@@ -281,112 +303,336 @@ class admin extends Controller {
         $pdf->cell(190,5,'',0,1,'C');
 
         $pdf->SetFont('helvetica','B',10);
-        $pdf->cell(80,8,' A. Summary of Patients in the hospital',0,1);
+        $pdf->cell(80,8,'A. Summary of Patients',0,1);
+        $tbl = <<<EOD
+        <table style="border:1px solid #000">
+        <tr>
+          <th  style="border:1px solid #000" rowspan="2"><br><br>DATE</th>
+          <th  style="border:1px solid #000" colspan="3">ADMITTED</th>
+          <th  style="border:1px solid #000" rowspan="2"><br><br>DATE</th>
+          <th  style="border:1px solid #000" colspan="3">DISCHARGES</th>
+          <th  style="border:1px solid #000" rowspan="2"><br><br>DATE</th>
+          <th  style="border:1px solid #000" colspan="3">OUTPATIENT</th>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">A.<br>NHIP</td>
+          <td  style="border:1px solid #000">B. <br>NON-NHIP</td>
+          <td  style="border:1px solid #000">C. <br>TOTAL</td>
+          <td  style="border:1px solid #000">A.<br>NHIP</td>
+          <td  style="border:1px solid #000">B. <br>NON-NHIP</td>
+          <td  style="border:1px solid #000">C.<br>TOTAL</td>
+          <td  style="border:1px solid #000">A. <br>NEW</td>
+          <td  style="border:1px solid #000">B. <br>REVISIT</td>
+          <td  style="border:1px solid #000">C. <br>TOTAL</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">JAN</td>
+          <td  style="border:1px solid #000">$jan_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$jan_in</td>
+          <td  style="border:1px solid #000">JAN</td>
+          <td  style="border:1px solid #000">$jan_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$jan_di</td>
+          <td  style="border:1px solid #000">JAN</td>
+          <td  style="border:1px solid #000">$jan_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$jan_out</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">FEB</td>
+          <td  style="border:1px solid #000">$feb_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$feb_in</td>
+          <td  style="border:1px solid #000">FEB</td>
+          <td  style="border:1px solid #000">$feb_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$feb_di</td>
+          <td  style="border:1px solid #000">FEB</td>
+          <td  style="border:1px solid #000">$feb_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$feb_out</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">MAR</td>
+          <td  style="border:1px solid #000">$mar_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$mar_in</td>
+          <td  style="border:1px solid #000">MAR</td>
+          <td  style="border:1px solid #000">$mar_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$mar_di</td>
+          <td  style="border:1px solid #000">MAR</td>
+          <td  style="border:1px solid #000">$mar_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$mar_out</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">APR</td>
+          <td  style="border:1px solid #000">$apr_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$apr_in</td>
+          <td  style="border:1px solid #000">APR</td>
+          <td  style="border:1px solid #000">$apr_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$apr_di</td>
+          <td  style="border:1px solid #000">APR</td>
+          <td  style="border:1px solid #000">$apr_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$apr_out</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">MAY</td>
+          <td  style="border:1px solid #000">$may_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$may_in</td>
+          <td  style="border:1px solid #000">MAY</td>
+          <td  style="border:1px solid #000">$may_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$may_di</td>
+          <td  style="border:1px solid #000">MAY</td>
+          <td  style="border:1px solid #000">$may_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$may_out</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">JUN</td>
+          <td  style="border:1px solid #000">$jun_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$jun_in</td>
+          <td  style="border:1px solid #000">JUN</td>
+          <td  style="border:1px solid #000">$jun_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$jun_di</td>
+          <td  style="border:1px solid #000">JUN</td>
+          <td  style="border:1px solid #000">$jun_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$jun_out</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">JUL</td>
+          <td  style="border:1px solid #000">$jul_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$jul_in</td>
+          <td  style="border:1px solid #000">JUL</td>
+          <td  style="border:1px solid #000">$jul_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$jul_di</td>
+          <td  style="border:1px solid #000">JUL</td>
+          <td  style="border:1px solid #000">$jul_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$jul_out</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">AUG</td>
+          <td  style="border:1px solid #000">$aug_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$aug_in</td>
+          <td  style="border:1px solid #000">AUG</td>
+          <td  style="border:1px solid #000">$aug_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$aug_di</td>
+          <td  style="border:1px solid #000">AUG</td>
+          <td  style="border:1px solid #000">$aug_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$aug_out</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">SEPT</td>
+          <td  style="border:1px solid #000">$sep_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$sep_in</td>
+          <td  style="border:1px solid #000">SEPT</td>
+          <td  style="border:1px solid #000">$sep_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$sep_di</td>
+          <td  style="border:1px solid #000">SEPT</td>
+          <td  style="border:1px solid #000">$sep_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$sep_out</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">OCT</td>
+          <td  style="border:1px solid #000">$oct_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$oct_in</td>
+          <td  style="border:1px solid #000">OCT</td>
+          <td  style="border:1px solid #000">$oct_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$oct_di</td>
+          <td  style="border:1px solid #000">OCT</td>
+          <td  style="border:1px solid #000">$oct_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$oct_out</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">NOV</td>
+          <td  style="border:1px solid #000">$nov_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$nov_in</td>
+          <td  style="border:1px solid #000">NOV</td>
+          <td  style="border:1px solid #000">$nov_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$nov_di</td>
+          <td  style="border:1px solid #000">NOV</td>
+          <td  style="border:1px solid #000">$nov_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$nov_out</td>
+        </tr>
+        <tr>
+          <td  style="border:1px solid #000">DEC</td>
+          <td  style="border:1px solid #000">$dec_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$dec_in</td>
+          <td  style="border:1px solid #000">DEC</td>
+          <td  style="border:1px solid #000">$dec_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$dec_di</td>
+          <td  style="border:1px solid #000">DEC</td>
+          <td  style="border:1px solid #000">$dec_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$dec_out</td>
+        </tr>
 
-        $pdf->cell(175,7,'Inpatient Care',1,0);
-        $pdf->cell(20,7,'Number',1,1);
+        <tr>
+          <td  style="border:1px solid #000">TOTAL</td>
+          <td  style="border:1px solid #000">$total_in</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$total_in</td>
+          <td  style="border:1px solid #000">TOTAL</td>
+          <td  style="border:1px solid #000">$total_di</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$total_di</td>
+          <td  style="border:1px solid #000">TOTAL</td>
+          <td  style="border:1px solid #000">$total_out</td>
+          <td  style="border:1px solid #000">0</td>
+          <td  style="border:1px solid #000">$total_out</td>
+        </tr>
+      </table>
+EOD;
+$pdf->writeHTML($tbl, true, false, false, false, '');
+     
 
-        $pdf->cell(175,7,'Total number of inpatients',1,0);
-        $pdf->cell(20,7,$total_inpatients,1,1,'C');
+$pdf->SetFont('helvetica','B',10);
+$pdf->cell(80,8,'B. Top Ten Most Common Cause Of Confinement',0,1);
+$tbls = <<<EOD
+<table>
+  <tr>
+    <th style="border:1px solid #000;width:80%" rowspan="2">DIAGNOSIS</th>
+    <th style="border:1px solid #000;width:20%" colspan="2">TOTAL</th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000" >NHIP</td>
+    <td style="border:1px solid #000" >NON-NHIP</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000">Pneumonia Moderate Risk</td>
+    <td style="border:1px solid #000"> 0</td>
+    <td style="border:1px solid #000"> 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000">Urinary Tract Infection</td>
+    <td style="border:1px solid #000"> 0</td>
+    <td style="border:1px solid #000"> 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000">Acute Gastroenteritis with Moderate Dehydration</td>
+    <td style="border:1px solid #000"> 0</td>
+    <td style="border:1px solid #000"> 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000">Dengue Fever</td>
+    <td style="border:1px solid #000"> 0</td>
+    <td style="border:1px solid #000"> 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000">Benign Febrile Convulsion</td>
+    <td style="border:1px solid #000"> 0</td>
+    <td style="border:1px solid #000"> 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000">Hypertension</td>
+    <td style="border:1px solid #000"> 0</td>
+    <td style="border:1px solid #000"> 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000">Cardio Vascular Disease</td>
+    <td style="border:1px solid #000"> 0</td>
+    <td style="border:1px solid #000"> 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000">Simple Febrile Convulsion</td>
+    <td style="border:1px solid #000"> 0</td>
+    <td style="border:1px solid #000"> 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000">Ischemic Heart Disease</td>
+    <td style="border:1px solid #000"> 0</td>
+    <td style="border:1px solid #000"> 0</td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #000">Acute Gastritis</td>
+    <td style="border:1px solid #000"> 0</td>
+    <td style="border:1px solid #000"> 0</td>
+  </tr>
+</table>
+EOD;
+$pdf->writeHTML($tbls, true, false, false, false, '');
 
-        $pdf->cell(175,7,'Total number of discharged',1,0);
-        $pdf->cell(20,7,$discharged_patients,1,1,'C');
 
-        $pdf->cell(175,7,'Total number of admitted and discharged on the same day',1,0);
-        $pdf->cell(20,7,$total_admitted_discharged,1,1,'C');
+$pdf->SetFont('helvetica','B',10);
+$pdf->cell(80,8,'C. Summary',0,1);
+$tbls = <<<EOD
+<table style="border:1px solid #000">
+<tr>
+  <th  style="border:1px solid #000" colspan="5"></th>
+  <th  style="border:1px solid #000" colspan="3">Numbers</th>
+</tr>
+<tr>
+<td colspan="5" style="border:1px solid #000">Total Number of Inpatients</td>
+<td colspan="3" style="border:1px solid #000">$total_inpatients</td>
+</tr>
 
-        $pdf->cell(175,7,'Total number of transferred patients',1,0);
-        $pdf->cell(20,7,$transferred_patients,1,1,'C');
+<tr>
+<td colspan="5" style="border:1px solid #000">Total Number of discharge</td>
+<td colspan="3" style="border:1px solid #000">$discharged_patients</td>
+</tr>
 
-        $pdf->cell(175,7,'Total number of out patient visit (new patient)',1,0);
-        $pdf->cell(20,7,$total_admission_type_new,1,1,'C');
+<tr>
+<td colspan="5" style="border:1px solid #000">Total Number of admitted and discharged on the same day</td>
+<td colspan="3" style="border:1px solid #000">$total_admitted_discharged</td>
+</tr>
 
-        $pdf->cell(175,7,'Total number of out patient visit (revisit)',1,0);
-        $pdf->cell(20,7,$total_admission_type_old,1,1,'C');
+<tr>
+<td colspan="5" style="border:1px solid #000">Total Number of outpatient visit (new patient)</td>
+<td colspan="3" style="border:1px solid #000">$total_out_patient_new</td>
+</tr>
 
-        $pdf->cell(175,7,'Total number of all outpatients',1,0);
-        $pdf->cell(20,7,$all_out_patients,1,1,'C');
+<tr>
+<td colspan="5" style="border:1px solid #000">Total Number of outpatient visit (revisit)</td>
+<td colspan="3" style="border:1px solid #000">$total_out_patient_old</td>
+</tr>
 
-        $pdf->cell(175,7,'Total number of deaths',1,0);
-        $pdf->cell(20,7,$deaths_patients,1,1,'C');
+<tr>
+<td colspan="5" style="border:1px solid #000">Total Number of all outpatient</td>
+<td colspan="3" style="border:1px solid #000">$all_out_patients</td>
+</tr>
 
-        $pdf->cell(175,7,'Total number of all patients',1,0);
-        $pdf->cell(20,7,$total_all_pateints,1,1,'C');
+<tr>
+<td colspan="5" style="border:1px solid #000">Total Number of deaths</td>
+<td colspan="3" style="border:1px solid #000">$deaths_patients</td>
+</tr>
 
-        $pdf->SetFont('helvetica','',8);
-        
-        $pdf->SetFont('helvetica','B',10);
-        $pdf->cell(80,12,'B. Table',0,1);
-        $pdf->SetFont('helvetica','',8);
+<tr>
+<td colspan="5" style="border:1px solid #000">Total Number of all patients</td>
+<td colspan="3" style="border:1px solid #000">$total_all_patients</td>
+</tr>
+</table>
+EOD;
+$pdf->writeHTML($tbls, true, false, false, false, '');
 
-        $pdf->cell(48.7,7,'Month',1,0);
-        $pdf->cell(48.7,7,'Inpatients',1,0);
-        $pdf->cell(48.7,7,'Outpatients',1,0);
-        $pdf->cell(48.7,7,'Total',1,1);
 
-        $pdf->cell(48.7,7,'January',1,0);
-        $pdf->cell(48.7,7,$jan_in,1,0);
-        $pdf->cell(48.7,7,$jan_out,1,0);
-        $pdf->cell(48.7,7,$jan_total,1,1);
-
-        $pdf->cell(48.7,7,'February',1,0);
-        $pdf->cell(48.7,7,$feb_in,1,0);
-        $pdf->cell(48.7,7,$feb_out,1,0);
-        $pdf->cell(48.7,7,$feb_total,1,1);
-
-        $pdf->cell(48.7,7,'March',1,0);
-        $pdf->cell(48.7,7,$mar_in,1,0);
-        $pdf->cell(48.7,7,$mar_out,1,0);
-        $pdf->cell(48.7,7,$mar_total,1,1);
-
-        $pdf->cell(48.7,7,'April',1,0);
-        $pdf->cell(48.7,7,$apr_in,1,0);
-        $pdf->cell(48.7,7,$apr_out,1,0);
-        $pdf->cell(48.7,7,$apr_total,1,1);
-
-        $pdf->cell(48.7,7,'May',1,0);
-        $pdf->cell(48.7,7,$may_in,1,0);
-        $pdf->cell(48.7,7,$may_out,1,0);
-        $pdf->cell(48.7,7,$may_total,1,1);
-
-        $pdf->cell(48.7,7,'June',1,0);
-        $pdf->cell(48.7,7,$jun_in,1,0);
-        $pdf->cell(48.7,7,$jun_out,1,0);
-        $pdf->cell(48.7,7,$jun_total,1,1);
-
-        $pdf->cell(48.7,7,'July',1,0);
-        $pdf->cell(48.7,7,$jul_in,1,0);
-        $pdf->cell(48.7,7,$jul_out,1,0);
-        $pdf->cell(48.7,7,$jul_total,1,1);
-
-        $pdf->cell(48.7,7,'Augost',1,0);
-        $pdf->cell(48.7,7,$aug_in,1,0);
-        $pdf->cell(48.7,7,$aug_out,1,0);
-        $pdf->cell(48.7,7,$aug_total,1,1);
-
-        $pdf->cell(48.7,7,'September',1,0);
-        $pdf->cell(48.7,7,$sep_in,1,0);
-        $pdf->cell(48.7,7,$sep_out,1,0);
-        $pdf->cell(48.7,7,$sep_total,1,1);
-
-        $pdf->cell(48.7,7,'October',1,0);
-        $pdf->cell(48.7,7,$oct_in,1,0);
-        $pdf->cell(48.7,7,$oct_out,1,0);
-        $pdf->cell(48.7,7,$oct_total,1,1);
-
-        $pdf->cell(48.7,7,'November',1,0);
-        $pdf->cell(48.7,7,$nov_in,1,0);
-        $pdf->cell(48.7,7,$nov_out,1,0);
-        $pdf->cell(48.7,7,$nov_total,1,1);
-
-        $pdf->cell(48.7,7,'December',1,0);
-        $pdf->cell(48.7,7,$dec_in,1,0);
-        $pdf->cell(48.7,7,$dec_out,1,0);
-        $pdf->cell(48.7,7,$dec_total,1,1);
-
-        $pdf->cell(146.1,7,'',1,0);
-        $pdf->cell(48.7,7,$grand_total,1,1);
-        $pdf->Output();     
+$pdf->Output(); 
 }
 
     
@@ -425,6 +671,11 @@ class admin extends Controller {
 
     public function test() {
         $this->view('pages/admin/test');
+    }
+
+    public function print($admissions_id) {
+        $data['prints'] = $this->model('account')->print_patient_information($admissions_id);
+        $this->view('pages/admin/print',$data);
     }
 
     public function logs() {

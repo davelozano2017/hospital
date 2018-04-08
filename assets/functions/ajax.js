@@ -553,7 +553,10 @@ function view_out_patients(outpatients_id) {
     })
 }
 
-
+function print_selected() {
+    var admissions_id = $('#admissions_id').val();
+    location.href= '../print/'+admissions_id;
+}
 
 function view_admissions(admissions_id) {
     var modal = $('#admission-modal');

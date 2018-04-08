@@ -108,7 +108,7 @@
                         </ul>
                     </li>
                     
-                    <li class="<?= $data['title'] == 'Reports' ? 'active':'';?>"><a href="<?=URL?>admin/reports"><i class="icon-graph"></i> <span>Statistical Reports</span></a></li>
+                    <li class="<?= $data['title'] == 'Reports' ? 'active':'';?>"><a href="<?=URL?>staff/statistical"><i class="icon-graph"></i> <span>Statistical Reports</span></a></li>
                     
 
                 <?php } ?>

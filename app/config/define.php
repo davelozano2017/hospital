@@ -23,7 +23,7 @@ $configs = [
     ],
     'profile' => [
         'COMPANY_NAME'  => 'Ospital ng Tagatay',
-        'DATE_FORMAT'   => 'Y-m-d g:i:s'
+        'DATE_FORMAT'   => 'F d, Y'
     ]    
 ];
 
