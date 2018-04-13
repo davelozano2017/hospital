@@ -61,7 +61,7 @@
                 <thead>
                     <tr>
                         <th colspan=5>Name</th>
-                        <td style="width:1px" class="text-center">Action</td>
+                        <th style="width:1px" class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>

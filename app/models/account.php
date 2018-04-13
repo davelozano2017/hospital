@@ -558,7 +558,9 @@ class account extends Model {
         } else {
             // update here 
             $query = $this->db->query("UPDATE `medical_record_out_patient` SET `surname`= '".$data['surname']."' ,`firstname`= '".$data['firstname']."', `middlename`= '".$data['middlename']."',`birthday`= '".$data['birthday']."',`age`= '".$data['age']."',`gender`= '".$data['gender']."',`address`= '".$data['address']."',`chief_complaints`= '".$data['chief_complaints']."',`opd_case_number`= '".$data['opd_case_number']."',`physicians_id`= '".$data['physicians_id']."',`hp`= '".$data['hp']."',`pulse_rate`= '".$data['pulse_rate']."',`respiratory_rate`= '".$data['respiratory_rate']."',`temperature`= '".$data['temperature']."',`weight`= '".$data['weight']."',`date`= '".$data['date']."',`type`= '".$data['type']."',`time`= '".$data['time']."',`impression`= '".$data['impression']."',`treatment`= '".$data['treatment']."' WHERE outpatients_id = $outpatients_id");
-            notify('info','OPD case number '.$data['opd_case_number'].' has been updated.',true);
+            if($query) {
+                notify('info','OPD case number '.$data['opd_case_number'].' has been updated.',true);
+            }
         }
     }
 
@@ -688,9 +690,16 @@ class account extends Model {
 
 
     public function get_all_out_patients() {
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id WHERE date = ''");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id WHERE mrop.impression = '' AND treatment = ''");
         return $query;
     }
+
+    public function get_all_out_patients_by_name() {
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id GROUP BY lastname,firstname,middlename");
+        return $query;
+    }
+
+    
 
     public function get_all_out_patients_by_doctor($id) {
         $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id WHERE mrop.physicians_id = $id");
