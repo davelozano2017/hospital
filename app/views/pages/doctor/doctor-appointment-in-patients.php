@@ -39,8 +39,8 @@
                         <th>Name</th>
                         <th>Hospital Code</th>
                         <th>Room</th>
-                        <td>Date</td>
-                        <td style="width:1px" class="text-center">Action</td>
+                        <th>Date</th>
+                        <th style="width:1px" class="text-center" colspan=2>Action</th>
                         </tr>
                 </thead>
                 <tbody>
@@ -50,6 +50,7 @@
                             <td><?=$row['hospital_code']?></td>
                             <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
                             <td><?=date('M d,Y',strtotime($row['admission_date']))?></td>
+                            <td></td>
                             <td class="text-center"><a class="btn btn-primary" onclick="view_admissions('<?=$row['admissions_id']?>')">View</a></td>
                         </tr>
                     <?php } ?>
@@ -104,6 +105,7 @@
                 <form name="formAdmission" id="formAdmission" method="POST" novalidate>
                     <input type="hidden" id="token" name="token" value="<?=$data['token']?>'">
                     <input type="hidden" id="admissions_id" name="admissions_id">
+                    <input type="hidden" id="patient_code" name="patient_code">
                     <div class="tabbable">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#basic-tab1" data-toggle="tab">Patient Details</a></li>
@@ -429,7 +431,7 @@
                                 <div class="col-sm-6">
                                     <label for="">Attending Physician * </label>
                                     <div class="form-group">
-                                        <select name="attending_physicians" id="attending_physicians"  class="form-control" required>
+                                        <select name="attending_physicians[]" id="attending_physicians"  class="form-control" required>
                                             <?php foreach($data['physicians'] as $physicians_list) { ?>
                                                 <option value="<?=$physicians_list['accounts_id']?>" selected><?=$physicians_list['name']?></option>
                                             <?php } ?>

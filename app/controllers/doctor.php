@@ -201,6 +201,8 @@ class doctor extends Controller {
                 'birthday'         => $this->input->post('birthday'),
                 'age'              => $this->input->post('age'),
                 'gender'           => $this->input->post('gender'),
+                'date'             => $this->input->post('date'),
+                'time'             => $this->input->post('time'),
                 'address'          => $this->input->post('patient_address'),
                 'opd_case_number'  => $this->input->post('opd_case_number'),
                 'chief_complaints' => $this->input->post('chief_complaints'),

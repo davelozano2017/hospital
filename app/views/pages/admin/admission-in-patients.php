@@ -39,8 +39,8 @@
                         <th>Name</th>
                         <th>Hospital Code</th>
                         <th>Room</th>
-                        <td colspan=2 >Date</td>
-                        <td style="width:1px" class="text-center">Action</td>
+                        <th colspan=2 >Date</th>
+                        <th style="width:1px" class="text-center">Action</th>
                         </tr>
                 </thead>
                 <tbody>

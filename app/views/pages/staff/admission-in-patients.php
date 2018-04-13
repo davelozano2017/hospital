@@ -40,8 +40,8 @@
                         <th>Hospital Code</th>
                         <th>Physicians</th>
                         <th>Room</th>
-                        <td>Date</td>
-                        <td style="width:1px" class="text-center">Action</td>
+                        <th>Date</th>
+                        <th style="width:1px" class="text-center">Action</th>
                         </tr>
                 </thead>
                 <tbody>

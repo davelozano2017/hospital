@@ -38,7 +38,14 @@ class account extends Model {
     public function all_out_patients_new($data) {
         $from = $data['from'];
         $to = $data['to'];
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
+        return $query->num_rows;
+    }
+
+    public function all_out_patients_old($data) {
+        $from = $data['from'];
+        $to = $data['to'];
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
         return $query->num_rows;
     }
 
@@ -213,94 +220,180 @@ class account extends Model {
 
 
 
-    public function jan_out() {
+    public function jan_out_new() {
         $from = date('Y').'-01-1';
         $to = date('Y').'-01-31';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
 
-    public function feb_out() {
+    public function feb_out_new() {
         $from = date('Y').'-02-1';
         $to = date('Y').'-02-28';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
 
-    public function mar_out() {
+    public function mar_out_new() {
         $from = date('Y').'-03-1';
         $to = date('Y').'-03-31';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
 
-    public function apr_out() {
+    public function apr_out_new() {
         $from = date('Y').'-04-1';
         $to = date('Y').'-04-30';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
 
-    public function may_out() {
+    public function may_out_new() {
         $from = date('Y').'-05-1';
         $to = date('Y').'-05-31';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
 
-    public function jun_out() {
+    public function jun_out_new() {
         $from = date('Y').'-06-1';
         $to = date('Y').'-06-30';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
 
-    public function jul_out() {
+    public function jul_out_new() {
         $from = date('Y').'-07-1';
         $to = date('Y').'-07-30';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
 
-    public function aug_out() {
+    public function aug_out_new() {
         $from = date('Y').'-08-1';
         $to = date('Y').'-08-31';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
 
-    public function sep_out() {
+    public function sep_out_new() {
         $from = date('Y').'-09-1';
         $to = date('Y').'-09-31';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
 
-    public function oct_out() {
+    public function oct_out_new() {
         $from = date('Y').'-10-1';
         $to = date('Y').'-10-31';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
 
-    public function nov_out() {
+    public function nov_out_new() {
         $from = date('Y').'-11-1';
         $to = date('Y').'-11-30';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
 
-    public function dec_out() {
+    public function dec_out_new() {
         $from = date('Y').'-12-1';
         $to = date('Y').'-12-31';
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' ");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'New Patient'");
         return $query->num_rows;
     }
+
+    public function jan_out_revisit() {
+        $from = date('Y').'-01-1';
+        $to = date('Y').'-01-31';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+    public function feb_out_revisit() {
+        $from = date('Y').'-02-1';
+        $to = date('Y').'-02-28';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+    public function mar_out_revisit() {
+        $from = date('Y').'-03-1';
+        $to = date('Y').'-03-31';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+    public function apr_out_revisit() {
+        $from = date('Y').'-04-1';
+        $to = date('Y').'-04-30';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+    public function may_out_revisit() {
+        $from = date('Y').'-05-1';
+        $to = date('Y').'-05-31';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+    public function jun_out_revisit() {
+        $from = date('Y').'-06-1';
+        $to = date('Y').'-06-30';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+    public function jul_out_revisit() {
+        $from = date('Y').'-07-1';
+        $to = date('Y').'-07-30';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+    public function aug_out_revisit() {
+        $from = date('Y').'-08-1';
+        $to = date('Y').'-08-31';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+    public function sep_out_revisit() {
+        $from = date('Y').'-09-1';
+        $to = date('Y').'-09-31';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+    public function oct_out_revisit() {
+        $from = date('Y').'-10-1';
+        $to = date('Y').'-10-31';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+    public function nov_out_revisit() {
+        $from = date('Y').'-11-1';
+        $to = date('Y').'-11-30';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+    public function dec_out_revisit() {
+        $from = date('Y').'-12-1';
+        $to = date('Y').'-12-31';
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient WHERE date > '$from' AND date <= '$to' AND type = 'Revisit'");
+        return $query->num_rows;
+    }
+
+
 
     public function get_all_inpatients($data) {
         $from = $data['from'];
         $to = $data['to'];
-        $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND admission_date <= '$to'");
+        $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND admission_date <= '$to' AND discharged_date = '' AND discharged_time = ''");
         return $query->num_rows;
     }
 
@@ -454,8 +547,8 @@ class account extends Model {
             if($check->num_rows > 0) {
                 notify('error','OPD case number already exist.',false);
             } else {
-                $query = $this->db->query("INSERT INTO `medical_record_out_patient`(`patient_code`,`surname`, `firstname`, `middlename`, `birthday`, `age`, `gender`, `address`, `chief_complaints`, `opd_case_number`, `physicians_id`, `hp`, `pulse_rate`, `respiratory_rate`, `temperature`, `weight`,`date`,`time`, `impression`, `treatment`) VALUES 
-                ('$patient_code','".$data['surname']."','".$data['firstname']."','".$data['middlename']."','".$data['birthday']."','".$data['age']."','".$data['gender']."','".$data['address']."','".$data['chief_complaints']."','".$data['opd_case_number']."','".$data['physicians_id']."','".$data['hp']."','".$data['pulse_rate']."','".$data['respiratory_rate']."','".$data['temperature']."','".$data['weight']."','".$data['date']."','".$data['time']."','".$data['impression']."','".$data['treatment']."')");
+                $query = $this->db->query("INSERT INTO `medical_record_out_patient`(`patient_code`,`surname`, `firstname`, `middlename`, `birthday`, `age`, `gender`, `address`, `chief_complaints`, `opd_case_number`, `physicians_id`, `hp`, `pulse_rate`, `respiratory_rate`, `temperature`, `weight`,`date`,`type`,`time`, `impression`, `treatment`) VALUES 
+                ('$patient_code','".$data['surname']."','".$data['firstname']."','".$data['middlename']."','".$data['birthday']."','".$data['age']."','".$data['gender']."','".$data['address']."','".$data['chief_complaints']."','".$data['opd_case_number']."','".$data['physicians_id']."','".$data['hp']."','".$data['pulse_rate']."','".$data['respiratory_rate']."','".$data['temperature']."','".$data['weight']."','".$data['date']."','".$data['type']."','".$data['time']."','".$data['impression']."','".$data['treatment']."')");
                 if($query) {
                     notify('success','New out-patient has been added.',true);
                 } else {
@@ -464,7 +557,7 @@ class account extends Model {
             }
         } else {
             // update here 
-            $query = $this->db->query("UPDATE `medical_record_out_patient` SET `surname`= '".$data['surname']."' ,`firstname`= '".$data['firstname']."', `middlename`= '".$data['middlename']."',`birthday`= '".$data['birthday']."',`age`= '".$data['age']."',`gender`= '".$data['gender']."',`address`= '".$data['address']."',`chief_complaints`= '".$data['chief_complaints']."',`opd_case_number`= '".$data['opd_case_number']."',`physicians_id`= '".$data['physicians_id']."',`hp`= '".$data['hp']."',`pulse_rate`= '".$data['pulse_rate']."',`respiratory_rate`= '".$data['respiratory_rate']."',`temperature`= '".$data['temperature']."',`weight`= '".$data['weight']."',`date`= '".$data['date']."',`time`= '".$data['time']."',`impression`= '".$data['impression']."',`treatment`= '".$data['treatment']."' WHERE outpatients_id = $outpatients_id");
+            $query = $this->db->query("UPDATE `medical_record_out_patient` SET `surname`= '".$data['surname']."' ,`firstname`= '".$data['firstname']."', `middlename`= '".$data['middlename']."',`birthday`= '".$data['birthday']."',`age`= '".$data['age']."',`gender`= '".$data['gender']."',`address`= '".$data['address']."',`chief_complaints`= '".$data['chief_complaints']."',`opd_case_number`= '".$data['opd_case_number']."',`physicians_id`= '".$data['physicians_id']."',`hp`= '".$data['hp']."',`pulse_rate`= '".$data['pulse_rate']."',`respiratory_rate`= '".$data['respiratory_rate']."',`temperature`= '".$data['temperature']."',`weight`= '".$data['weight']."',`date`= '".$data['date']."',`type`= '".$data['type']."',`time`= '".$data['time']."',`impression`= '".$data['impression']."',`treatment`= '".$data['treatment']."' WHERE outpatients_id = $outpatients_id");
             notify('info','OPD case number '.$data['opd_case_number'].' has been updated.',true);
         }
     }
@@ -506,7 +599,7 @@ class account extends Model {
 
     public function get_all_admissions($status) {
         $date_today = date('Y-m-d');
-        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.date_today = '$date_today' AND a.status = $status GROUP BY patient_code");
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.status = $status GROUP BY patient_code");
         return $query;
     }
 
@@ -595,7 +688,7 @@ class account extends Model {
 
 
     public function get_all_out_patients() {
-        $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id");
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id WHERE date = ''");
         return $query;
     }
 

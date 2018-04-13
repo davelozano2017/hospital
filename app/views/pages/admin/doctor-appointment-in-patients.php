@@ -45,8 +45,8 @@
                         <th>Hospital Code</th>
                         <th>Physician</th>
                         <th>Room</th>
-                        <td>Date</td>
-                        <td colspan=2 style="width:1px" class="text-center">Action</td>
+                        <th>Date</th>
+                        <th colspan=2 style="width:1px" class="text-center">Action</th>
                         </tr>
                 </thead>
                 <tbody>
@@ -72,9 +72,9 @@
                         <th>Hospital Code</th>
                         <th>Physician</th>
                         <th>Room</th>
-                        <td style="width:1px"></td>
-                        <td style="width:1px"></td>
-                        <td style="width:1px" class="text-center">Action</td>
+                        <th style="width:1px"></th>
+                        <th style="width:1px"></th>
+                        <th style="width:1px" class="text-center">Action</th>
                         </tr>
                 </thead>
                 <tbody>

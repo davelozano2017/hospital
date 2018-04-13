@@ -252,7 +252,17 @@
                                 
                                 <div class="clearfix"></div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
+                                    <label for="">Type</label>
+                                    <div class="form-group">
+                                        <select class="form-control" name="type" id="type">
+                                            <option value="New Patient">New Patient</option>
+                                            <option value="Revisit">Revisit</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
                                     <label for="">Date</label>
                                     <div class="form-group">
                                         <input type="date" max="<?=date('Y-m-d')?>" name="date" id="date" ng-model="date" class="form-control" required>
@@ -262,7 +272,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                     <label for="">Time</label>
                                     <div class="form-group">
                                         <input type="time" name="time" id="time" ng-model="time" class="form-control" required>

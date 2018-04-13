@@ -321,7 +321,7 @@ function profile_picture() {
 
 function doctor_modal() {
     var modal = $('#doctor-modal');
-    modal.modal();
+    modal.modal({ backdrop: 'static', keyboard: false});
     $('#formDoctor')[0].reset();
     
     modal.find($('#btn-doctor')).html('Add Doctor <i class="icon-arrow-right14 position-right"></i>').attr('disabled',true);
@@ -329,7 +329,7 @@ function doctor_modal() {
 
 function admission_modal() {
     var modal = $('#admission-modal');
-    modal.modal();
+    modal.modal({ backdrop: 'static', keyboard: false});
     $('#formAdmission')[0].reset();
     modal.find($('#btn-admissions')).html('Add In Patient <i class="icon-arrow-right14 position-right"></i>').attr('disabled',true);
     $('#btn-admissions').removeClass('hidden');
@@ -337,7 +337,7 @@ function admission_modal() {
 
 function out_patient_modal() {
     var modal = $('#out-patient-modal');
-    modal.modal();
+    modal.modal({ backdrop: 'static', keyboard: false});
     $('#formOutPatients')[0].reset();
     modal.find($('#btn-out-patients')).html('Add Out Patient <i class="icon-arrow-right14 position-right"></i>').attr('disabled',true);
 }
@@ -346,14 +346,14 @@ function out_patient_modal() {
 
 function room_modal() {
     var modal = $('#rooms-modal');
-    modal.modal();
+    modal.modal({ backdrop: 'static', keyboard: false});
     $('#formRoom')[0].reset();
     modal.find($('#btn-rooms')).html('Add Room <i class="icon-arrow-right14 position-right"></i>').attr('disabled',true);
 }
 
 function staff_modal() {
     var modal = $('#staff-modal');
-    modal.modal();
+    modal.modal({ backdrop: 'static', keyboard: false});
     $('#formStaff')[0].reset();
     modal.find($('#btn-staff')).html('Add Staff <i class="icon-arrow-right14 position-right"></i>').attr('disabled',true);
 }
@@ -467,7 +467,7 @@ function view_doctor(accounts_id) {
         },
         dataType : 'json',
         success:function(data) {
-            modal.modal();
+            modal.modal({ backdrop: 'static', keyboard: false});
             modal.find($('#doctor_accounts_id')).val(data.accounts_id);
             modal.find($('#doctor_name')).val(data.name);
             modal.find($('#doctor_contact')).val(data.contact);
@@ -491,7 +491,7 @@ function view_out_patients_by_surname(outpatients_id) {
         },
         dataType : 'json',
         success:function(data) {
-            modal.modal();
+            modal.modal({ backdrop: 'static', keyboard: false});
             modal.find($('#outpatients_id')).val(data.outpatients_id);
             modal.find($('#ssurname')).val(data.surname);
             modal.find($('#sfirstname')).val(data.firstname);
@@ -527,7 +527,7 @@ function view_out_patients(outpatients_id) {
         },
         dataType : 'json',
         success:function(data) {
-            modal.modal();
+            modal.modal({ backdrop: 'static', keyboard: false});
             modal.find($('#outpatients_id')).val(data.outpatients_id);
             modal.find($('#surname')).val(data.surname);
             modal.find($('#firstname')).val(data.firstname);
@@ -546,6 +546,7 @@ function view_out_patients(outpatients_id) {
             modal.find($('#weight')).val(data.weight);
             modal.find($('#date')).val(data.date);
             modal.find($('#time')).val(data.time);
+            modal.find($('#type')).val(data.type);
             modal.find($('#impression')).val(data.impression);
             modal.find($('#treatment')).val(data.treatment);
             $('#btn-out-patients').html('Save Changes <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
@@ -568,7 +569,7 @@ function view_admissions(admissions_id) {
         },
         dataType : 'json',
         success:function(data) {
-            modal.modal();
+            modal.modal({ backdrop: 'static', keyboard: false});
             modal.find($('#admissions_id')).val(data.admissions_id);
             modal.find($('#patient_code')).val(data.patient_code);
             modal.find($('#surname')).val(data.surname);
@@ -638,7 +639,7 @@ function view_patients(admissions_id) {
         },
         dataType : 'json',
         success:function(data) {
-            modal.modal();
+            modal.modal({ backdrop: 'static', keyboard: false});
             modal.find($('#admissions_id')).val(data.admissions_id);
             modal.find($('#surname')).val(data.surname);
             modal.find($('#firstname')).val(data.firstname);
@@ -707,7 +708,7 @@ function view_rooms(rooms_id) {
         },
         dataType : 'json',
         success:function(data) {
-            modal.modal();
+            modal.modal({ backdrop: 'static', keyboard: false});
             modal.find($('#rooms_id')).val(rooms_id);
             modal.find($('#room_type')).val(data.room_type);
             modal.find($('#floor')).val(data.floor);
@@ -745,7 +746,7 @@ function view_staff(accounts_id) {
         },
         dataType : 'json',
         success:function(data) {
-            modal.modal();
+            modal.modal({ backdrop: 'static', keyboard: false});
             modal.find($('#staff_accounts_id')).val(data.accounts_id);
             modal.find($('#staff_name')).val(data.name);
             modal.find($('#staff_contact')).val(data.contact);
