@@ -15,7 +15,7 @@
 .tg .tg-us36{border-color:inherit;vertical-align:top}
 </style>
 </head>
-<body>
+<body onload="print()">
     <div style="margin:auto;width:900px">
     
         <table class="tg">
