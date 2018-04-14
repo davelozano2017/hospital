@@ -20,17 +20,17 @@
     
         <table class="tg">
         <tr>
-            <th class="tg-l711" colspan="3"><img style="width:120px;height:120px" src="https://www.foreclosurephilippines.com/wp-content/uploads/2010/11/tagaytay-city-official-seal1.jpg"></th>
-            <th class="tg-uys7" colspan="5">#################   <br>OSPITAL NG TAGAYTAY<br>#################################<br>#############<br>PHILHEALTH ACCREDITED</th>
-            <th class="tg-l711" colspan="2"><img style="width:120px;height:120px" src="http://localhost/hospital/assets/images/logo.png"></th>
+            <th style="border:none" class="tg-l711" colspan="3"><img style="width:120px;height:120px" src="https://www.foreclosurephilippines.com/wp-content/uploads/2010/11/tagaytay-city-official-seal1.jpg"></th>
+            <th style="border:none" class="tg-uys7" colspan="5">#################   <br>OSPITAL NG TAGAYTAY<br>#################################<br>#############<br>PHILHEALTH ACCREDITED</th>
+            <th style="border:none"  class="tg-l711" colspan="2"><img style="width:120px;height:120px" src="http://localhost/hospital/assets/images/logo.png"></th>
         </tr>
         <tr>
-            <td class="tg-l711" colspan="10">&nbsp; &nbsp; &nbsp; &nbsp; ################################################################################################&nbsp; &nbsp; &nbsp; &nbsp; </td>
+            <td  style="border:none" class="tg-l711" colspan="10">&nbsp; &nbsp; &nbsp; &nbsp; ################################################################################################&nbsp; &nbsp; &nbsp; &nbsp; </td>
         </tr>
         <tr>
-            <td class="tg-c3ow" colspan="4">TYPE</td>
-            <td class="tg-c3ow" colspan="4">MEDICAL RECORD <br>OUT-PATIENT-DEPARTMENT</td>
-            <td class="tg-c3ow" colspan="2">OPD CASE NO. <br><?=$data['prints']->opd_case_number?></td>
+            <td style="border:none"  class="tg-c3ow" colspan="4">TYPE <br><?=$data['prints']->type?></td>
+            <td style="border:none"  class="tg-c3ow" colspan="4">MEDICAL RECORD <br>OUT-PATIENT-DEPARTMENT</td>
+            <td style="border:none"  class="tg-c3ow" colspan="2">OPD CASE NO. <br><?=$data['prints']->opd_case_number?></td>
         </tr>
         <tr>
             <td class="tg-us36" colspan="4">DATE AND TIME  <br><?=date(DATE_FORMAT,strtotime($data['prints']->date)).' - '.date('g i A',strtotime($data['prints']->time))?> </td>
@@ -53,10 +53,10 @@
             <td class="tg-us36">WEIGHT<br><?=$data['prints']->weight?></td>
         </tr>
         <tr>
-            <td class="tg-us36" colspan="10"><?=$data['prints']->impression?><br>IMPRESSIONS / DIAGNOSIS</td>
+            <td style="border:none" class="tg-us36" colspan="10"><?=$data['prints']->impression?><br>IMPRESSIONS / DIAGNOSIS</td>
         </tr>
         <tr>
-            <td class="tg-us36" colspan="10"><?=$data['prints']->treatment?><br>TREATMENT / MEDICINE</td>
+            <td style="border:none" class="tg-us36" colspan="10"><?=$data['prints']->treatment?><br>TREATMENT / MEDICINE</td>
         </tr>
         </table>
     </div>
