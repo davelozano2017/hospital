@@ -379,7 +379,7 @@ function InsertOrUpdateRooms() {
 
 function InsertOrUpdateAdmission() {
     var data = $('#formAdmission').serialize();
-    if( $('#principal_operation').val() == '') {
+    if($('#hospital_code').val() == '' || $('#medical_record_number').val() == '' || $('#admission_date').val() == '' || $('#admission_time').val() == '' || $('#admitting_personnel').val() == '') {
         $('#btn-admissions').html('Add In Patients <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
         notify('error','Please fill up all fields');
     } else {
@@ -496,7 +496,7 @@ function view_out_patients_by_surname(outpatients_id) {
             modal.find($('#ssurname')).val(data.surname);
             modal.find($('#sfirstname')).val(data.firstname);
             modal.find($('#smiddlename')).val(data.middlename);
-            modal.find($('#birthday')).val(data.birthday);
+            modal.find($('#sbirthday')).val(data.birthday);
             modal.find($('#sage')).val(data.age);
             modal.find($('#sgender')).val(data.gender);
             modal.find($('#spatient_address')).val(data.address);
@@ -557,6 +557,11 @@ function view_out_patients(outpatients_id) {
 function print_selected() {
     var admissions_id = $('#admissions_id').val();
     location.href= '../print/'+admissions_id;
+}
+
+function print_out_selected() {
+    var outpatients_id = $('#outpatients_id').val();
+    location.href= '../print_out_patient/'+outpatients_id;
 }
 
 function view_admissions(admissions_id) {

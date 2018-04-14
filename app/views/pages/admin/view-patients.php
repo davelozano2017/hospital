@@ -767,7 +767,33 @@
                                             </span>
                                         </div>
                                     </div>
+                                    
                                     <div class="clearfix"></div>
+
+                                <div class="col-sm-4">
+                                    <label for="">Type</label>
+                                    <div class="form-group">
+                                        <select readonly class="form-control" name="type" id="type">
+                                            <option value="New Patient">New Patient</option>
+                                            <option value="Revisit">Revisit</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="">Date</label>
+                                    <div class="form-group">
+                                        <input type="date" readonly name="date" id="date" ng-model="date" class="form-control" required>
+                                     
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <label for="">Time</label>
+                                    <div class="form-group">
+                                        <input type="time" readonly name="time" id="time" ng-model="time" class="form-control" required>
+                                    </div>
+                                </div>
                                     
 
                                     <div class="col-sm-12">
@@ -802,7 +828,7 @@
             </div>
 
             <div class="modal-footer">
-                <!-- <button type="submit" ng-disabled="formOutPatients.$invalid" id="btn-out-patients" name="btn-out-patients" onclick="InsertOrUpdateOutPatients()"  class="btn btn-primary"> <i class="icon-arrow-right14 position-right"></i></button> -->
+                <button type="submit" id="btn-print" name="btn-print" onclick="print_out_selected()"  class="btn btn-primary">  Print  <i class="icon-arrow-right14 position-right"></i></button>
             </div>
             </form>
         </div>

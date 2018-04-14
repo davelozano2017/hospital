@@ -103,7 +103,7 @@ class admin extends Controller {
     public function all_patients() {
         $data['token']        = $_SESSION['token'];
         $data['title']        = 'All Patients';
-        $data['outpatients']  = $this->model('account')->get_all_out_patients();
+        $data['outpatients']  = $this->model('account')->get_all_out_patients_by_name();
         $data['all_patients'] = $this->model('account')->get_all_patients();
         $data['rooms']        = $this->model('account')->get_all_rooms();
         $data['physicians']   = $this->model('account')->get_all_physicians();
@@ -208,7 +208,7 @@ class admin extends Controller {
         $discharged = array( 'from' => $from, 'to' => $to);
         $discharged_patients = $this->model('account')->get_all_discharged_patients($discharged);
 
-        $admitted_discharged = array( 'from' => $from);
+        $admitted_discharged = array( 'from' => $from, 'to' => $to);
         $total_admitted_discharged = $this->model('account')->get_all_admitted_discharged_patients($admitted_discharged);
 
         $outpatient_new = array( 'from' => $from, 'to' => $to);
@@ -218,6 +218,7 @@ class admin extends Controller {
         $all_patients = array('from' => $from,'to'=>$to);
         $total_all_patient = $this->model('account')->all_patients($all_patients);
         $total_all_patients = $total_all_patient + $total_out_patient_new + $total_out_patient_old;
+
         $jan_in = $this->model('account')->jan_in();
         $feb_in = $this->model('account')->feb_in();
         $mar_in = $this->model('account')->mar_in();
@@ -231,6 +232,45 @@ class admin extends Controller {
         $nov_in = $this->model('account')->nov_in();
         $dec_in = $this->model('account')->dec_in();
 
+        $jan_in_non = $this->model('account')->jan_in_non();
+        $feb_in_non = $this->model('account')->feb_in_non();
+        $mar_in_non = $this->model('account')->mar_in_non();
+        $apr_in_non = $this->model('account')->apr_in_non();
+        $may_in_non = $this->model('account')->may_in_non();
+        $jun_in_non = $this->model('account')->jun_in_non();
+        $jul_in_non = $this->model('account')->jul_in_non();
+        $aug_in_non = $this->model('account')->aug_in_non();
+        $sep_in_non = $this->model('account')->sep_in_non();
+        $oct_in_non = $this->model('account')->oct_in_non();
+        $nov_in_non = $this->model('account')->nov_in_non();
+        $dec_in_non = $this->model('account')->dec_in_non();
+
+        $jan_di  = $this->model('account')->jan_di();
+        $feb_di  = $this->model('account')->feb_di();
+        $mar_di  = $this->model('account')->mar_di();
+        $apr_di  = $this->model('account')->apr_di();
+        $may_di  = $this->model('account')->may_di();
+        $jun_di  = $this->model('account')->jun_di();
+        $jul_di  = $this->model('account')->jul_di();
+        $aug_di  = $this->model('account')->aug_di();
+        $sep_di  = $this->model('account')->sep_di();
+        $oct_di  = $this->model('account')->oct_di();
+        $nov_di  = $this->model('account')->nov_di();
+        $dec_di  = $this->model('account')->dec_di();
+
+        $jan_di_non  = $this->model('account')->jan_di_non();
+        $feb_di_non  = $this->model('account')->feb_di_non();
+        $mar_di_non  = $this->model('account')->mar_di_non();
+        $apr_di_non  = $this->model('account')->apr_di_non();
+        $may_di_non  = $this->model('account')->may_di_non();
+        $jun_di_non  = $this->model('account')->jun_di_non();
+        $jul_di_non  = $this->model('account')->jul_di_non();
+        $aug_di_non  = $this->model('account')->aug_di_non();
+        $sep_di_non  = $this->model('account')->sep_di_non();
+        $oct_di_non  = $this->model('account')->oct_di_non();
+        $nov_di_non  = $this->model('account')->nov_di_non();
+        $dec_di_non  = $this->model('account')->dec_di_non();
+        
         $jan_out_new = $this->model('account')->jan_out_new();
         $feb_out_new = $this->model('account')->feb_out_new();
         $mar_out_new = $this->model('account')->mar_out_new();
@@ -257,19 +297,6 @@ class admin extends Controller {
         $nov_out_revisit = $this->model('account')->nov_out_revisit();
         $dec_out_revisit = $this->model('account')->dec_out_revisit();
 
-        $jan_di  = $this->model('account')->jan_di();
-        $feb_di  = $this->model('account')->feb_di();
-        $mar_di  = $this->model('account')->mar_di();
-        $apr_di  = $this->model('account')->apr_di();
-        $may_di  = $this->model('account')->may_di();
-        $jun_di  = $this->model('account')->jun_di();
-        $jul_di  = $this->model('account')->jul_di();
-        $aug_di  = $this->model('account')->aug_di();
-        $sep_di  = $this->model('account')->sep_di();
-        $oct_di  = $this->model('account')->oct_di();
-        $nov_di  = $this->model('account')->nov_di();
-        $dec_di  = $this->model('account')->dec_di();
-
         $total_in = $jan_in + $feb_in + $mar_in + $apr_in + $may_in + $jun_in + $jul_in + $aug_in + $sep_in + $oct_in + $nov_in + $dec_in;
 
         $total_di = $jan_di + $feb_di + $mar_di + $apr_di + $may_di + $jun_di + $jul_di + $aug_di + $sep_di + $oct_di + $nov_di + $dec_di;
@@ -279,6 +306,32 @@ class admin extends Controller {
         $total_out_revisit = $jan_out_revisit + $feb_out_revisit + $mar_out_revisit + $apr_out_revisit + $may_out_revisit + $jun_out_revisit + $jul_out_revisit + $aug_out_revisit + $sep_out_revisit + $oct_out_revisit + $nov_out_revisit + $dec_out_revisit;
 
         $total_out = $total_out_new + $total_out_revisit;
+
+        $total_jan = $jan_in + $jan_in_non;
+        $total_feb = $feb_in + $feb_in_non;
+        $total_mar = $mar_in + $mar_in_non;
+        $total_apr = $apr_in + $apr_in_non;
+        $total_may = $may_in + $may_in_non;
+        $total_jun = $jun_in + $jun_in_non;
+        $total_jul = $jul_in + $jul_in_non;
+        $total_aug = $aug_in + $aug_in_non;
+        $total_sep = $sep_in + $sep_in_non;
+        $total_oct = $oct_in + $oct_in_non;
+        $total_nov = $nov_in + $nov_in_non;
+        $total_dec = $dec_in + $dec_in_non;
+
+        $total_jan_di = $jan_di + $jan_di_non;
+        $total_feb_di = $feb_di + $feb_di_non;
+        $total_mar_di = $mar_di + $mar_di_non;
+        $total_apr_di = $apr_di + $apr_di_non;
+        $total_may_di = $may_di + $may_di_non;
+        $total_jun_di = $jun_di + $jun_di_non;
+        $total_jul_di = $jul_di + $jul_di_non;
+        $total_aug_di = $aug_di + $aug_di_non;
+        $total_sep_di = $sep_di + $sep_di_non;
+        $total_oct_di = $oct_di + $oct_di_non;
+        $total_nov_di = $nov_di + $nov_di_non;
+        $total_dec_di = $dec_di + $dec_di_non;
         
         $total_jan_out = $jan_out_new + $jan_out_revisit;
         $total_feb_out = $feb_out_new + $feb_out_revisit;
@@ -292,6 +345,8 @@ class admin extends Controller {
         $total_oct_out = $oct_out_new + $oct_out_revisit;
         $total_nov_out = $nov_out_new + $nov_out_revisit;
         $total_dec_out = $dec_out_new + $dec_out_revisit;
+        
+        $totalt = $total_inpatients + $discharged_patients;
         
 
         $from1 = date('F d, Y',strtotime($from));
@@ -345,12 +400,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">JAN</td>
           <td  style="border:1px solid #000">$jan_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$jan_in</td>
+          <td  style="border:1px solid #000">$jan_in_non</td>
+          <td  style="border:1px solid #000">$total_jan</td>
           <td  style="border:1px solid #000">JAN</td>
           <td  style="border:1px solid #000">$jan_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$jan_di</td>
+          <td  style="border:1px solid #000">$jan_di_non</td>
+          <td  style="border:1px solid #000">$total_jan_di</td>
           <td  style="border:1px solid #000">JAN</td>
           <td  style="border:1px solid #000">$jan_out_new</td>
           <td  style="border:1px solid #000">$jan_out_revisit</td>
@@ -359,12 +414,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">FEB</td>
           <td  style="border:1px solid #000">$feb_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$feb_in</td>
+          <td  style="border:1px solid #000">$feb_in_non</td>
+          <td  style="border:1px solid #000">$total_feb</td>
           <td  style="border:1px solid #000">FEB</td>
           <td  style="border:1px solid #000">$feb_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$feb_di</td>
+          <td  style="border:1px solid #000">$feb_di_non</td>
+          <td  style="border:1px solid #000">$total_feb_di</td>
           <td  style="border:1px solid #000">FEB</td>
           <td  style="border:1px solid #000">$feb_out_new</td>
           <td  style="border:1px solid #000">$feb_out_revisit</td>
@@ -373,12 +428,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">MAR</td>
           <td  style="border:1px solid #000">$mar_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$mar_in</td>
+          <td  style="border:1px solid #000">$mar_in_non</td>
+          <td  style="border:1px solid #000">$total_mar</td>
           <td  style="border:1px solid #000">MAR</td>
           <td  style="border:1px solid #000">$mar_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$mar_di</td>
+          <td  style="border:1px solid #000">$mar_di_non</td>
+          <td  style="border:1px solid #000">$total_mar_di</td>
           <td  style="border:1px solid #000">MAR</td>
           <td  style="border:1px solid #000">$mar_out_new</td>
           <td  style="border:1px solid #000">$mar_out_revisit</td>
@@ -387,12 +442,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">APR</td>
           <td  style="border:1px solid #000">$apr_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$apr_in</td>
+          <td  style="border:1px solid #000">$apr_in_non</td>
+          <td  style="border:1px solid #000">$total_apr</td>
           <td  style="border:1px solid #000">APR</td>
           <td  style="border:1px solid #000">$apr_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$apr_di</td>
+          <td  style="border:1px solid #000">$apr_di_non</td>
+          <td  style="border:1px solid #000">$total_apr_di</td>
           <td  style="border:1px solid #000">APR</td>
           <td  style="border:1px solid #000">$apr_out_new</td>
           <td  style="border:1px solid #000">$apr_out_revisit</td>
@@ -401,12 +456,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">MAY</td>
           <td  style="border:1px solid #000">$may_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$may_in</td>
+          <td  style="border:1px solid #000">$may_in_non</td>
+          <td  style="border:1px solid #000">$total_may</td>
           <td  style="border:1px solid #000">MAY</td>
           <td  style="border:1px solid #000">$may_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$may_di</td>
+          <td  style="border:1px solid #000">$may_di_non</td>
+          <td  style="border:1px solid #000">$total_may_di</td>
           <td  style="border:1px solid #000">MAY</td>
           <td  style="border:1px solid #000">$may_out_new</td>
           <td  style="border:1px solid #000">$may_out_revisit</td>
@@ -415,12 +470,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">JUN</td>
           <td  style="border:1px solid #000">$jun_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$jun_in</td>
+          <td  style="border:1px solid #000">$jun_in_non</td>
+          <td  style="border:1px solid #000">$total_jun</td>
           <td  style="border:1px solid #000">JUN</td>
           <td  style="border:1px solid #000">$jun_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$jun_di</td>
+          <td  style="border:1px solid #000">$jun_di_non</td>
+          <td  style="border:1px solid #000">$total_jun_di</td>
           <td  style="border:1px solid #000">JUN</td>
           <td  style="border:1px solid #000">$jun_out_new</td>
           <td  style="border:1px solid #000">$jun_out_revisit</td>
@@ -429,12 +484,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">JUL</td>
           <td  style="border:1px solid #000">$jul_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$jul_in</td>
+          <td  style="border:1px solid #000">$jul_in_non</td>
+          <td  style="border:1px solid #000">$total_jul</td>
           <td  style="border:1px solid #000">JUL</td>
           <td  style="border:1px solid #000">$jul_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$jul_di</td>
+          <td  style="border:1px solid #000">$jul_di_non</td>
+          <td  style="border:1px solid #000">$total_jul_di</td>
           <td  style="border:1px solid #000">JUL</td>
           <td  style="border:1px solid #000">$jul_out_new</td>
           <td  style="border:1px solid #000">$jul_out_revisit</td>
@@ -443,12 +498,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">AUG</td>
           <td  style="border:1px solid #000">$aug_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$aug_in</td>
+          <td  style="border:1px solid #000">$aug_in_non</td>
+          <td  style="border:1px solid #000">$total_aug</td>
           <td  style="border:1px solid #000">AUG</td>
           <td  style="border:1px solid #000">$aug_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$aug_di</td>
+          <td  style="border:1px solid #000">$aug_di_non</td>
+          <td  style="border:1px solid #000">$total_aug_di</td>
           <td  style="border:1px solid #000">AUG</td>
           <td  style="border:1px solid #000">$aug_out_new</td>
           <td  style="border:1px solid #000">$aug_out_revisit</td>
@@ -457,12 +512,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">SEPT</td>
           <td  style="border:1px solid #000">$sep_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$sep_in</td>
+          <td  style="border:1px solid #000">$sep_in_non</td>
+          <td  style="border:1px solid #000">$total_sep</td>
           <td  style="border:1px solid #000">SEPT</td>
           <td  style="border:1px solid #000">$sep_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$sep_di</td>
+          <td  style="border:1px solid #000">$sep_di_non</td>
+          <td  style="border:1px solid #000">$total_sep_di</td>
           <td  style="border:1px solid #000">SEPT</td>
           <td  style="border:1px solid #000">$sep_out_new</td>
           <td  style="border:1px solid #000">$sep_out_revisit</td>
@@ -471,12 +526,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">OCT</td>
           <td  style="border:1px solid #000">$oct_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$oct_in</td>
+          <td  style="border:1px solid #000">$oct_in_non</td>
+          <td  style="border:1px solid #000">$total_oct</td>
           <td  style="border:1px solid #000">OCT</td>
           <td  style="border:1px solid #000">$oct_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$oct_di</td>
+          <td  style="border:1px solid #000">$oct_di_non</td>
+          <td  style="border:1px solid #000">$total_oct_di</td>
           <td  style="border:1px solid #000">OCT</td>
           <td  style="border:1px solid #000">$oct_out_new</td>
           <td  style="border:1px solid #000">$oct_out_revisit</td>
@@ -485,12 +540,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">NOV</td>
           <td  style="border:1px solid #000">$nov_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$nov_in</td>
+          <td  style="border:1px solid #000">$nov_in_non</td>
+          <td  style="border:1px solid #000">$total_nov</td>
           <td  style="border:1px solid #000">NOV</td>
           <td  style="border:1px solid #000">$nov_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$nov_di</td>
+          <td  style="border:1px solid #000">$nov_di_non</td>
+          <td  style="border:1px solid #000">$total_nov_di</td>
           <td  style="border:1px solid #000">NOV</td>
           <td  style="border:1px solid #000">$nov_out_new</td>
           <td  style="border:1px solid #000">$nov_out_revisit</td>
@@ -499,12 +554,12 @@ class admin extends Controller {
         <tr>
           <td  style="border:1px solid #000">DEC</td>
           <td  style="border:1px solid #000">$dec_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$dec_in</td>
+          <td  style="border:1px solid #000">$dec_in_non</td>
+          <td  style="border:1px solid #000">$total_dec</td>
           <td  style="border:1px solid #000">DEC</td>
           <td  style="border:1px solid #000">$dec_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$dec_di</td>
+          <td  style="border:1px solid #000">$dec_di_non</td>
+          <td  style="border:1px solid #000">$total_dec_di</td>
           <td  style="border:1px solid #000">DEC</td>
           <td  style="border:1px solid #000">$dec_out_new</td>
           <td  style="border:1px solid #000">$dec_out_revisit</td>
@@ -540,6 +595,11 @@ $tbls = <<<EOD
 </tr>
 <tr>
 <td colspan="5" style="border:1px solid #000">Total Number of Inpatients</td>
+<td colspan="3" style="border:1px solid #000">$totalt</td>
+</tr>
+
+<tr>
+<td colspan="5" style="border:1px solid #000">Total Number of admitted patient </td>
 <td colspan="3" style="border:1px solid #000">$total_inpatients</td>
 </tr>
 
@@ -626,6 +686,11 @@ $pdf->Output();
     public function print($admissions_id) {
         $data['prints'] = $this->model('account')->print_patient_information($admissions_id);
         $this->view('pages/admin/print',$data);
+    }
+
+    public function print_out_patient($outpatients_id) {
+        $data['prints'] = $this->model('account')->print_out_patient_information($outpatients_id);
+        $this->view('pages/admin/print_out_patient',$data);
     }
 
     public function logs() {
