@@ -201,7 +201,7 @@
                                 <div class="clearfix"></div>
 
                                 <div class="col-sm-2">
-                                    <label for="">HP</label>
+                                    <label for="">BP</label>
                                     <div class="form-group">
                                         <input type="text" name="hp" id="hp" ng-model="hp" class="form-control" required>
                                         <span ng-messages="formOutPatients.hp.$error" ng-if="formOutPatients.hp.$dirty">
@@ -286,20 +286,14 @@
                                 <div class="col-sm-12">
                                     <label for="">Impression / Diagnosis</label>
                                     <div class="form-group">
-                                        <input type="text" name="impression" id="impression" ng-model="impression" class="form-control" required>
-                                        <span ng-messages="formOutPatients.impression.$error" ng-if="formOutPatients.impression.$dirty">
-                                            <strong ng-message="required" class="text-danger">This field is required.</strong>
-                                        </span>
+                                        <input type="text" name="impression" id="impression" ng-model="impression" class="form-control" >
                                     </div>
                                 </div>
 
                                 <div class="col-sm-12">
                                     <label for="">Treatment / Medicine</label>
                                     <div class="form-group">
-                                        <input type="text" name="treatment" id="treatment" ng-model="treatment" class="form-control" required>
-                                        <span ng-messages="formOutPatients.treatment.$error" ng-if="formOutPatients.treatment.$dirty">
-                                            <strong ng-message="required" class="text-danger">This field is required.</strong>
-                                        </span>
+                                        <input type="text" name="treatment" id="treatment" ng-model="treatment" class="form-control" >
                                     </div>
                                 </div>
                                 
