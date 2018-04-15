@@ -134,7 +134,15 @@ class staff extends Controller {
 
         $total_in = $jan_in + $feb_in + $mar_in + $apr_in + $may_in + $jun_in + $jul_in + $aug_in + $sep_in + $oct_in + $nov_in + $dec_in;
 
+        $total_in_non = $jan_in_non + $feb_in_non + $mar_in_non + $apr_in_non + $may_in_non + $jun_in_non + $jul_in_non + $aug_in_non + $sep_in_non + $oct_in_non + $nov_in_non + $dec_in_non;
+        
+        $total_inn = $total_in + $total_in_non;
+        
         $total_di = $jan_di + $feb_di + $mar_di + $apr_di + $may_di + $jun_di + $jul_di + $aug_di + $sep_di + $oct_di + $nov_di + $dec_di;
+
+        $total_di_non = $jan_di_non + $feb_di_non + $mar_di_non + $apr_di_non + $may_di_non + $jun_di_non + $jul_di_non + $aug_di_non + $sep_di_non + $oct_di_non + $nov_di_non + $dec_di_non;
+
+        $total_dii = $total_di + $total_di_non;
 
         $total_out_new = $jan_out_new + $feb_out_new + $mar_out_new + $apr_out_new + $may_out_new + $jun_out_new + $jul_out_new + $aug_out_new + $sep_out_new + $oct_out_new + $nov_out_new + $dec_out_new;
 
@@ -404,12 +412,12 @@ class staff extends Controller {
         <tr>
           <td  style="border:1px solid #000">TOTAL</td>
           <td  style="border:1px solid #000">$total_in</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$total_in</td>
+          <td  style="border:1px solid #000">$total_in_non</td>
+          <td  style="border:1px solid #000">$total_inn</td>
           <td  style="border:1px solid #000">TOTAL</td>
           <td  style="border:1px solid #000">$total_di</td>
-          <td  style="border:1px solid #000">0</td>
-          <td  style="border:1px solid #000">$total_di</td>
+          <td  style="border:1px solid #000">$total_di_non</td>
+          <td  style="border:1px solid #000">$total_dii</td>
           <td  style="border:1px solid #000">TOTAL</td>
           <td  style="border:1px solid #000">$total_out_new</td>
           <td  style="border:1px solid #000">$total_out_revisit</td>
@@ -479,7 +487,6 @@ $pdf->writeHTML($tbls, true, false, false, false, '');
 
 $pdf->Output(); 
 }
-
 
     public function statistical(){
         $data['title']       = 'Statistical';
