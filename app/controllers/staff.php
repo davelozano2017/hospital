@@ -588,7 +588,7 @@ $pdf->Output();
     public function all_patients() {
         $data['token']        = $_SESSION['token'];
         $data['title']        = 'All Patients';
-        $data['outpatients']  = $this->model('account')->get_all_out_patients();
+        $data['outpatients']  = $this->model('account')->get_all_out_patients_by_name();
         $data['all_patients'] = $this->model('account')->get_all_patients();
         $data['rooms']        = $this->model('account')->get_all_rooms();
         $data['physicians']   = $this->model('account')->get_all_physicians();

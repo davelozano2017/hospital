@@ -210,6 +210,7 @@ class doctor extends Controller {
                 'hp'               => $this->input->post('hp'),
                 'pulse_rate'       => $this->input->post('pulse_rate'),
                 'respiratory_rate' => $this->input->post('respiratory_rate'),
+                'type'             => $this->input->post('type'),
                 'temperature'      => $this->input->post('temperature'),
                 'weight'           => $this->input->post('weight'),
                 'impression'       => $this->input->post('impression'),
