@@ -557,7 +557,7 @@ class account extends Model {
     public function get_all_inpatients($data) {
         $from = $data['from'];
         $to = $data['to'];
-        $query = $this->db->query("SELECT * FROM admissions WHERE admission_date BETWEEN '$from' AND '$to'");
+        $query = $this->db->query("SELECT * FROM admissions WHERE admission_date BETWEEN '$from' AND '$to' AND discharged_date = '' AND discharged_time = '' ");
         return $query->num_rows;
     }
 
