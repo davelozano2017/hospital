@@ -64,6 +64,7 @@
                 <li>
                     <a href="#"><i class="icon-cog3"></i> <span>Control Panel</span></a>
                     <ul>
+                        <li class="<?= $data['title'] == 'Diseases' ? 'active':'';?>"><a href="<?=URL?>admin/diseases">Diseases</a></li>
                         <li class="<?= $data['title'] == 'Logs' ? 'active':'';?>"><a href="<?=URL?>admin/logs">Logs</a></li>
                         <li class="<?= $data['title'] == 'Room' ? 'active':'';?>"><a href="<?=URL?>admin/rooms">Rooms</a></li>
                     </ul>

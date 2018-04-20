@@ -342,13 +342,12 @@ function out_patient_modal() {
     modal.find($('#btn-out-patients')).html('Add Out Patient <i class="icon-arrow-right14 position-right"></i>').attr('disabled',true);
 }
 
-
-
-function room_modal() {
-    var modal = $('#rooms-modal');
+function diseases_modal() {
+    var modal = $('#diseases-modal');
     modal.modal({ backdrop: 'static', keyboard: false});
-    $('#formRoom')[0].reset();
-    modal.find($('#btn-rooms')).html('Add Room <i class="icon-arrow-right14 position-right"></i>').attr('disabled',true);
+    $('#formDiseases')[0].reset();
+    $('#btn-delete-diseases').AddClass('hidden');
+    modal.find($('#btn-diseases')).html('Add Diseases <i class="icon-arrow-right14 position-right"></i>').attr('disabled',true);
 }
 
 function staff_modal() {
@@ -373,6 +372,25 @@ function InsertOrUpdateRooms() {
             var content = data.type == 'info' ? 'Save Changes' : 'Add Room';
             $('#btn-rooms').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
             $('#rooms-modal').modal('hide');
+        }
+    })
+}
+
+function InsertOrUpdateDiseases() {
+    var data = $('#formDiseases').serialize();
+    $.ajax({
+        type : 'POST',
+        url : url + 'InsertOrUpdateDiseases',
+        data : data,
+        dataType : 'json',
+        beforeSend:function() {
+            $('#btn-diseases').html(' <i class="icon-spinner2 spinner"></i>').attr('disabled',true);
+        },
+        success:function(data) {
+            data.success === true ? notify(data.type,data.message) : notify(data.type,data.message);
+            var content = data.type == 'info' ? 'Save Changes' : 'Add Diseases';
+            $('#btn-diseases').html(content +' <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
+            $('#diseases-modal').modal('hide');
         }
     })
 }
@@ -703,22 +721,21 @@ function view_patients(admissions_id) {
     })
 }
 
-function view_rooms(rooms_id) {
-    var modal = $('#rooms-modal');
+function view_diseases(diseases_id) {
+    var modal = $('#diseases-modal');
     $.ajax({
         type : 'POST',
-        url : url + 'get_rooms_by_id',
+        url : url + 'get_diseases_by_id',
         data : {
-            rooms_id : rooms_id
+            diseases_id : diseases_id
         },
         dataType : 'json',
         success:function(data) {
             modal.modal({ backdrop: 'static', keyboard: false});
-            modal.find($('#rooms_id')).val(rooms_id);
-            modal.find($('#room_type')).val(data.room_type);
-            modal.find($('#floor')).val(data.floor);
-            modal.find($('#room_number')).val(data.room_number);
-            $('#btn-rooms').html('Save Changes <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
+            modal.find($('#diseases_id')).val(diseases_id);
+            modal.find($('#diseases')).val(data.diseases);
+            $('#btn-delete-diseases').removeClass('hidden');
+            $('#btn-diseases').html('Save Changes <i class="icon-arrow-right14 position-right"></i>').attr('disabled',false);
         }
     })
 }
@@ -733,6 +750,24 @@ function delete_rooms() {
         dataType : 'json',
         beforeSend:function(){
             $('#btn-delete-rooms').html(' <i class="icon-spinner2 spinner"></i>').attr('disabled',true);
+        },
+        success:function(data) {
+            modal.modal('hide');
+            notify(data.type,data.message);
+        }
+    })
+}
+
+function delete_diseases() {
+    var data = $('#formDiseases').serialize();
+    var modal = $('#diseases-modal');
+    $.ajax({
+        type : 'POST',
+        url : url + 'delete_diseases_by_id',
+        data : data,
+        dataType : 'json',
+        beforeSend:function(){
+            $('#btn-delete-diseases').html(' <i class="icon-spinner2 spinner"></i>').attr('disabled',true);
         },
         success:function(data) {
             modal.modal('hide');

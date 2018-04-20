@@ -5,6 +5,8 @@ class account extends Model {
         parent::__construct();
     }
 
+  
+
     public function filter_disposition($data) {
         $from = $data['from'];
         $to = $data['to'];
@@ -815,6 +817,21 @@ class account extends Model {
         return $query->num_rows;
     }
 
+      public function view_diseases() {
+        $query =  $this->db->query("SELECT * FROM admissions");
+        return $query;
+    }
+
+    public function get_all_diseases() {
+        $query = $this->db->query("SELECT * FROM diseases");
+        return $query;
+    }
+
+    public function get_diseases() {
+        $query = $this->db->query("SELECT * FROM diseases");
+        return $query->num_rows;
+    }
+
     public function total_out_patients() {
         $query = $this->db->query("SELECT * FROM medical_record_out_patient");
         return $query->num_rows;
@@ -952,6 +969,11 @@ class account extends Model {
         echo json_encode($query->fetch_object());
     }
 
+    public function get_diseases_by_id($diseases_id) {
+        $query = $this->db->query("SELECT * FROM diseases WHERE diseases_id = $diseases_id");
+        echo json_encode($query->fetch_object());
+    }
+
     public function rooms($data) {
         $rooms_id    = $data['rooms_id'];
         $room_type   = $data['room_type'];
@@ -971,9 +993,31 @@ class account extends Model {
         }
     }
 
+    public function diseases($data) {
+        $diseases_id = $data['diseases_id'];
+        $diseases    = $data['diseases'];
+        if(empty($diseases_id)) {
+            $check       = $this->db->query("SELECT * FROM diseases WHERE diseases = '$diseases'");
+            if($check->num_rows > 0) {
+                notify('error','Disease already exist.',false);
+            } else {
+                $query = $this->db->query("INSERT INTO diseases (diseases) VALUES ('$diseases')");
+                notify('success','New disease has been added.',true);
+            }
+        } else {
+            $query = $this->db->query("UPDATE diseases SET diseases = '$diseases' WHERE diseases_id = $diseases_id");
+            notify('info','Data has been changed.',true);
+        }
+    }
+
     public function delete_rooms_by_id($rooms_id) {
         $query = $this->db->query("DELETE FROM rooms WHERE rooms_id = $rooms_id");
         notify('info','Room has been deleted',true);
+    }
+
+    public function delete_diseases_by_id($diseases_id) {
+        $query = $this->db->query("DELETE FROM diseases WHERE diseases_id = $diseases_id");
+        notify('info','Disease has been deleted',true);
     }
     
     public function countries() {
@@ -1030,5 +1074,3 @@ class account extends Model {
         $query = $this->db->real_escape_string(htmlentities($_POST[$data]));
         return $query;
     }
-
-}

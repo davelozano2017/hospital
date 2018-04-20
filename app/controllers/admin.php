@@ -49,6 +49,19 @@ class admin extends Controller {
         $this->view('components/scripts',$data);
     }
 
+    public function diseases() {
+        $data['token']    = $_SESSION['token'];
+        $data['title']    = 'Diseases';
+        $data['user']     = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['diseases'] = $this->model('account')->get_all_diseases();
+        $this->view('components/header',$data);
+        $this->view('components/top-bar',$data);
+        $this->view('components/sidebar',$data);
+        $this->view('pages/admin/diseases',$data);
+        $this->view('components/footer',$data);
+        $this->view('components/scripts',$data);
+    }
+
     public function password() {
         $data['token'] = $_SESSION['token'];
         $data['title'] = 'Profile';
@@ -174,6 +187,7 @@ class admin extends Controller {
         $data['physicians']  = $this->model('account')->get_all_physicians();
         $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
         $data['nationality'] = $this->model('account')->countries();
+        $data['diseases']    = $this->model('account')->get_all_diseases();
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);
@@ -218,7 +232,9 @@ class admin extends Controller {
         $all_patients = array('from' => $from,'to'=>$to);
         $total_all_patient = $this->model('account')->all_patients($all_patients);
         $total_all_patients = $total_all_patient + $total_out_patient_new + $total_out_patient_old;
-
+        
+        $diseases = $this->model('account')->get_diseases();
+        
         $jan_in = $this->model('account')->jan_in();
         $feb_in = $this->model('account')->feb_in();
         $mar_in = $this->model('account')->mar_in();
@@ -665,6 +681,7 @@ $pdf->Output();
         $data['physicians']  = $this->model('account')->get_all_physicians();
         $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
         $data['nationality'] = $this->model('account')->countries();
+        $data['diseases']    = $this->model('account')->get_all_diseases();
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);
@@ -739,6 +756,16 @@ $pdf->Output();
                 'username'    => $this->input->post('username')
             );
             $this->model('account')->update_profile($data);
+        }
+    }
+
+    public function InsertOrUpdateDiseases() {
+        if(isset($_SESSION['token']) == $this->input->post('token')) {
+            $data = array(
+                'diseases_id' => $this->input->post('diseases_id'),
+                'diseases'    => $this->input->post('diseases'),
+            );
+            $this->model('account')->diseases($data);
         }
     }
 
@@ -886,6 +913,11 @@ $pdf->Output();
         $this->model('account')->get_rooms_by_id($rooms_id);
     }
 
+    public function get_diseases_by_id() {
+        $diseases_id = $this->input->post('diseases_id');
+        $this->model('account')->get_diseases_by_id($diseases_id);
+    }
+
     public function InsertOrUpdateRooms() {
         if(isset($_SESSION['token']) == $this->input->post('token')) {
             $data = array(
@@ -905,8 +937,13 @@ $pdf->Output();
         }
     }
 
-    
-    
+    public function delete_diseases_by_id() {
+        if(isset($_SESSION['token']) == $this->input->post('token')) {
+            $diseases_id = $this->input->post('diseases_id');
+            $this->model('account')->delete_diseases_by_id($diseases_id);
+        }
+    }
+
     public function update_password() {
         if(isset($_SESSION['token']) == $this->input->post('token')) {
             $data = array(
