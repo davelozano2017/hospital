@@ -682,6 +682,7 @@ class account extends Model {
         header('Content-type: application/json');
         echo json_encode($jsonArray);
     }
+    
 
     public function get_user_information($account_id) {
         $query = $this->db->query("SELECT * FROM accounts WHERE accounts_id = $account_id");
@@ -885,7 +886,7 @@ class account extends Model {
 
     public function get_all_admissions_by_doctor($status) {
         $date_today = date('Y-m-d');
-        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.date_today = '$date_today' AND a.status = $status AND accounts_id = ".$_SESSION['id']);
+        $query = $this->db->query("SELECT * FROM admissions as a INNER JOIN accounts as ac ON a.attending_physicians = ac.accounts_id INNER JOIN rooms as r ON a.room = r.rooms_id WHERE a.discharged_date = '' AND a.status = $status AND accounts_id = ".$_SESSION['id']);
         return $query;
     }
 

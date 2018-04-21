@@ -40,7 +40,7 @@
                         <th>Hospital Code</th>
                         <th>Physicians</th>
                         <th>Room</th>
-                        <td>Date</td>
+                        <th>Date</th>
                         <td style="width:1px" class="text-center">Action</td>
                         </tr>
                 </thead>
@@ -66,8 +66,8 @@
                         <th>Name</th>
                         <th>Hospital Code</th>
                         <th>Room</th>
-                        <td style="width:1px"></td>
-                        <td style="width:1px" class="text-center">Action</td>
+                        <th style="width:1px"></th>
+                        <th style="width:1px" class="text-center">Action</th>
                         </tr>
                 </thead>
                 <tbody>
@@ -490,6 +490,7 @@
                                 <div class="col-sm-4">
                                     <label for="">Philhealth</label>
                                     <select name="philhealth" id="philhealth" class="form-control">
+                                        <option value="None">None</option>
                                         <option value="Formal (GSIS/PS)">Formal (GSIS/PS)</option>
                                         <option value="Informal/IPP">Informal/IPP</option>
                                         <option value="Lifetime">Lifetime</option>
@@ -580,6 +581,7 @@
                                 <div class="col-sm-3">
                                     <label for="">Disposition</label>
                                     <select name="disposition" id="disposition" class="form-control">
+                                    <option value="Unknown">Unknown</option>
                                         <option value="Discharged">Discharged</option>
                                         <option value="Transferred">Transferred</option>
                                         <option value="Absconded">Absconded</option>
@@ -589,6 +591,7 @@
                                 <div class="col-sm-4">
                                     <label for="">Outcome</label>
                                     <select name="outcome" id="outcome" class="form-control">
+                                        <option value="Unknown">Unknown</option>
                                         <option value="Recovered">Recovered</option>
                                         <option value="Died">Died</option>
                                         <option value="48 Hours">48 Hours</option>
