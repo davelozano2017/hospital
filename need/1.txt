@@ -1,0 +1,17 @@
+*omit DESCRIPTION in SECTION FORM ( done )
+
+*SUBJECT - /subject code -/title ( done )
+
+*if the year level & section was chosen, automatically retrieve the list of subjects
+
+*if the student was assigned to a particular section omit 
+him/her from the selection list ( done )
+
+*error trapping in set of dates in EVENTS
+
+*produce the FORM 137 (retain the records of prev. school years) all grades
+will be automatically update the form 137
+
+*include the awards of the students in PARENT MODULE.
+
+*School year
