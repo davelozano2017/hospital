@@ -286,7 +286,12 @@
                                 <div class="col-sm-12">
                                     <label for="">Impression / Diagnosis</label>
                                     <div class="form-group">
-                                        <input type="text" name="impression" id="impression" ng-model="impression" class="form-control" >
+                                        <select class="form-control select2" name="impression" id="impression">
+                                                <option value="" selected>Select Diagnosis</option>
+                                            <?php foreach($data['diseases'] as $dis) { ?>
+                                                <option value="<?=$dis['diseases']?>"><?=$dis['diseases']?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                 </div>
 

@@ -5,13 +5,19 @@ class account extends Model {
         parent::__construct();
     }
 
-  
+    public function filter_outcome($data) {
+        $from = $data['from'];
+        $to = $data['to'];
+        $outcome = $data['outcome'];
+        $query = $this->db->query("SELECT * FROM admissions WHERE outcome = '$outcome'");
+        return $query->num_rows;
+    }
 
     public function filter_disposition($data) {
         $from = $data['from'];
         $to = $data['to'];
         $disposition = $data['disposition'];
-        $query = $this->db->query("SELECT * FROM admissions WHERE admission_date > '$from' AND admission_date <= '$to' AND disposition = '$disposition'");
+        $query = $this->db->query("SELECT * FROM admissions WHERE admission_date BETWEEN '$from' AND '$to' AND disposition = '$disposition'");
         return $query->num_rows;
     }
 
@@ -655,8 +661,6 @@ class account extends Model {
         }
     }
 
-    
-
     public function chart_by_doctor($id) {
         $result = $this->db->query("SELECT *, COUNT(*) as c  FROM admissions WHERE status = 0 AND attending_physicians = $id GROUP BY admission_date");
         $jsonArray = array();
@@ -670,8 +674,21 @@ class account extends Model {
         echo json_encode($jsonArray);
     }
 
+    public function chart_by_doctor_discharged($id) {
+        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM admissions WHERE status = 1 AND attending_physicians = $id GROUP BY admission_date");
+        $jsonArray = array();
+        foreach($result as $row) {
+            $jsonArrayItem = array();
+            $jsonArrayItem['label'] = date('M d, Y',strtotime($row['admission_date']));
+            $jsonArrayItem['value'] = $row['c'];
+            array_push($jsonArray, $jsonArrayItem);
+        }    
+        header('Content-type: application/json');
+        echo json_encode($jsonArray);
+    }
+
     public function chart_out_patients_by_doctor($id) {
-        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM medical_record_out_patient status = 1 AND WHERE physicians_id = $id GROUP BY date");
+        $result = $this->db->query("SELECT *, COUNT(*) as c  FROM medical_record_out_patient WHERE physicians_id = $id GROUP BY date");
         $jsonArray = array();
         foreach($result as $row) {
             $jsonArrayItem = array();

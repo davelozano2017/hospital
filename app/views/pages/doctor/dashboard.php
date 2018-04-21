@@ -66,7 +66,7 @@
                                 <div id="chart-container-doctor-discharged"></div>
                             </div>
 
-                            <div class="tab-pane" id="basic-tab2">
+                            <div class="tab-pane" id="basic-tab3">
                                 <div id="chart-container-out-doctor"></div>
                             </div>
                         </div>

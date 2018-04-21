@@ -27,9 +27,6 @@ class staff extends Controller {
         $out_patients = array('from' => $from,'to'=>$to);
         $all_out_patients = $this->model('account')->all_out_patients($out_patients);
         
-        
-        $transferred = array( 'from' => $from, 'to' => $to, 'disposition' => 'Transferred' );
-        $transferred_patients = $this->model('account')->filter_disposition($transferred);
 
         $admission_type_new = array( 'from' => $from, 'to' => $to, 'admission_type' => 'New');
         $total_admission_type_new = $this->model('account')->filter_admission($admission_type_new);
@@ -37,8 +34,8 @@ class staff extends Controller {
         $admission_type_old = array( 'from' => $from, 'to' => $to, 'admission_type' => 'Old');
         $total_admission_type_old = $this->model('account')->filter_admission($admission_type_old);
 
-        $deaths = array( 'from' => $from, 'to' => $to, 'disposition' => 'Deaths' );
-        $deaths_patients = $this->model('account')->filter_disposition($deaths);
+        $deaths = array( 'from' => $from, 'to' => $to, 'outcome' => 'Died' );
+        $deaths_patients = $this->model('account')->filter_outcome($deaths);
 
         $discharged = array( 'from' => $from, 'to' => $to);
         $discharged_patients = $this->model('account')->get_all_discharged_patients($discharged);
@@ -53,7 +50,9 @@ class staff extends Controller {
         $all_patients = array('from' => $from,'to'=>$to);
         $total_all_patient = $this->model('account')->all_patients($all_patients);
         $total_all_patients = $total_all_patient + $total_out_patient_new + $total_out_patient_old;
-
+        
+        $filter_diseases = $this->model('account')->view_diseases($all_patients);
+        
         $jan_in = $this->model('account')->jan_in();
         $feb_in = $this->model('account')->feb_in();
         $mar_in = $this->model('account')->mar_in();
@@ -202,6 +201,7 @@ class staff extends Controller {
         // 1 = end line
         $pdf->SetFont('helvetica','B',10);
         $pdf->cell(190,5,'Republic of the Philippines',0,1,'C');
+        $pdf->Image('http://localhost/hospital/assets/images/logo.png', 20, 12, 20, 20, '', '', '', true, 1000);
         $pdf->SetFont('helvetica','B',13);
         $pdf->cell(190,5,'OSPITAL NG TAGAYTAY',0,1,'C');
         $pdf->SetFont('helvetica','B',10);
@@ -427,14 +427,29 @@ class staff extends Controller {
 EOD;
 
 $pdf->writeHTML($tbl, true, false, false, false, '');
-     
+
+
+        
 $pdf->SetFont('helvetica','B',10);
-$pdf->cell(80,8,'B. Summary',0,1);
+$pdf->cell(80,8,'B. List Of Diagnosis',0,1);
+
+$pdf->cell(170,8,'Diagnosis',1,0);
+$pdf->cell(20,8,'Total',1,1);
+foreach($filter_diseases as $row) {
+    $pdf->cell(170,8,$row['final_diagnosis'],1,0);
+    $pdf->cell(20,8,$this->model('account')->count_diseases($row['final_diagnosis']),1,1);
+}
+
+
+
+
+$pdf->SetFont('helvetica','B',10);
+$pdf->cell(80,8,'C. Summary',0,1);
 $tbls = <<<EOD
 <table style="border:1px solid #000">
 <tr>
-  <th  style="border:1px solid #000" colspan="5"></th>
-  <th  style="border:1px solid #000" colspan="3">Numbers</th>
+<th  style="border:1px solid #000" colspan="5"></th>
+<th  style="border:1px solid #000" colspan="3">Numbers</th>
 </tr>
 <tr>
 <td colspan="5" style="border:1px solid #000">Total Number of Inpatients</td>
@@ -483,7 +498,6 @@ $tbls = <<<EOD
 </table>
 EOD;
 $pdf->writeHTML($tbls, true, false, false, false, '');
-
 
 $pdf->Output(); 
 }
@@ -649,6 +663,7 @@ $pdf->Output();
         $data['rooms']       = $this->model('account')->get_all_rooms();
         $data['physicians']  = $this->model('account')->get_all_physicians();
         $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['diseases']    = $this->model('account')->get_all_diseases();
         $data['nationality'] = $this->model('account')->countries();
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
@@ -664,6 +679,7 @@ $pdf->Output();
         $data['physicians']  = $this->model('account')->get_all_physicians();
         $data['outpatients'] = $this->model('account')->get_all_out_patients();
         $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['diseases']    = $this->model('account')->get_all_diseases();
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);

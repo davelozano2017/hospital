@@ -205,10 +205,6 @@ class admin extends Controller {
 
         $out_patients = array('from' => $from,'to'=>$to);
         $all_out_patients = $this->model('account')->all_out_patients($out_patients);
-        
-        
-        $transferred = array( 'from' => $from, 'to' => $to, 'disposition' => 'Transferred' );
-        $transferred_patients = $this->model('account')->filter_disposition($transferred);
 
         $admission_type_new = array( 'from' => $from, 'to' => $to, 'admission_type' => 'New');
         $total_admission_type_new = $this->model('account')->filter_admission($admission_type_new);
@@ -216,8 +212,8 @@ class admin extends Controller {
         $admission_type_old = array( 'from' => $from, 'to' => $to, 'admission_type' => 'Old');
         $total_admission_type_old = $this->model('account')->filter_admission($admission_type_old);
 
-        $deaths = array( 'from' => $from, 'to' => $to, 'disposition' => 'Deaths' );
-        $deaths_patients = $this->model('account')->filter_disposition($deaths);
+        $deaths = array( 'from' => $from, 'to' => $to, 'outcome' => 'Died' );
+        $deaths_patients = $this->model('account')->filter_outcome($deaths);
 
         $discharged = array( 'from' => $from, 'to' => $to);
         $discharged_patients = $this->model('account')->get_all_discharged_patients($discharged);
@@ -377,12 +373,13 @@ class admin extends Controller {
         $to1  = date('F d, Y',strtotime($to));
         
         $pdf = new TCPDF('P','mm','Legal');
-        $pdf->AddPage();
 
         // 0 = first line
         // 1 = end line
+        $pdf->AddPage();
         $pdf->SetFont('helvetica','B',10);
         $pdf->cell(190,5,'Republic of the Philippines',0,1,'C');
+        $pdf->Image('http://localhost/hospital/assets/images/logo.png', 20, 12, 20, 20, '', '', '', true, 1000);
         $pdf->SetFont('helvetica','B',13);
         $pdf->cell(190,5,'OSPITAL NG TAGAYTAY',0,1,'C');
         $pdf->SetFont('helvetica','B',10);
@@ -397,9 +394,9 @@ class admin extends Controller {
         $pdf->SetFont('helvetica','B',10);
         $pdf->cell(190,5,'Date : From '.$from1.' To '.$to1.'',0,1,'C');
         $pdf->cell(190,5,'',0,1,'C');
-
         $pdf->SetFont('helvetica','B',10);
         $pdf->cell(80,8,'A. Summary of Patients',0,1);
+        
         $tbl = <<<EOD
         <table style="border:1px solid #000">
         <tr>
@@ -710,6 +707,7 @@ $pdf->Output();
         $data['physicians']  = $this->model('account')->get_all_physicians();
         $data['outpatients'] = $this->model('account')->get_all_out_patients();
         $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['diseases']    = $this->model('account')->get_all_diseases();
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);
