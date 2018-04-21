@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Print record for patient</title>
 </head>
-<body onload="print()">
+<body>
     
 <style type="text/css">
   .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
@@ -19,7 +19,7 @@
   </style>
   <table class="tg" style="margin:auto">
     <tr>
-      <td class="tg-dvpl" colspan="4" rowspan="2">OSPITAL NG TAGAYTAY <br>Bacolod St. Kaybagal Soutd <br>Tagaytay City</td>
+      <td class="tg-dvpl" colspan="4" rowspan="2"><img src="http://localhost/hospital/assets/images/logo.png" style="width:70px;height:70px;float:left">OSPITAL NG TAGAYTAY <br>Bacolod St. Kaybagal Soutd <br>Tagaytay City</td>
       <td class="tg-c3ow">     HOSPITAL CODE    </td>
       <td class="tg-us36"><strong><?=$data['prints']->hospital_code;?></strong></td>
     </tr>

@@ -233,7 +233,7 @@ class admin extends Controller {
         $total_all_patient = $this->model('account')->all_patients($all_patients);
         $total_all_patients = $total_all_patient + $total_out_patient_new + $total_out_patient_old;
         
-        $diseases = $this->model('account')->get_diseases();
+        $filter_diseases = $this->model('account')->view_diseases($all_patients);
         
         $jan_in = $this->model('account')->jan_in();
         $feb_in = $this->model('account')->feb_in();
@@ -608,14 +608,29 @@ class admin extends Controller {
 EOD;
 
 $pdf->writeHTML($tbl, true, false, false, false, '');
-     
+
+
+        
 $pdf->SetFont('helvetica','B',10);
-$pdf->cell(80,8,'B. Summary',0,1);
+$pdf->cell(80,8,'B. List Of Diagnosis',0,1);
+
+$pdf->cell(170,8,'Diagnosis',1,0);
+$pdf->cell(20,8,'Total',1,1);
+foreach($filter_diseases as $row) {
+    $pdf->cell(170,8,$row['final_diagnosis'],1,0);
+    $pdf->cell(20,8,$this->model('account')->count_diseases($row['final_diagnosis']),1,1);
+}
+
+
+
+
+$pdf->SetFont('helvetica','B',10);
+$pdf->cell(80,8,'C. Summary',0,1);
 $tbls = <<<EOD
 <table style="border:1px solid #000">
 <tr>
-  <th  style="border:1px solid #000" colspan="5"></th>
-  <th  style="border:1px solid #000" colspan="3">Numbers</th>
+<th  style="border:1px solid #000" colspan="5"></th>
+<th  style="border:1px solid #000" colspan="3">Numbers</th>
 </tr>
 <tr>
 <td colspan="5" style="border:1px solid #000">Total Number of Inpatients</td>
@@ -664,7 +679,6 @@ $tbls = <<<EOD
 </table>
 EOD;
 $pdf->writeHTML($tbls, true, false, false, false, '');
-
 
 $pdf->Output(); 
 }

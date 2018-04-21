@@ -817,9 +817,16 @@ class account extends Model {
         return $query->num_rows;
     }
 
-      public function view_diseases() {
-        $query =  $this->db->query("SELECT * FROM admissions");
+    public function view_diseases($data) {
+        $from = $data['from'];
+        $to = $data['to'];
+        $query =  $this->db->query("SELECT * FROM admissions WHERE admission_date >= '$from' AND discharged_date <= '$to' GROUP BY final_diagnosis ORDER BY final_diagnosis");
         return $query;
+    }
+
+    public function count_diseases($final_diagnosis) {
+        $query =  $this->db->query("SELECT * FROM admissions WHERE final_diagnosis = '$final_diagnosis'");
+        return $query->num_rows;
     }
 
     public function get_all_diseases() {
@@ -1074,3 +1081,5 @@ class account extends Model {
         $query = $this->db->real_escape_string(htmlentities($_POST[$data]));
         return $query;
     }
+
+}
