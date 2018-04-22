@@ -28,7 +28,6 @@
 <div class="tabbable">
     <ul class="nav nav-tabs">
         <li class="active"><a href="#Admission" data-toggle="tab">Admission</a></li>
-        <li><a href="#Discharged" data-toggle="tab">Discharged</a></li>
     </ul>
 
     <div class="tab-content">
@@ -59,31 +58,6 @@
             </table>
         </div>
 
-        <div class="tab-pane" id="Discharged">
-            <table id="table-discharged" class="table datatable-responsive">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Hospital Code</th>
-                        <th>Room</th>
-                        <th style="width:1px"></th>
-                        <th style="width:1px" class="text-center">Action</th>
-                        </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($data['discharged'] as $row) { ?> 
-                        <tr>
-                            <td><?=$row['firstname']. ' '.$row['middlename']. ' '.$row['surname']?></td>
-                            <td><?=$row['hospital_code']?></td>
-                            <td><?=$row['room_type'].' - '.$row['floor'].' - '.$row['room_number']?></td>
-                            <td></td>
-                            <td class="text-center"><a class="btn btn-primary" onclick="view_admissions('<?=$row['admissions_id']?>')">view</a></td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
-        
     </div>
 </div>
 

@@ -26,7 +26,6 @@ class staff extends Controller {
 
         $out_patients = array('from' => $from,'to'=>$to);
         $all_out_patients = $this->model('account')->all_out_patients($out_patients);
-        
 
         $admission_type_new = array( 'from' => $from, 'to' => $to, 'admission_type' => 'New');
         $total_admission_type_new = $this->model('account')->filter_admission($admission_type_new);
@@ -49,9 +48,9 @@ class staff extends Controller {
 
         $all_patients = array('from' => $from,'to'=>$to);
         $total_all_patient = $this->model('account')->all_patients($all_patients);
-        $total_all_patients = $total_all_patient + $total_out_patient_new + $total_out_patient_old;
         
         $filter_diseases = $this->model('account')->view_diseases($all_patients);
+        $filter_diseases_out = $this->model('account')->view_diseases_out($all_patients);
         
         $jan_in = $this->model('account')->jan_in();
         $feb_in = $this->model('account')->feb_in();
@@ -188,17 +187,18 @@ class staff extends Controller {
         $total_nov_out = $nov_out_new + $nov_out_revisit;
         $total_dec_out = $dec_out_new + $dec_out_revisit;
         
-        $totalt = $total_inpatients + $discharged_patients;
+        $totalt = $total_inpatients + $discharged_patients - $deaths_patients;
         
+        $total_all_patients = $all_out_patients + $totalt + $deaths_patients;
 
         $from1 = date('F d, Y',strtotime($from));
         $to1  = date('F d, Y',strtotime($to));
         
         $pdf = new TCPDF('P','mm','Legal');
-        $pdf->AddPage();
 
         // 0 = first line
         // 1 = end line
+        $pdf->AddPage();
         $pdf->SetFont('helvetica','B',10);
         $pdf->cell(190,5,'Republic of the Philippines',0,1,'C');
         $pdf->Image('http://localhost/hospital/assets/images/logo.png', 20, 12, 20, 20, '', '', '', true, 1000);
@@ -216,9 +216,9 @@ class staff extends Controller {
         $pdf->SetFont('helvetica','B',10);
         $pdf->cell(190,5,'Date : From '.$from1.' To '.$to1.'',0,1,'C');
         $pdf->cell(190,5,'',0,1,'C');
-
         $pdf->SetFont('helvetica','B',10);
-        $pdf->cell(80,8,'A. Summary of Patients',0,1);
+        $pdf->cell(80,8,'A: Summary of Patients',0,1);
+        
         $tbl = <<<EOD
         <table style="border:1px solid #000">
         <tr>
@@ -431,8 +431,7 @@ $pdf->writeHTML($tbl, true, false, false, false, '');
 
         
 $pdf->SetFont('helvetica','B',10);
-$pdf->cell(80,8,'B. List Of Diagnosis',0,1);
-
+$pdf->cell(170,8,'B.1: List of Diagnosis ( In - Patients )',0,1);
 $pdf->cell(170,8,'Diagnosis',1,0);
 $pdf->cell(20,8,'Total',1,1);
 foreach($filter_diseases as $row) {
@@ -441,19 +440,25 @@ foreach($filter_diseases as $row) {
 }
 
 
+$pdf->SetFont('helvetica','B',10);
+$pdf->cell(170,8,'B.2: List of diagnosis ( Out Patients )',0,1);
+$pdf->cell(170,8,'Diagnosis',1,0);
+$pdf->cell(20,8,'Total',1,1);
+foreach($filter_diseases_out as $rows) {
+    $pdf->cell(170,8,$rows['impression'],1,0);
+    $pdf->cell(20,8,$this->model('account')->count_diseases_out($rows['impression']),1,1);
+}
+
+
 
 
 $pdf->SetFont('helvetica','B',10);
-$pdf->cell(80,8,'C. Summary',0,1);
+$pdf->cell(80,8,'C:. Summary',0,1);
 $tbls = <<<EOD
 <table style="border:1px solid #000">
 <tr>
 <th  style="border:1px solid #000" colspan="5"></th>
 <th  style="border:1px solid #000" colspan="3">Numbers</th>
-</tr>
-<tr>
-<td colspan="5" style="border:1px solid #000">Total Number of Inpatients</td>
-<td colspan="3" style="border:1px solid #000">$totalt</td>
 </tr>
 
 <tr>
@@ -482,25 +487,32 @@ $tbls = <<<EOD
 </tr>
 
 <tr>
-<td colspan="5" style="border:1px solid #000">Total Number of all outpatient</td>
-<td colspan="3" style="border:1px solid #000">$all_out_patients</td>
+<td colspan="5" style="border:1px solid #000">Total Number of deaths</td>
+<td colspan="3" style="border:1px solid #000">$deaths_patients</td>
 </tr>
 
 <tr>
-<td colspan="5" style="border:1px solid #000">Total Number of deaths</td>
-<td colspan="3" style="border:1px solid #000">$deaths_patients</td>
+<td colspan="5" style="border:1px solid #000">Total Number of Inpatients</td>
+<td colspan="3" style="border:1px solid #000">$totalt</td>
+</tr>
+
+<tr>
+<td colspan="5" style="border:1px solid #000">Total Number of all outpatient</td>
+<td colspan="3" style="border:1px solid #000">$all_out_patients</td>
 </tr>
 
 <tr>
 <td colspan="5" style="border:1px solid #000">Total Number of all patients</td>
 <td colspan="3" style="border:1px solid #000">$total_all_patients</td>
 </tr>
+
 </table>
 EOD;
 $pdf->writeHTML($tbls, true, false, false, false, '');
 
 $pdf->Output(); 
 }
+
 
     public function statistical(){
         $data['title']       = 'Statistical';

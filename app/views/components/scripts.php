@@ -49,6 +49,8 @@ graph_out();
 graph_doctor();
 graph_doctor_discharged();
 graph_out_doctor();
+
+
 </script>
 </body>
 </html>
