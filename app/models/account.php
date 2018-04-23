@@ -848,12 +848,14 @@ class account extends Model {
     public function view_diseases($data) {
         $from = $data['from'];
         $to = $data['to'];
-        $query =  $this->db->query("SELECT * FROM admissions WHERE admission_date >= '$from' AND discharged_date <= '$to' GROUP BY final_diagnosis ORDER BY final_diagnosis");
+        $query =  $this->db->query("SELECT * FROM admissions WHERE admission_date >= '$from' AND discharged_date <= '$to' AND discharged_date != '' GROUP BY final_diagnosis");
         return $query;
     }
 
-    public function count_diseases($final_diagnosis) {
-        $query =  $this->db->query("SELECT * FROM admissions WHERE final_diagnosis = '$final_diagnosis'");
+    public function count_diseases($data,$final_diagnosis) {
+        $from = $data['from'];
+        $to = $data['to'];
+        $query =  $this->db->query("SELECT * FROM admissions WHERE admission_date >= '$from' AND discharged_date <= '$to' AND final_diagnosis = '$final_diagnosis'");
         return $query->num_rows;
     }
     
@@ -864,8 +866,11 @@ class account extends Model {
         return $query;
     }
 
-    public function count_diseases_out($impression) {
-        $query =  $this->db->query("SELECT * FROM medical_record_out_patient WHERE impression = '$impression'");
+    public function count_diseases_out($data,$impression) {
+        
+        $from = $data['from'];
+        $to = $data['to'];
+        $query =  $this->db->query("SELECT * FROM medical_record_out_patient WHERE date BETWEEN '$from' AND '$to' AND impression = '$impression'");
         return $query->num_rows;
     }
 

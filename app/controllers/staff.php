@@ -436,7 +436,7 @@ $pdf->cell(170,8,'Diagnosis',1,0);
 $pdf->cell(20,8,'Total',1,1);
 foreach($filter_diseases as $row) {
     $pdf->cell(170,8,$row['final_diagnosis'],1,0);
-    $pdf->cell(20,8,$this->model('account')->count_diseases($row['final_diagnosis']),1,1);
+    $pdf->cell(20,8,$this->model('account')->count_diseases($all_patients,$row['final_diagnosis']),1,1);
 }
 
 
@@ -446,11 +446,8 @@ $pdf->cell(170,8,'Diagnosis',1,0);
 $pdf->cell(20,8,'Total',1,1);
 foreach($filter_diseases_out as $rows) {
     $pdf->cell(170,8,$rows['impression'],1,0);
-    $pdf->cell(20,8,$this->model('account')->count_diseases_out($rows['impression']),1,1);
+    $pdf->cell(20,8,$this->model('account')->count_diseases_out($all_patients,$rows['impression']),1,1);
 }
-
-
-
 
 $pdf->SetFont('helvetica','B',10);
 $pdf->cell(80,8,'C:. Summary',0,1);
