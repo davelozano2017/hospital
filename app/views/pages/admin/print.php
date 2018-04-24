@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Print record for patient</title>
 </head>
-<body>
+<body onload="print()">
     
 <style type="text/css">
   .tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}

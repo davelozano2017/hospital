@@ -636,7 +636,7 @@ foreach($filter_diseases_out as $rows) {
 
 
 $pdf->SetFont('helvetica','B',10);
-$pdf->cell(80,8,'C:. Summary',0,1);
+$pdf->cell(80,8,'C: Summary',0,1);
 $tbls = <<<EOD
 <table style="border:1px solid #000">
 <tr>
