@@ -21,7 +21,7 @@
         <table class="tg">
         <tr>
             <th style="border:none" class="tg-l711" colspan="3"><img style="width:120px;height:120px" src="https://www.foreclosurephilippines.com/wp-content/uploads/2010/11/tagaytay-city-official-seal1.jpg"></th>
-            <th style="border:none" class="tg-uys7" colspan="5">#################   <br>OSPITAL NG TAGAYTAY<br>#################################<br>#############<br>PHILHEALTH ACCREDITED</th>
+            <th style="border:none" class="tg-uys7" colspan="5">Republic of the Philippines   <br>OSPITAL NG TAGAYTAY<br>Bacolod St., Kaybagal South, Tagaytay City<br>Telephone No. (0945) 4832 160<br>PHILHEALTH ACCREDITED</th>
             <th style="border:none"  class="tg-l711" colspan="2"><img style="width:120px;height:120px" src="http://localhost/hospital/assets/images/logo.png"></th>
         </tr>
         <tr>
