@@ -191,8 +191,6 @@ class staff extends Controller {
         
         $totalt = $total_inpatients;
         
-        $totalt = $total_inpatients + $discharged_patients;
-        
         $total_all_patients = $all_out_patients + $totalt;
 
         $from1 = date('F d, Y',strtotime($from));

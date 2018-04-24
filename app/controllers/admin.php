@@ -371,7 +371,6 @@ class admin extends Controller {
         $total_dec_out = $dec_out_new + $dec_out_revisit;
         
         $totalt = $total_inpatients;
-        $totalt = $total_inpatients + $discharged_patients;
         
         $total_all_patients = $all_out_patients + $totalt;
 
