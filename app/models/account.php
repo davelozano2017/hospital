@@ -572,10 +572,17 @@ class account extends Model {
         return $query->num_rows;
     }
 
+    public function get_all_admission($data) {
+        $from = $data['from'];
+        $to = $data['to'];
+        $query = $this->db->query("SELECT * FROM admissions WHERE admission_date BETWEEN '$from' AND '$to' AND discharged_date = '' ");
+        return $query->num_rows;
+    }
+
     public function get_all_inpatients($data) {
         $from = $data['from'];
         $to = $data['to'];
-        $query = $this->db->query("SELECT * FROM admissions WHERE admission_date BETWEEN '$from' AND '$to' AND discharged_date = '' AND discharged_time = '' ");
+        $query = $this->db->query("SELECT * FROM admissions WHERE admission_date BETWEEN '$from' AND '$to'");
         return $query->num_rows;
     }
 
@@ -848,14 +855,14 @@ class account extends Model {
     public function view_diseases($data) {
         $from = $data['from'];
         $to = $data['to'];
-        $query =  $this->db->query("SELECT * FROM admissions WHERE admission_date >= '$from' AND discharged_date <= '$to' AND discharged_date != '' GROUP BY final_diagnosis");
+        $query =  $this->db->query("SELECT * FROM admissions WHERE admission_date >= '$from' AND admission_date <= '$to' AND discharged_date != '' GROUP BY final_diagnosis");
         return $query;
     }
 
     public function count_diseases($data,$final_diagnosis) {
         $from = $data['from'];
         $to = $data['to'];
-        $query =  $this->db->query("SELECT * FROM admissions WHERE admission_date >= '$from' AND discharged_date <= '$to' AND final_diagnosis = '$final_diagnosis'");
+        $query =  $this->db->query("SELECT * FROM admissions WHERE admission_date >= '$from' AND admission_date <= '$to' AND final_diagnosis = '$final_diagnosis'");
         return $query->num_rows;
     }
     

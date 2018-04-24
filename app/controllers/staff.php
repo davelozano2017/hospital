@@ -22,7 +22,9 @@ class staff extends Controller {
         $to = $_POST['to'];
 
         $inpatients = array( 'from' => $from, 'to' => $to );
+        
         $total_inpatients = $this->model('account')->get_all_inpatients($inpatients);
+        $get_all_admission = $this->model('account')->get_all_admission($inpatients);
 
         $out_patients = array('from' => $from,'to'=>$to);
         $all_out_patients = $this->model('account')->all_out_patients($out_patients);
@@ -187,9 +189,9 @@ class staff extends Controller {
         $total_nov_out = $nov_out_new + $nov_out_revisit;
         $total_dec_out = $dec_out_new + $dec_out_revisit;
         
-        $totalt = $total_inpatients + $discharged_patients - $deaths_patients;
+        $totalt = $total_inpatients;
         
-        $total_all_patients = $all_out_patients + $totalt + $deaths_patients;
+        $total_all_patients = $all_out_patients + $totalt;
 
         $from1 = date('F d, Y',strtotime($from));
         $to1  = date('F d, Y',strtotime($to));
@@ -449,6 +451,9 @@ foreach($filter_diseases_out as $rows) {
     $pdf->cell(20,8,$this->model('account')->count_diseases_out($all_patients,$rows['impression']),1,1);
 }
 
+
+
+
 $pdf->SetFont('helvetica','B',10);
 $pdf->cell(80,8,'C:. Summary',0,1);
 $tbls = <<<EOD
@@ -460,7 +465,7 @@ $tbls = <<<EOD
 
 <tr>
 <td colspan="5" style="border:1px solid #000">Total Number of admitted patient </td>
-<td colspan="3" style="border:1px solid #000">$total_inpatients</td>
+<td colspan="3" style="border:1px solid #000">$get_all_admission</td>
 </tr>
 
 <tr>
