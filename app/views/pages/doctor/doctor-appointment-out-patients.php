@@ -272,10 +272,12 @@
                                 <div class="col-sm-12">
                                     <label for="">Impression / Diagnosis</label>
                                     <div class="form-group">
-                                        <input type="text" name="impression" id="impression" ng-model="impression" class="form-control" required>
-                                        <span ng-messages="formOutPatients.impression.$error" ng-if="formOutPatients.impression.$dirty">
-                                            <strong ng-message="required" class="text-danger">This field is required.</strong>
-                                        </span>
+                                        <select class="form-control select2" name="impression" id="impression">
+                                                <option value="" selected>Select Diagnosis</option>
+                                            <?php foreach($data['diseases'] as $dis) { ?>
+                                                <option value="<?=$dis['diseases']?>"><?=$dis['diseases']?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                 </div>
 

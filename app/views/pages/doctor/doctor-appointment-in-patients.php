@@ -66,8 +66,8 @@
                         <th>Hospital Code</th>
                         <th>Physicians</th>
                         <th>Room</th>
-                        <td style="width:1px"></td>
-                        <td style="width:1px" class="text-center">Action</td>
+                        <th style="width:1px"></th>
+                        <th style="width:1px" class="text-center">Action</th>
                         </tr>
                 </thead>
                 <tbody>
@@ -551,7 +551,12 @@
                                 <div class="col-sm-8">
                                     <label for="">Final Diagnosis</label>
                                     <div class="form-group">
-                                        <input type="text" name="final_diagnosis" id="final_diagnosis" ng-model="final_diagnosis" class="form-control">
+                                        <select class="form-control select2" name="final_diagnosis" id="final_diagnosis">
+                                                <option value="" selected>Select Diagnosis</option>
+                                            <?php foreach($data['diseases'] as $dis) { ?>
+                                                <option value="<?=$dis['diseases']?>"><?=$dis['diseases']?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                 </div>
                                 

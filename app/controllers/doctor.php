@@ -122,6 +122,7 @@ class doctor extends Controller {
         $data['physicians']  = $this->model('account')->get_all_physicians();
         $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
         $data['nationality'] = $this->model('account')->countries();
+        $data['diseases']    = $this->model('account')->get_all_diseases();
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);
@@ -136,6 +137,7 @@ class doctor extends Controller {
         $data['physicians']  = $this->model('account')->get_all_physicians();
         $data['outpatients'] = $this->model('account')->get_all_out_patients_by_doctor($_SESSION['id']);
         $data['user']        = $this->model('account')->get_user_information($_SESSION['id']);
+        $data['diseases']    = $this->model('account')->get_all_diseases();
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);
         $this->view('components/sidebar',$data);
