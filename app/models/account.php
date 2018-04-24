@@ -21,6 +21,16 @@ class account extends Model {
         return $query->num_rows;
     }
 
+    public function bar_admission_in_patient() {
+        $query = $this->db->query("SELECT * FROM admissions GROUP BY final_diagnosis LIMIT 10");
+        return $query;
+    }
+
+    public function bar_admission_out_patient() {
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient GROUP BY impression LIMIT 10");
+        return $query;
+    }
+
     public function all_patients($data) {
         $from = $data['from'];
         $to = $data['to'];

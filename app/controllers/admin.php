@@ -28,6 +28,8 @@ class admin extends Controller {
         $data['total_out_patients'] = $this->model('account')->total_out_patients();
         $data['total_doctor'] = $this->model('account')->total_users(1);
         $data['total_staff'] = $this->model('account')->total_users(2);
+        $data['bar_in'] = $this->model('account')->bar_admission_in_patient();
+        $data['bar_out'] = $this->model('account')->bar_admission_out_patient();
         $data['user'] = $this->model('account')->get_user_information($_SESSION['id']);
         $this->view('components/header',$data);
         $this->view('components/top-bar',$data);

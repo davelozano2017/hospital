@@ -52,5 +52,6 @@ graph_out_doctor();
 
 
 </script>
+ <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>
