@@ -189,7 +189,11 @@ class staff extends Controller {
         $total_nov_out = $nov_out_new + $nov_out_revisit;
         $total_dec_out = $dec_out_new + $dec_out_revisit;
         
+<<<<<<< HEAD
         $totalt = $total_inpatients;
+=======
+        $totalt = $total_inpatients + $discharged_patients;
+>>>>>>> 8a5a8dfada0bbee2bf27c02bba8d14ed70fc3f6b
         
         $total_all_patients = $all_out_patients + $totalt;
 
