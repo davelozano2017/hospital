@@ -80,7 +80,7 @@ class doctor extends Controller {
         $data['token']        = $_SESSION['token'];
         $data['title']        = 'All Patients';
         $data['all_patients'] = $this->model('account')->get_doctor_patients($_SESSION['id']);
-        $data['outpatients']  = $this->model('account')->get_all_out_patients_by_doctor($_SESSION['id']);
+        $data['outpatients']  = $this->model('account')->get_all_out_patients_by_name_by_doctor($_SESSION['id']);
         $data['rooms']        = $this->model('account')->get_all_rooms();
         $data['physicians']   = $this->model('account')->get_all_physicians();
         $data['user']         = $this->model('account')->get_user_information($_SESSION['id']);

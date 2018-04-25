@@ -945,6 +945,11 @@ class account extends Model {
         return $query;
     }
 
+    public function get_all_out_patients_by_name_by_doctor($id) {
+        $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id WHERE mrop.physicians_id = $id GROUP BY surname,firstname,middlename");
+        return $query;
+    }
+
     public function get_all_out_patients_by_doctor($id) {
         $query = $this->db->query("SELECT * FROM medical_record_out_patient as mrop INNER JOIN accounts as ac ON mrop.physicians_id = ac.accounts_id WHERE mrop.physicians_id = $id AND mrop.impression = '' AND mrop.treatment = ''");
         return $query;
