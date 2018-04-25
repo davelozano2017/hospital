@@ -368,9 +368,9 @@ class admin extends Controller {
         $total_nov_out = $nov_out_new + $nov_out_revisit;
         $total_dec_out = $dec_out_new + $dec_out_revisit;
         
-        $totalt = $total_inpatients + $discharged_patients - $deaths_patients;
+        $totalt = $total_inpatients + $discharged_patients;
         
-        $total_all_patients = $all_out_patients + $totalt + $deaths_patients;
+        $total_all_patients = $all_out_patients + $totalt;
 
         $from1 = date('F d, Y',strtotime($from));
         $to1  = date('F d, Y',strtotime($to));
